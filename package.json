@@ -1,0 +1,60 @@
+{
+  "name": "@remotemerge/nepali-date-converter",
+  "version": "1.0",
+  "description": "Modern JavaScript tool to convert date from BS to AD and vice-versa.",
+  "homepage": "https://nepali-date.madansapkota.com",
+  "license": "MIT",
+  "keywords": [
+    "BS",
+    "Bikram",
+    "Sambat",
+    "Nepali",
+    "Calendar",
+    "Date",
+    "Converter",
+    "Miti",
+    "Pariwartan"
+  ],
+  "author": {
+    "name": "Madan Sapkota",
+    "email": "contact@madansapkota.com",
+    "url": "https://madansapkota.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:remotemerge/nepali-date-converter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/remotemerge/nepali-date-converter/issues"
+  },
+  "prettier": {
+    "bracketSameLine": true,
+    "printWidth": 120,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all"
+  },
+  "type": "module",
+  "module": "date-picker.js",
+  "main": "date-picker.umd.cjs",
+  "scripts": {
+    "lint": "eslint --ext .ts src",
+    "lint:fix": "eslint --ext .ts --fix src",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "date-fns": "^2.29.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.21",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
+    "eslint": "^8.24.0",
+    "typescript": "^4.8.3",
+    "vite": "^3.1.3"
+  },
+  "optionalDependencies": {
+    "prettier": "^2.7.1"
+  }
+}
