@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "removeComments": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "target": "ESNext"
+  },
+  "include": [
+    "src/types/*.d.ts",
+    "src/*.ts"
+  ]
+}
