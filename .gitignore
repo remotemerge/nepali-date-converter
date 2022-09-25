@@ -1,0 +1,18 @@
+### ignore vendor directories
+/.yarn/
+/node_modules/
+/vendor/
+
+### ignore build directories
+/build/
+/bundle/
+/dist/
+
+### Generated files
+*.cache
+*.key
+*.log
+*.zip
+.env
+pnpm-lock.yaml
+yarn.lock
