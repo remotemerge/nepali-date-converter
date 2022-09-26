@@ -4,7 +4,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     lib: {
-      entry: './src/converter.ts',
+      entry: './src/Converter.ts',
       name: 'DateConverter',
       fileName: 'date-converter',
       formats: ['es', 'cjs'],
