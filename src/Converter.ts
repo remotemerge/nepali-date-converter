@@ -58,7 +58,7 @@ export default class Converter extends Calendar {
     }
 
     // calculate date from start date
-    const calcDate: Date = addDays(this.calStartDate, totalDays);
+    const calcDate: Date = addDays(this.startDate, totalDays);
 
     // format output
     return {
@@ -79,8 +79,8 @@ export default class Converter extends Calendar {
     // validate date range
     if (
       !isWithinInterval(startOfDay(new Date(inputDate)), {
-        start: this.calStartDate,
-        end: this.calEndDate,
+        start: this.startDate,
+        end: this.endDate,
       })
     ) {
       throw new Error('The input date is out of supported range.');

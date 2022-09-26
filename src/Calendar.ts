@@ -6,12 +6,12 @@ export default class Calendar {
   /**
    * The calendar support start date -> 1975-01-01 BS
    */
-  protected readonly calStartDate: Date = startOfDay(new Date('1918-04-13'));
+  protected readonly startDate: Date = startOfDay(new Date('1918-04-13'));
 
   /**
    * The calendar support end date -> 2099-12-30 BS
    */
-  protected readonly calEndDate: Date = endOfDay(new Date('2043-04-13'));
+  protected readonly endDate: Date = endOfDay(new Date('2043-04-13'));
 
   /**
    * Convert numbers from nepali to english
@@ -33,7 +33,7 @@ export default class Calendar {
    */
   protected getBsDate(givenDate: string): { year: number; month: number; day: number } {
     // calculate days difference
-    const totalDays = Math.abs(differenceInDays(startOfDay(new Date(givenDate)), this.calStartDate));
+    const totalDays = Math.abs(differenceInDays(startOfDay(new Date(givenDate)), this.startDate));
 
     // skip last day counting
     let counter = -1;
