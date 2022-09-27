@@ -92,11 +92,3 @@ export default class Converter extends Calendar {
     return { ...bsDate, wd: this.numToDay(new Date(inputDate).getDay()) };
   }
 }
-
-// set in windows object
-interface customWindow extends Window {
-  DateConverter: unknown;
-}
-
-declare const window: customWindow;
-window.DateConverter = Converter;
