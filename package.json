@@ -34,15 +34,19 @@
     "tabWidth": 2,
     "trailingComma": "all"
   },
+  "files": [
+    "dist"
+  ],
   "type": "module",
-  "module": "date-picker.js",
-  "main": "date-picker.umd.cjs",
+  "module": "dist/ndc-es.js",
+  "main": "dist/ndc-cjs.js",
+  "types": "dist/Converter.d.ts",
   "scripts": {
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --ext .ts --fix src",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build && tsc"
   },
   "dependencies": {
     "@types/jest": "^29.0.3",
