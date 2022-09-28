@@ -11,7 +11,7 @@ for (let i = 0; i < records.length; i++) {
   const resDate = `${year}-${padZero(month)}-${padZero(day)}`;
   const nepDate = records[i].nep;
 
-  test('The input date ' + nepDate + ' is equals to converted date ' + resDate, () => {
+  test('The English date ' + records[i].eng + ' is equals to Nepali date date ' + resDate, () => {
     expect(resDate).toBe(nepDate);
   });
 
