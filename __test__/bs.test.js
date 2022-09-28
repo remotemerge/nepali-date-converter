@@ -7,11 +7,13 @@ const padZero = (num) => (num < 10 ? `0${num}` : num);
 
 // test dates
 for (let i = 0; i < records.length; i++) {
-  const { year, month, date } = new DateConverter(records[i].eng).toBs();
-  const resDate = `${year}-${padZero(month)}-${padZero(date)}`;
   const nepDate = records[i].nep;
+  const engDate = records[i].eng;
 
-  test('The English date ' + records[i].eng + ' is equals to Nepali date date ' + resDate, () => {
+  const { year, month, date } = new DateConverter(engDate).toBs();
+  const resDate = `${year}-${padZero(month)}-${padZero(date)}`;
+
+  test('The English date ' + engDate + ' is equals to Nepali date ' + resDate, () => {
     expect(resDate).toBe(nepDate);
   });
 }
