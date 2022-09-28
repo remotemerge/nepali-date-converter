@@ -1,4 +1,4 @@
-import { addDays, isWithinInterval, startOfDay } from 'date-fns';
+import { addDays, endOfDay, isWithinInterval, startOfDay } from 'date-fns';
 
 import Calendar from './Calendar';
 import { Years } from './data/Years';
@@ -15,9 +15,9 @@ export default class Converter extends Calendar {
   private readonly inputMonth: number;
 
   /**
-   * The day extracted from input date.
+   * The date extracted from input date.
    */
-  private readonly inputDay: number;
+  private readonly inputDate: number;
 
   /**
    * Throw the error if date is not in supported range
@@ -32,7 +32,7 @@ export default class Converter extends Calendar {
       .trim();
 
     // update date values
-    [this.inputYear, this.inputMonth, this.inputDay] = <number[]>strDate.split('-').map((num) => +num);
+    [this.inputYear, this.inputMonth, this.inputDate] = <number[]>strDate.split('-').map((num) => +num);
   }
 
   /**
@@ -52,7 +52,7 @@ export default class Converter extends Calendar {
         const yearMonths = [...Years[this.inputYear].slice(0, 11)];
         for (const monthIndex in yearMonths) {
           if (this.inputMonth === +monthIndex + 1) {
-            totalDays += this.inputDay;
+            totalDays += this.inputDate;
             break;
           }
           totalDays += yearMonths[monthIndex];
@@ -79,13 +79,13 @@ export default class Converter extends Calendar {
    */
   public toBs(): { year: number; month: number; date: number; wd: string } {
     // format input date
-    const inputDate = `${this.inputYear}-${this.inputMonth}-${this.inputDay}`;
+    const inputDate = `${this.inputYear}-${this.inputMonth}-${this.inputDate}`;
 
     // validate date range
     if (
       !isWithinInterval(startOfDay(new Date(inputDate)), {
-        start: this.startDate,
-        end: this.endDate,
+        start: startOfDay(this.startDate),
+        end: endOfDay(this.endDate),
       })
     ) {
       throw new Error(this.dateRangeError);
