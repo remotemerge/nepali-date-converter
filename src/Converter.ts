@@ -19,6 +19,11 @@ export default class Converter extends Calendar {
    */
   private readonly inputDay: number;
 
+  /**
+   * Throw the error if date is not in supported range
+   */
+  private readonly dateRangeError = 'The input date is out of supported range.';
+
   public constructor(date: string) {
     super();
     // clean input date
@@ -36,7 +41,7 @@ export default class Converter extends Calendar {
   public toAd(): { year: number; month: number; date: number; wd: string } {
     // validate year range
     if (this.inputYear < 1975 || this.inputYear > 2099) {
-      throw new Error('The input date is out of supported range.');
+      throw new Error(this.dateRangeError);
     }
 
     // skip last day counting
@@ -83,7 +88,7 @@ export default class Converter extends Calendar {
         end: this.endDate,
       })
     ) {
-      throw new Error('The input date is out of supported range.');
+      throw new Error(this.dateRangeError);
     }
 
     // convert to BS date
