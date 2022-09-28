@@ -1,4 +1,4 @@
-import { differenceInCalendarDays } from 'date-fns';
+import { addDays, differenceInCalendarDays } from 'date-fns';
 
 import { Years } from './data/Years';
 
@@ -29,7 +29,33 @@ export default class Calendar {
   }
 
   /**
-   * Calculate nepali date based on input or default
+   * Calculate AD date based on input BS date
+   */
+  protected getAdDate(inputYear: number, inputMonth: number, inputDate: number): Date {
+    // init the counter
+    let counter = 0;
+
+    // count calendar days
+    Years.some((months, year) => {
+      if (inputYear === year) {
+        months.some((days, mi) => {
+          if (inputMonth === +mi + 1) {
+            counter += inputDate - 1; // skip last day
+            return true;
+          }
+          counter += days;
+        });
+        return true;
+      }
+      counter += months[12];
+    });
+
+    // calculate the output date
+    return addDays(this.startDate, counter);
+  }
+
+  /**
+   * Calculate BS date based on input AD date
    */
   protected getBsDate(givenDate: string): { year: number; month: number; date: number } {
     // init BS date object

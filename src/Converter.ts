@@ -1,7 +1,6 @@
-import { addDays, endOfDay, isWithinInterval, startOfDay } from 'date-fns';
+import { endOfDay, isWithinInterval, startOfDay } from 'date-fns';
 
 import Calendar from './Calendar';
-import { Years } from './data/Years';
 
 export default class Converter extends Calendar {
   /**
@@ -38,46 +37,24 @@ export default class Converter extends Calendar {
   /**
    * Convert the input BS date to AD date.
    */
-  public toAd(): { year: number; month: number; date: number; wd: string } {
+  public toAd(): { year: number; month: number; date: number; day: string } {
     // validate year range
     if (this.inputYear < 1975 || this.inputYear > 2099) {
       throw new Error(this.dateRangeError);
     }
 
-    // init the counter
-    let counter = 0;
-
-    // count calendar days
-    Years.some((months, year) => {
-      if (this.inputYear === year) {
-        months.some((days, mi) => {
-          if (this.inputMonth === +mi + 1) {
-            counter += this.inputDate - 1; // skip last day
-            return true;
-          }
-          counter += days;
-        });
-        return true;
-      }
-      counter += months[12];
-    });
-
-    // calculate date from start date
-    const calcDate = addDays(this.startDate, counter);
+    // convert to AD date
+    const adDate = this.getAdDate(this.inputYear, this.inputMonth, this.inputDate);
+    const weekday = this.numToDay(adDate.getDay());
 
     // format output
-    return {
-      year: calcDate.getFullYear(),
-      month: calcDate.getMonth() + 1,
-      date: calcDate.getDate(),
-      wd: this.numToDay(calcDate.getDay()),
-    };
+    return { year: adDate.getFullYear(), month: adDate.getMonth() + 1, date: adDate.getDate(), day: weekday };
   }
 
   /**
    * Convert the input AD date to BS date.
    */
-  public toBs(): { year: number; month: number; date: number; wd: string } {
+  public toBs(): { year: number; month: number; date: number; day: string } {
     // format input date
     const inputDate = `${this.inputYear}-${this.inputMonth}-${this.inputDate}`;
 
@@ -93,7 +70,9 @@ export default class Converter extends Calendar {
 
     // convert to BS date
     const bsDate = this.getBsDate(inputDate);
+    const weekday = this.numToDay(new Date(inputDate).getDay());
+
     // format the output
-    return { ...bsDate, wd: this.numToDay(new Date(inputDate).getDay()) };
+    return { ...bsDate, day: weekday };
   }
 }
