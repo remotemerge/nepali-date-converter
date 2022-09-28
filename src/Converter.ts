@@ -47,20 +47,20 @@ export default class Converter extends Calendar {
     // init the counter
     let counter = 0;
 
-    for (const year in Years) {
-      if (this.inputYear === +year) {
-        const yearMonths = Years[year].slice(0, 12);
-        for (const monthIndex in yearMonths) {
-          if (this.inputMonth === +monthIndex + 1) {
+    // count calendar days
+    Years.some((months, year) => {
+      if (this.inputYear === year) {
+        months.some((days, mi) => {
+          if (this.inputMonth === +mi + 1) {
             counter += this.inputDate - 1; // skip last day
-            break;
+            return true;
           }
-          counter += yearMonths[monthIndex];
-        }
-        break;
+          counter += days;
+        });
+        return true;
       }
-      counter += Years[year][12];
-    }
+      counter += months[12];
+    });
 
     // calculate date from start date
     const calcDate = addDays(this.startDate, counter);
