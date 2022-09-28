@@ -44,26 +44,26 @@ export default class Converter extends Calendar {
       throw new Error(this.dateRangeError);
     }
 
-    // skip last day counting
-    let totalDays = -1;
+    // init the counter
+    let counter = 0;
 
     for (const year in Years) {
       if (this.inputYear === +year) {
-        const yearMonths = [...Years[this.inputYear].slice(0, 11)];
+        const yearMonths = Years[year].slice(0, 12);
         for (const monthIndex in yearMonths) {
           if (this.inputMonth === +monthIndex + 1) {
-            totalDays += this.inputDate;
+            counter += this.inputDate - 1; // skip last day
             break;
           }
-          totalDays += yearMonths[monthIndex];
+          counter += yearMonths[monthIndex];
         }
         break;
       }
-      totalDays += Years[year][12];
+      counter += Years[year][12];
     }
 
     // calculate date from start date
-    const calcDate: Date = addDays(this.startDate, totalDays);
+    const calcDate = addDays(this.startDate, counter);
 
     // format output
     return {
