@@ -33,7 +33,7 @@ export default class Converter extends Calendar {
   /**
    * Convert the input BS date to AD date.
    */
-  public toAd(): { year: number; month: number; day: number; wd: string } {
+  public toAd(): { year: number; month: number; date: number; wd: string } {
     // validate year range
     if (this.inputYear < 1975 || this.inputYear > 2099) {
       throw new Error('The input date is out of supported range.');
@@ -64,7 +64,7 @@ export default class Converter extends Calendar {
     return {
       year: calcDate.getFullYear(),
       month: calcDate.getMonth() + 1,
-      day: calcDate.getDate(),
+      date: calcDate.getDate(),
       wd: this.numToDay(calcDate.getDay()),
     };
   }
