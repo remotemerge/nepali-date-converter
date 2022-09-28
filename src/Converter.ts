@@ -72,7 +72,7 @@ export default class Converter extends Calendar {
   /**
    * Convert the input AD date to BS date.
    */
-  public toBs(): { year: number; month: number; day: number; wd: string } {
+  public toBs(): { year: number; month: number; date: number; wd: string } {
     // format input date
     const inputDate = `${this.inputYear}-${this.inputMonth}-${this.inputDay}`;
 
