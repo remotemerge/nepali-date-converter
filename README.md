@@ -39,11 +39,15 @@ Import the `DateConverter` module in your JS/TS code.
 ```javascript
 // as ES module
 import DateConverter from '@remotemerge/ndc-node-sdk';
-// still in love with require? 😱
+```
+
+*OR*
+
+```javascript
 const DateConverter = require('@remotemerge/ndc-node-sdk');
 ```
 
-### From BS to AD
+### Convert from BS to AD
 
 Add BS date in `YYYY-MM-DD` format to convert from BS to AD.
 
@@ -58,7 +62,7 @@ outputs
 { year: 1961, month: 1, date: 30, day: 'Monday' }
 ```
 
-### From AD to BS
+### Convert from AD to BS
 
 Add AD date in `YYYY-MM-DD` format to convert from AD to BS.
 
