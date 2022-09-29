@@ -72,3 +72,13 @@ outputs
 ```log
 { year: 2058, month: 2, date: 19, day: 'Friday' }
 ```
+
+### Using CDN
+
+You can also use the library directly in HTML from the jsDelivr CDN.
+
+```log
+<script src="https://cdn.jsdelivr.net/npm/@remotemerge/ndc-node-sdk@1/ndc-umd.min.js"></script>
+```
+
+After script installation, follow the examples above.
