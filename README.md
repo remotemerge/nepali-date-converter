@@ -38,7 +38,7 @@ Import the `DateConverter` module in your JS/TS code.
 
 ```javascript
 // as ES module
-import DateConverter from '@remotemerge/ndc-node-sdk';
+import { DateConverter } from '@remotemerge/ndc-node-sdk';
 ```
 
 *OR*
