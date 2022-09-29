@@ -1,6 +1,6 @@
 # Nepali Date Converter (NDC)
 
-Modern JavaScript tool to convert date from BS to AD and vice-versa.
+Modern JavaScript library to convert date from BS to AD and vice-versa.
 
 ## Features
 
