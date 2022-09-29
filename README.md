@@ -43,7 +43,7 @@ Import the `DateConverter` module in your JS/TS code.
 
 ```javascript
 // as ES module
-import { DateConverter } from '@remotemerge/ndc-node-sdk';
+import DateConverter from '@remotemerge/ndc-node-sdk';
 ```
 
 *OR*
@@ -84,10 +84,14 @@ outputs
 
 ### Using CDN
 
-You can also use the library directly in HTML from the [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@remotemerge/ndc-node-sdk).
+You can also use the library directly in HTML from
+the [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@remotemerge/ndc-node-sdk).
 
-```log
-<script src="https://cdn.jsdelivr.net/npm/@remotemerge/ndc-node-sdk@1/ndc-umd.js"></script>
+```html
+
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/@remotemerge/ndc-node-sdk@1/ndc-iife.js'></script>
+<script type='text/javascript'>
+  const converted = new DateConverter('2044-01-08').toAd();
+  console.log(converted);
+</script>
 ```
-
-After script installation, follow the examples above.
