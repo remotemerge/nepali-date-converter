@@ -1,0 +1,31 @@
+# The workflow to run the tests
+name: Testing
+
+# Controls when the workflow will run
+on: [ pull_request ]
+
+jobs:
+  test:
+    # OS to run
+    runs-on: ubuntu-latest
+
+    steps:
+      # checkout the code
+      - uses: actions/checkout@v3
+
+      # Use nodejs LTS version
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+
+      - name: "Print version"
+        run: node -v && npm -v
+
+      - name: "Install dependencies and build"
+        run: npm install
+
+      - name: "Build project"
+        run: npm run build
+
+      - name: "Run Tests"
+        run: npm run test
