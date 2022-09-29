@@ -1,5 +1,5 @@
 # The workflow to run the tests
-name: Testing
+name: Test
 
 # Controls when the workflow will run
 on: [ pull_request ]
@@ -21,11 +21,14 @@ jobs:
       - name: "Print version"
         run: node -v && npm -v
 
-      - name: "Install dependencies and build"
+      - name: "Install dependencies"
         run: npm install
 
       - name: "Build project"
         run: npm run build
+
+      - name: "Create data file"
+        run: \cp __test__/data.dist.json __test__/data.json
 
       - name: "Run Tests"
         run: npm run test
