@@ -1,4 +1,4 @@
-# Nepali Date Converter (NDC)
+# 🔁 Nepali Date Converter (NDC)
 
 [![Package](https://img.shields.io/npm/v/@remotemerge/ndc-node-sdk?logo=npm)](https://www.npmjs.com/package/@remotemerge/ndc-node-sdk)
 ![Build](https://img.shields.io/github/workflow/status/remotemerge/ndc-node-sdk/Publish?logo=github)
