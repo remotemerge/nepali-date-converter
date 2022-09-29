@@ -2,7 +2,7 @@ import { endOfDay, isWithinInterval, startOfDay } from 'date-fns';
 
 import { Calendar } from './Calendar';
 
-export class DateConverter extends Calendar {
+export default class DateConverter extends Calendar {
   /**
    * The year extracted from input date.
    */
