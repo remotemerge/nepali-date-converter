@@ -6,7 +6,7 @@ export default defineConfig({
     lib: {
       entry: './src/DateConverter.ts',
       name: 'DateConverter',
-      formats: ['es', 'umd'],
+      formats: ['es', 'iife', 'cjs'],
       fileName: (format) => {
         return `ndc-${format}.js`;
       },
