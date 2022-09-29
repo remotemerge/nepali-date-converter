@@ -1,5 +1,5 @@
 {
-  "name": "@remotemerge/nepali-date-converter",
+  "name": "@remotemerge/ndc-node-sdk",
   "version": "1.0",
   "description": "Modern JavaScript tool to convert date from BS to AD and vice-versa.",
   "homepage": "https://nepali-date.madansapkota.com",
@@ -22,10 +22,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:remotemerge/nepali-date-converter.git"
+    "url": "git@github.com:remotemerge/ndc-node-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/remotemerge/nepali-date-converter/issues"
+    "url": "https://github.com/remotemerge/ndc-node-sdk/issues"
   },
   "prettier": {
     "bracketSameLine": true,

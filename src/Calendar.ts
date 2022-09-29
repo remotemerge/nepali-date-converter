@@ -2,7 +2,7 @@ import { addDays, differenceInCalendarDays } from 'date-fns';
 
 import { Years } from './data/Years';
 
-export default class Calendar {
+export class Calendar {
   /**
    * The calendar support start date -> 1975-01-01 BS
    */
