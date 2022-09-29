@@ -19,7 +19,7 @@ jobs:
         run: npm install
 
       - name: "Build project"
-        run: npm run build
+        run: npm run package
 
       - name: "Copy readme doc"
         run: \cp README.md ./dist/README.md
