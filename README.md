@@ -84,10 +84,10 @@ outputs
 
 ### Using CDN
 
-You can also use the library directly in HTML from the jsDelivr CDN.
+You can also use the library directly in HTML from the [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@remotemerge/ndc-node-sdk).
 
 ```log
-<script src="https://cdn.jsdelivr.net/npm/@remotemerge/ndc-node-sdk@1/ndc-umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@remotemerge/ndc-node-sdk@1/ndc-umd.js"></script>
 ```
 
 After script installation, follow the examples above.
