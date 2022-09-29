@@ -1,8 +1,8 @@
 {
   "name": "@remotemerge/ndc-node-sdk",
   "version": "1.0",
-  "description": "Modern JavaScript tool to convert date from BS to AD and vice-versa.",
-  "homepage": "https://nepali-date.madansapkota.com",
+  "description": "Modern JavaScript library to convert date from BS to AD and vice-versa.",
+  "homepage": "https://madansapkota.com",
   "license": "MIT",
   "keywords": [
     "BS",
@@ -34,19 +34,14 @@
     "tabWidth": 2,
     "trailingComma": "all"
   },
-  "files": [
-    "dist"
-  ],
   "type": "module",
-  "module": "dist/ndc-es.js",
-  "main": "dist/ndc-cjs.js",
-  "types": "dist/Converter.d.ts",
   "scripts": {
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --ext .ts --fix src",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "dev": "vite",
-    "build": "vite build && tsc"
+    "build": "vite build",
+    "package": "vite build && tsc && node package.js"
   },
   "dependencies": {
     "date-fns": "^2.29.3"
