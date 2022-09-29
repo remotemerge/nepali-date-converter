@@ -1,0 +1,29 @@
+# The workflow to install the package
+name: Install
+
+# Controls when the workflow will run
+on:
+  workflow_run:
+    workflows: [ "Publish" ]
+    types:
+      - completed
+
+jobs:
+  install:
+    # OS to run
+    runs-on: ubuntu-latest
+
+    steps:
+      # Use nodejs LTS version
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+
+      - name: "Generate package.json file"
+        run: npm init -y
+
+      - name: "Install ndc package"
+        run: npm install @remotemerge/ndc-node-sdk
+
+      - name: "List installed packages"
+        run: npm list --depth=0
