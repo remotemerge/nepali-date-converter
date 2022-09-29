@@ -1,5 +1,10 @@
 # Nepali Date Converter (NDC)
 
+[![Package](https://img.shields.io/npm/v/@remotemerge/ndc-node-sdk?logo=npm)](https://www.npmjs.com/package/@remotemerge/ndc-node-sdk)
+![Build](https://img.shields.io/github/workflow/status/remotemerge/ndc-node-sdk/Publish?logo=github)
+![Downloads](https://img.shields.io/npm/dt/@remotemerge/ndc-node-sdk)
+![License](https://img.shields.io/npm/l/@remotemerge/ndc-node-sdk)
+
 Modern JavaScript library to convert date from BS to AD and vice-versa.
 
 ## Features
