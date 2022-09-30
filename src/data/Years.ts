@@ -2,7 +2,7 @@
  * The Nepali calendar data from 1975 BS to 2099 BS.
  * Based on the array index months days (0 → 11th), total days in year (12th)
  */
-const Years: Array<number[]> = [];
+const Years: number[][] = [];
 // fill years and their months
 Years[1975] = [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365];
 Years[1976] = [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366];
