@@ -89,8 +89,8 @@ the [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@remotemerge/ndc-node-sd
 
 ```html
 
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/@remotemerge/ndc-node-sdk@1/ndc-iife.js'></script>
-<script type='text/javascript'>
+<script src='https://cdn.jsdelivr.net/npm/@remotemerge/ndc-node-sdk@1/ndc-iife.js'></script>
+<script>
   const converted = new DateConverter('2044-01-08').toAd();
   console.log(converted);
 </script>
