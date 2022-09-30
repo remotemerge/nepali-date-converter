@@ -31,7 +31,7 @@ export default class DateConverter extends Calendar {
       .trim();
 
     // update date values
-    [this.inputYear, this.inputMonth, this.inputDate] = <number[]>strDate.split('-').map((num) => +num);
+    [this.inputYear, this.inputMonth, this.inputDate] = strDate.split('-').map((num) => +num);
   }
 
   /**
