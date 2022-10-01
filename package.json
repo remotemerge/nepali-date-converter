@@ -1,6 +1,6 @@
 {
   "name": "@remotemerge/ndc-node-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Modern JavaScript library to convert date from BS to AD and vice-versa.",
   "homepage": "https://madansapkota.com",
   "license": "MIT",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:remotemerge/ndc-node-sdk.git"
+    "url": "git+https://github.com/remotemerge/ndc-node-sdk.git"
   },
   "bugs": {
     "url": "https://github.com/remotemerge/ndc-node-sdk/issues"
@@ -47,11 +47,11 @@
     "date-fns": "^2.29.3"
   },
   "devDependencies": {
-    "@types/jest": "^29.1.0",
+    "@types/jest": "^29.1.1",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "eslint": "^8.24.0",
-    "jest": "^29.1.1",
+    "jest": "^29.1.2",
     "typescript": "^4.8.4",
     "vite": "^3.1.4"
   },

@@ -23,7 +23,6 @@ const packageConfig = {
   type: pc.type,
   module: 'ndc-es.js',
   main: 'ndc-cjs.js',
-  types: 'DateConverter.ts',
 };
 
 // generate package manager file
