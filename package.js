@@ -23,6 +23,7 @@ const packageConfig = {
   type: pc.type,
   module: 'ndc-es.js',
   main: 'ndc-cjs.js',
+  types: 'index.d.ts',
 };
 
 // generate package manager file
