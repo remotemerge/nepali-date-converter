@@ -1,11 +1,12 @@
 # 🔁 Nepali Date Converter (NDC)
 
 [![Package](https://img.shields.io/npm/v/@remotemerge/ndc-node-sdk?logo=npm)](https://www.npmjs.com/package/@remotemerge/ndc-node-sdk)
-![Build](https://img.shields.io/github/workflow/status/remotemerge/ndc-node-sdk/Publish?logo=github)
-![Downloads](https://img.shields.io/npm/dt/@remotemerge/ndc-node-sdk)
-![License](https://img.shields.io/npm/l/@remotemerge/ndc-node-sdk)
+[![Build](https://img.shields.io/github/workflow/status/remotemerge/ndc-node-sdk/Publish?logo=github)](README.md)
+[![Downloads](https://img.shields.io/npm/dt/@remotemerge/ndc-node-sdk)](https://www.npmjs.com/package/@remotemerge/ndc-node-sdk)
+[![Size](https://img.shields.io/bundlephobia/minzip/@remotemerge/ndc-node-sdk)](README.md)
+[![License](https://img.shields.io/npm/l/@remotemerge/ndc-node-sdk)](LICENSE)
 
-Modern JavaScript library to convert date from BS to AD and vice-versa.
+Modern JavaScript library to convert date from BS to AD and vice versa.
 
 ## Features
 
@@ -16,7 +17,7 @@ Modern JavaScript library to convert date from BS to AD and vice-versa.
 **TypeScript Support** — built-in types support, and it's written in TypeScript. The package seamlessly works on
 browsers, JS/ESx, Node.js, and bundlers like Webpack, Rollup, etc.
 
-**Conversion** — supports date conversion from BS to AD and vice-versa.
+**Conversion** — supports date conversion from BS to AD and vice versa.
 
 **Accurate** — from 1975-2099 BS, 100% of the data was tested and corrected. The package is ready to be used in
 production.
@@ -27,13 +28,13 @@ production.
 
 The library is available as a npm package. To install the package, run:
 
-```shell
+```bash
 npm install @remotemerge/ndc-node-sdk
 ```
 
 or, if you are using a Yarn package manager, run:
 
-```shell
+```bash
 yarn add @remotemerge/ndc-node-sdk
 ```
 
@@ -88,7 +89,6 @@ You can also use the library directly in HTML from
 the [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@remotemerge/ndc-node-sdk).
 
 ```html
-
 <script src='https://cdn.jsdelivr.net/npm/@remotemerge/ndc-node-sdk@1/ndc-iife.js'></script>
 <script>
   const converted = new DateConverter('2044-01-08').toAd();
