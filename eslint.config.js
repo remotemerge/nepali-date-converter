@@ -8,7 +8,7 @@ import importPlugin from 'eslint-plugin-import';
 export default [
   {
     files: ['**/*.ts', '**/*.tsx'],
-    ignores: ['jest.config.ts', 'dist/**', 'node_modules/**', 'public/**'],
+    ignores: ['dist/**', 'node_modules/**', 'public/**'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
