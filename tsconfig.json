@@ -1,17 +1,37 @@
 {
   "compilerOptions": {
+    // Basic Configuration
+    "target": "ESNext",
+    "module": "ESNext",
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "removeComments": true,
+    "incremental": true,
+
+    // Strict Type Checking
+    "strict": true,
+    "noImplicitAny": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // Module Resolution
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    // Declaration Files
     "declaration": true,
     "emitDeclarationOnly": true,
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "outDir": "dist",
-    "removeComments": true,
-    "strict": true,
-    "strictFunctionTypes": true,
-    "target": "ESNext"
+
+    // Performance and Optimization
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src/types/*.d.ts",
-    "src/*.ts"
-  ]
+
+  // Include and Exclude
+  "include": ["src/**/*.ts", "__tests__/**/*.ts", "vite.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }
