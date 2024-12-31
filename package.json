@@ -4,6 +4,13 @@
   "description": "Modern JavaScript library to convert date from BS to AD and vice-versa.",
   "homepage": "https://madansapkota.com",
   "license": "MIT",
+  "private": false,
+  "author": {
+    "name": "Madan Sapkota",
+    "role": "Maintainer",
+    "email": "contact+github@madansapkota.com",
+    "url": "https://madansapkota.com"
+  },
   "keywords": [
     "BS",
     "Bikram",
@@ -15,11 +22,6 @@
     "Miti",
     "Pariwartan"
   ],
-  "author": {
-    "name": "Madan Sapkota",
-    "email": "contact@madansapkota.com",
-    "url": "https://madansapkota.com"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/remotemerge/ndc-node-sdk.git"
@@ -27,12 +29,11 @@
   "bugs": {
     "url": "https://github.com/remotemerge/ndc-node-sdk/issues"
   },
+  "engines": {
+    "node": ">=22.12 <23.0.0"
+  },
   "prettier": {
-    "bracketSameLine": true,
-    "printWidth": 120,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "all"
+    "singleQuote": true
   },
   "type": "module",
   "scripts": {
@@ -48,8 +49,8 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@typescript-eslint/eslint-plugin": "^8.18.2",
-    "@typescript-eslint/parser": "^8.18.2",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
     "eslint": "^9.17.0",
     "jest": "^29.7.0",
     "prettier": "^3.4.2",
