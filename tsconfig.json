@@ -32,6 +32,6 @@
   },
 
   // Include and Exclude
-  "include": ["src/**/*.ts", "__tests__/**/*.ts", "vite.config.ts"],
+  "include": ["src/**/*.ts", "__tests__/**/*.ts", "*.ts"],
   "exclude": ["node_modules", "dist"]
 }
