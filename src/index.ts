@@ -8,13 +8,7 @@ import {
 
 import { years } from './years';
 
-export interface IDateConverter {
-  toAd(): { year: number; month: number; date: number; day: string };
-
-  toBs(): { year: number; month: number; date: number; day: string };
-}
-
-export default class DateConverter implements IDateConverter {
+export default class DateConverter {
   /**
    * The calendar support start date -> 1975-01-01 BS
    */
