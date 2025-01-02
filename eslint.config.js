@@ -9,6 +9,13 @@ export default [
   {
     files: ['**/*.ts', '**/*.tsx'],
     ignores: ['dist/**', 'node_modules/**', 'public/**'],
+    settings: {
+      'import/resolver': {
+        node: {
+          extensions: ['.js', '.json', '.ts'],
+        },
+      },
+    },
     languageOptions: {
       parser: tsParser,
       parserOptions: {
