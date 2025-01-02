@@ -22,10 +22,6 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
 
-    // Declaration Files
-    "declaration": true,
-    "emitDeclarationOnly": true,
-
     // Performance and Optimization
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
