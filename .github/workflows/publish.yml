@@ -26,7 +26,7 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run package
+        run: npm run build
 
       - name: Publish the package to npm
         run: npm publish ./dist --access public
