@@ -56,4 +56,4 @@ pnpm-lock.yaml
 yarn.lock
 
 ## Data Files
-/__test__/data.json
+/__tests__/data.json
