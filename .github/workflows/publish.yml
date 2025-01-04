@@ -12,6 +12,12 @@ jobs:
     # Run on the latest Ubuntu
     runs-on: ubuntu-latest
 
+    # Set default values for the jobs
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./html
+
     steps:
       # Checkout the repository
       - uses: actions/checkout@v4
@@ -21,9 +27,6 @@ jobs:
         with:
           node-version: 22
           registry-url: 'https://registry.npmjs.org'
-
-      - name: Change the working directory
-        run: cd html
 
       - name: Install dependencies
         run: npm install

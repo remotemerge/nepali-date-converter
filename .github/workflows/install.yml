@@ -18,6 +18,12 @@ jobs:
         node-version: [18, 20, 22]
       fail-fast: false
 
+    # Set default values for the jobs
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./html
+
     steps:
       # Checkout the repository
       - uses: actions/checkout@v4
