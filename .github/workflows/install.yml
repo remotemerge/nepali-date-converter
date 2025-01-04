@@ -30,7 +30,7 @@ jobs:
       - name: Generate package.json file
         run: npm init -y
 
-      - name: Install ndc package
+      - name: Install Nepali Date Converter
         run: npm install @remotemerge/nepali-date-converter
 
       - name: List installed packages
