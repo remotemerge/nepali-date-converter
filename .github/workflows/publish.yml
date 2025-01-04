@@ -1,34 +1,34 @@
-# The workflow to publish package
+# The workflow to publish the package
 name: Publish
 
 # Controls when the workflow will run
 on:
   release:
-    types: [ created ]
-    branches: [ main ]
+    types: [ created ] # Trigger on new releases
+    branches: [ main ] # Only on the main branch
 
 jobs:
   publish:
-    # OS to run
+    # Run on the latest Ubuntu
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      # Checkout the repository
+      - uses: actions/checkout@v4
 
-      - name: "Install dependencies"
+      # Set up Node.js with the LTS version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
         run: npm install
 
-      - name: "Build project"
+      - name: Build project
         run: npm run package
 
-      - name: "Copy readme doc"
-        run: \cp README.md ./dist/README.md
-
-      # publish to NPM
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-          registry-url: 'https://registry.npmjs.org'
-      - run: npm publish ./dist --access public
+      - name: Publish the package to npm
+        run: npm publish ./dist --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
