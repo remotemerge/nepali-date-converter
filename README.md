@@ -1,7 +1,8 @@
 # 📅 Nepali Date Converter
 
 [![Package](https://img.shields.io/npm/v/@remotemerge/nepali-date-converter?logo=npm)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
-[![Build](https://img.shields.io/github/workflow/status/remotemerge/nepali-date-converter/Publish?logo=github)](README.md)
+[![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/publish.yml?logo=github)](README.md)
+![Tests](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?style=flat&logo=counterstrike&label=test)
 [![Downloads](https://img.shields.io/npm/dt/@remotemerge/nepali-date-converter?logo=spreadshirt)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
 [![Size](https://img.shields.io/bundlephobia/minzip/@remotemerge/nepali-date-converter?logo=ipfs)](https://bundlephobia.com/result?p=@remotemerge/nepali-date-converter)
 [![License](https://img.shields.io/npm/l/@remotemerge/nepali-date-converter?logo=opensourceinitiative)](LICENSE)
