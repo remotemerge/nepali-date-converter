@@ -1,161 +1,175 @@
-import { addDays, differenceInCalendarDays, endOfDay, isWithinInterval, startOfDay } from 'date-fns';
+import {
+  addDays,
+  differenceInCalendarDays,
+  endOfDay,
+  isWithinInterval,
+  startOfDay,
+} from 'date-fns';
 
-import { Years } from './data/Years';
+import { years } from './years';
 
-export interface IDateConverter {
-  toAd(): { year: number; month: number; date: number; day: string };
-
-  toBs(): { year: number; month: number; date: number; day: string };
-}
-
-export default class DateConverter implements IDateConverter {
-  /**
-   * The calendar support start date -> 1975-01-01 BS
-   */
-  private readonly startDate = new Date('1918-04-13');
-
-  /**
-   * The calendar support end date -> 2099-12-30 BS
-   */
-  private readonly endDate = new Date('2043-04-13');
-
-  /**
-   * The year extracted from input date.
-   */
-  private readonly inputYear: number;
-
-  /**
-   * The month extracted from input date.
-   */
-  private readonly inputMonth: number;
-
-  /**
-   * The date extracted from input date.
-   */
-  private readonly inputDate: number;
-
-  /**
-   * Throw the error if date is not in supported range
-   */
+export default class DateConverter {
+  // Supported date range for the Nepali calendar (1975 BS - 2099 BS)
+  private readonly startDate = new Date('1918-04-13'); // 1975-01-01 BS
+  private readonly endDate = new Date('2043-04-13'); // 2099-12-30 BS
   private readonly dateRangeError = 'The input date is out of supported range.';
 
-  /**
-   * @param strDate {string}
-   */
-  public constructor(strDate: string) {
-    // clean input date
-    strDate = this.numToEn(strDate)
-      .replace(/[./|,]/gm, '-')
-      .trim();
+  // Extracted values from the input date string
+  private readonly inputYear: number;
+  private readonly inputMonth: number;
+  private readonly inputDate: number;
 
-    // update date values
-    [this.inputYear, this.inputMonth, this.inputDate] = strDate.split('-').map((num) => +num);
+  constructor(strDate: string) {
+    // Parse and clean the input date string
+    const [year, month, date] = this.parseDateString(strDate);
+    this.inputYear = year;
+    this.inputMonth = month;
+    this.inputDate = date;
   }
 
   /**
-   * Convert numbers from nepali to english
+   * Parses and cleans the input date string.
+   * Converts Nepali numerals to English and splits into year, month, and date.
+   */
+  private parseDateString(strDate: string): [number, number, number] {
+    const cleanedDate = this.numToEn(strDate)
+      .replace(/[./|,]/g, '-')
+      .trim();
+    const [year, month, date] = cleanedDate.split('-').map(Number);
+
+    return [year, month, date];
+  }
+
+  /**
+   * Converts Nepali numerals (०-९) to English numerals (0-9).
    */
   private numToEn(strNum: string): string {
-    const nums = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-    return strNum.replace(/[०१२३४५६७८९]/gm, (str) => nums.indexOf(str).toString());
+    const nepaliNumerals = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
+
+    return strNum.replace(/[०१२३४५६७८९]/g, (char) =>
+      nepaliNumerals.indexOf(char).toString(),
+    );
   }
 
   /**
-   * Convert weekday index to day name
+   * Converts a day index (0-6) to a day name (Sunday-Saturday).
    */
   private numToDay(dayIndex: number): string {
-    return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayIndex];
+    const days = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+
+    return days[dayIndex];
   }
 
   /**
-   * Calculate AD date based on input BS date
+   * Calculates the AD date for a given BS date.
+   * Uses the total days difference from the start date (1975-01-01 BS).
    */
-  private getAdDate(inputYear: number, inputMonth: number, inputDate: number): Date {
-    // init the counter
-    let counter = 0;
+  private getAdDate(year: number, month: number, date: number): Date {
+    let totalDays = 0;
 
-    // count calendar days
-    Years.some((months, year) => {
-      if (inputYear === year) {
-        months.some((days, mi) => {
-          if (inputMonth === +mi + 1) {
-            counter += inputDate - 1; // skip last day
-            return true;
-          }
-          counter += days;
-        });
-        return true;
-      }
-      counter += months[12];
-    });
+    // Add days for each year before the input year
+    for (let y = 1975; y < year; y++) {
+      totalDays += years[y][12]; // daysInYear is stored at index 12
+    }
 
-    // calculate the output date
-    return addDays(this.startDate, counter);
+    // Add days for each month before the input month
+    for (let m = 0; m < month - 1; m++) {
+      totalDays += years[year][m];
+    }
+
+    // Add days for the current month
+    totalDays += date - 1; // Subtract 1 to exclude the current day
+
+    return addDays(this.startDate, totalDays);
   }
 
   /**
-   * Calculate BS date based on input AD date
+   * Calculates the BS date for a given AD date.
+   * Uses the total days difference from the start date (1975-01-01 BS).
    */
-  private getBsDate(givenDate: string): { year: number; month: number; date: number } {
-    // init BS date object
-    const bsDate = { year: 0, month: 0, date: 0 };
-    // calculate days difference
-    const totalDays = Math.abs(differenceInCalendarDays(new Date(givenDate), this.startDate));
-    // init the counter
-    let counter = 0;
+  private getBsDate(givenDate: string): {
+    year: number;
+    month: number;
+    date: number;
+  } {
+    const targetDate = new Date(givenDate);
+    let remainingDays = differenceInCalendarDays(targetDate, this.startDate);
 
-    // search the calendar
-    Years.some((months, year) => {
-      // init days in the year
-      const daysInYear = Years[year][12];
+    // Iterate through years and months to find the BS date
+    for (const year in years) {
+      const daysInYear = years[year][12];
 
-      if (counter + daysInYear > totalDays) {
-        // init months
-        const months = Years[year].slice(0, 12);
-        months.some((days, mi) => {
-          if (counter + days > totalDays) {
-            // set output date
-            [bsDate.year, bsDate.month, bsDate.date] = [year, mi + 1, totalDays - counter + 1];
-            // exit from month loop
-            return true;
-          }
-          counter += days;
-        });
-        // exit from year loop
-        return true;
+      if (remainingDays >= daysInYear) {
+        remainingDays -= daysInYear;
+        continue;
       }
-      counter += daysInYear;
-    });
-    return bsDate;
+
+      for (let month = 0; month < 12; month++) {
+        const daysInMonth = years[year][month];
+
+        if (remainingDays >= daysInMonth) {
+          remainingDays -= daysInMonth;
+          continue;
+        }
+
+        // Return the calculated BS date
+        return {
+          year: Number(year),
+          month: month + 1,
+          date: remainingDays + 1,
+        };
+      }
+    }
+
+    throw new Error(this.dateRangeError);
   }
 
   /**
-   * Convert the input BS date to AD date.
+   * Converts the input BS date to an AD date.
+   * Returns an object with year, month, date, and day.
    */
   public toAd() {
-    // validate year range
+    // Validate the input year range
     if (this.inputYear < 1975 || this.inputYear > 2099) {
       throw new Error(this.dateRangeError);
     }
 
-    // convert to AD date
-    const adDate = this.getAdDate(this.inputYear, this.inputMonth, this.inputDate);
+    // Calculate the AD date and weekday
+    const adDate = this.getAdDate(
+      this.inputYear,
+      this.inputMonth,
+      this.inputDate,
+    );
     const weekday = this.numToDay(adDate.getDay());
 
-    // format output
-    return { year: adDate.getFullYear(), month: adDate.getMonth() + 1, date: adDate.getDate(), day: weekday };
+    return {
+      year: adDate.getFullYear(),
+      month: adDate.getMonth() + 1,
+      date: adDate.getDate(),
+      day: weekday,
+    };
   }
 
   /**
-   * Convert the input AD date to BS date.
+   * Converts the input AD date to a BS date.
+   * Returns an object with year, month, date, and day.
    */
   public toBs() {
-    // format input date
+    // Format the input date string
     const inputDate = `${this.inputYear}-${this.inputMonth}-${this.inputDate}`;
+    const targetDate = new Date(inputDate);
 
-    // validate date range
+    // Validate the input date range
     if (
-      !isWithinInterval(startOfDay(new Date(inputDate)), {
+      !isWithinInterval(targetDate, {
         start: startOfDay(this.startDate),
         end: endOfDay(this.endDate),
       })
@@ -163,11 +177,10 @@ export default class DateConverter implements IDateConverter {
       throw new Error(this.dateRangeError);
     }
 
-    // convert to BS date
+    // Calculate the BS date and weekday
     const bsDate = this.getBsDate(inputDate);
-    const weekday = this.numToDay(new Date(inputDate).getDay());
+    const weekday = this.numToDay(targetDate.getDay());
 
-    // format the output
     return { ...bsDate, day: weekday };
   }
 }

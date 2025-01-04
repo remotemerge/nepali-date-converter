@@ -1,17 +1,33 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "emitDeclarationOnly": true,
+    // Basic Configuration
+    "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
-    "outDir": "dist",
+    "outDir": "./dist",
+    "baseUrl": "./",
     "removeComments": true,
+    "incremental": true,
+
+    // Strict Type Checking
     "strict": true,
+    "noImplicitAny": true,
     "strictFunctionTypes": true,
-    "target": "ESNext"
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // Module Resolution
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    // Performance and Optimization
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src/types/*.d.ts",
-    "src/*.ts"
-  ]
+
+  // Include and Exclude
+  "include": ["*.ts", "__tests__/**/*.ts", "maker/*.ts", "src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

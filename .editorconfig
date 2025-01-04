@@ -1,6 +1,6 @@
 root = true
 
-# global configs
+# Global Settings
 [*]
 charset = utf-8
 end_of_line = lf
@@ -8,9 +8,13 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
-max_line_length = 120
+max_line_length = 80
 
-# markdown
+# Markdown and XML
+[*.{md,xml}]
+max_line_length = off
+
+# Markdown
 [*.md]
 trim_trailing_whitespace = false
 insert_final_newline = false

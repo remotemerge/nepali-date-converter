@@ -1,61 +1,72 @@
 {
-  "name": "@remotemerge/ndc-node-sdk",
-  "version": "1.0.3",
-  "description": "Modern JavaScript library to convert date from BS to AD and vice-versa.",
+  "name": "@remotemerge/nepali-date-converter",
+  "version": "1.0.0",
+  "description": "A modern JavaScript library for seamless conversion between Bikram Sambat (BS) and Gregorian (AD) dates. Easily convert Nepali dates to English dates and vice versa with support for years 1975 BS to 2099 BS.",
   "homepage": "https://madansapkota.com",
   "license": "MIT",
-  "keywords": [
-    "BS",
-    "Bikram",
-    "Sambat",
-    "Nepali",
-    "Calendar",
-    "Date",
-    "Converter",
-    "Miti",
-    "Pariwartan"
-  ],
+  "private": false,
   "author": {
     "name": "Madan Sapkota",
-    "email": "contact@madansapkota.com",
+    "role": "Maintainer",
+    "email": "contact+github@madansapkota.com",
     "url": "https://madansapkota.com"
   },
+  "keywords": [
+    "ad-to-bs",
+    "bikram-sambat",
+    "bs-to-ad",
+    "date-conversion",
+    "miti-pariwartan",
+    "nepali-calendar",
+    "nepali-date",
+    "nepali-date-converter",
+    "nepali-date-formatter",
+    "nepali-date-library",
+    "nepali-date-tool",
+    "nepali-date-utility",
+    "nepali-miti"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/remotemerge/ndc-node-sdk.git"
+    "url": "git+https://github.com/remotemerge/nepali-date-converter.git"
   },
   "bugs": {
-    "url": "https://github.com/remotemerge/ndc-node-sdk/issues"
+    "url": "https://github.com/remotemerge/nepali-date-converter/issues"
+  },
+  "engines": {
+    "node": ">=22.12 <23.0.0"
   },
   "prettier": {
-    "bracketSameLine": true,
-    "printWidth": 120,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "all"
+    "singleQuote": true
   },
   "type": "module",
   "scripts": {
-    "lint": "eslint --ext .ts src",
-    "lint:fix": "eslint --ext .ts --fix src",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "lint": "eslint **/*.ts",
+    "lint:fix": "eslint **/*.ts --fix",
+    "test": "jest",
     "dev": "vite",
-    "build": "vite build",
-    "package": "vite build && tsc && node package.js"
+    "preview": "vite preview",
+    "build": "vite build && npx tsx maker/package-manager.ts"
   },
   "dependencies": {
-    "date-fns": "^2.29.3"
+    "date-fns": "^4.1.0"
   },
   "devDependencies": {
-    "@types/jest": "^29.1.1",
-    "@typescript-eslint/eslint-plugin": "^5.38.1",
-    "@typescript-eslint/parser": "^5.38.1",
-    "eslint": "^8.24.0",
-    "jest": "^29.1.2",
-    "typescript": "^4.8.4",
-    "vite": "^3.1.4"
-  },
-  "optionalDependencies": {
-    "prettier": "^2.7.1"
+    "@stylistic/eslint-plugin": "^2.12.1",
+    "@types/jest": "^29.5.14",
+    "@typescript-eslint/eslint-plugin": "^8.19.0",
+    "@typescript-eslint/parser": "^8.19.0",
+    "eslint": "^9.17.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.14.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.4.2",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vite-plugin-dts": "^4.4.0"
   }
 }

@@ -1,97 +1,184 @@
-# 🔁 Nepali Date Converter (NDC)
+# 📅 Nepali Date Converter
 
-[![Package](https://img.shields.io/npm/v/@remotemerge/ndc-node-sdk?logo=npm)](https://www.npmjs.com/package/@remotemerge/ndc-node-sdk)
-![Build](https://img.shields.io/github/workflow/status/remotemerge/ndc-node-sdk/Publish?logo=github)
-![Downloads](https://img.shields.io/npm/dt/@remotemerge/ndc-node-sdk)
-![License](https://img.shields.io/npm/l/@remotemerge/ndc-node-sdk)
+[![Package](https://img.shields.io/npm/v/@remotemerge/nepali-date-converter?logo=npm)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
+[![Build](https://img.shields.io/github/workflow/status/remotemerge/nepali-date-converter/Publish?logo=github)](README.md)
+[![Downloads](https://img.shields.io/npm/dt/@remotemerge/nepali-date-converter?logo=spreadshirt)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
+[![Size](https://img.shields.io/bundlephobia/minzip/@remotemerge/nepali-date-converter?logo=ipfs)](https://bundlephobia.com/result?p=@remotemerge/nepali-date-converter)
+[![License](https://img.shields.io/npm/l/@remotemerge/nepali-date-converter?logo=opensourceinitiative)](LICENSE)
 
-Modern JavaScript library to convert date from BS to AD and vice-versa.
+**Nepali Date Converter** is a lightweight, high-performance JavaScript library designed to simplify date conversions between the **Bikram Sambat (BS)** and **Gregorian (AD)** calendars. Whether you're building applications for Nepali users or working with historical data, NDC provides accurate and efficient date conversion for **1975 BS to 2099 BS** (1918 AD to 2043 AD). Perfect for developers working with Nepali calendars, festivals, or events.
 
-## Features
+---
 
-**Date Range** — supports conversion between 1975-2099 BS or 1918-2043 AD.
+## ✨ Features
 
-**Size** — with massive 125 years of data and code, the size is tiny; plain *7.3 KB* and Gzip *2.2 KB*.
+- **Accurate Date Conversion**: Convert dates between **BS (Bikram Sambat)** and **AD (Gregorian)** with 100% accuracy.
+- **Wide Date Range**: Supports conversion for **1975 BS to 2099 BS** (1918 AD to 2043 AD).
+- **Lightweight**: Just **7.3 KB** (plain) and **2.2 KB** (gzipped) — optimized for performance.
+- **TypeScript Support**: Built-in TypeScript types for a seamless development experience.
+- **Cross-Platform**: Works in **Node.js**, **browsers**, and bundlers like **Webpack**, **Rollup**, **Vite**, etc.
+- **Fast and Reliable**: Localized data and optimized code for lightning-fast results.
 
-**TypeScript Support** — built-in types support, and it's written in TypeScript. The package seamlessly works on
-browsers, JS/ESx, Node.js, and bundlers like Webpack, Rollup, etc.
+---
 
-**Conversion** — supports date conversion from BS to AD and vice-versa.
+## 🚀 Installation
 
-**Accurate** — from 1975-2099 BS, 100% of the data was tested and corrected. The package is ready to be used in
-production.
+Install the package via **npm** or **Yarn**:
 
-**Fast** — localized data and optimized code; the outcomes are lightning fast!
-
-## Installation
-
-The library is available as a npm package. To install the package, run:
-
-```shell
-npm install @remotemerge/ndc-node-sdk
+```bash
+npm install @remotemerge/nepali-date-converter
 ```
 
-or, if you are using a Yarn package manager, run:
+or
 
-```shell
-yarn add @remotemerge/ndc-node-sdk
+```bash
+yarn add @remotemerge/nepali-date-converter
 ```
 
-## Quick Examples
+---
 
-Import the `DateConverter` module in your JS/TS code.
+## 📖 Quick Start
+To get started with the Nepali Date Converter, follow the simple examples below. You can convert dates from **BS to AD** or **AD to BS** with just a few lines of code.
+
+### Importing the Library
+
+#### ES Modules (Recommended for Modern JavaScript/TypeScript Projects)
+```javascript
+import DateConverter from '@remotemerge/nepali-date-converter';
+```
+
+#### CommonJS (For Node.js or Legacy Projects)
+```javascript
+const DateConverter = require('@remotemerge/nepali-date-converter');
+```
+
+---
+
+### Converting BS to AD
+
+Convert a **Bikram Sambat (BS)** date to a **Gregorian (AD)** date. Simply pass the BS date in `YYYY-MM-DD` format to the `DateConverter` and call the `.toAd()` method.
 
 ```javascript
-// as ES module
-import DateConverter from '@remotemerge/ndc-node-sdk';
-```
-
-*OR*
-
-```javascript
-const DateConverter = require('@remotemerge/ndc-node-sdk');
-```
-
-### Convert from BS to AD
-
-Add BS date in `YYYY-MM-DD` format to convert from BS to AD.
-
-```javascript
-const converted = new DateConverter('2017-10-17').toAd();
+// Convert BS date '2079-10-17' to AD
+const converted = new DateConverter('2079-10-17').toAd();
 console.log(converted);
 ```
 
-outputs
-
-```log
-{ year: 1961, month: 1, date: 30, day: 'Monday' }
+**Output**:
+```text
+{ year: 2023, month: 1, date: 30, day: 'Monday' }
 ```
 
-### Convert from AD to BS
+- **Input Format**: `YYYY-MM-DD` (Bikram Sambat date).
+- **Output**: An object containing the converted Gregorian date (`year`, `month`, `date`) and the day of the week (`day`).
 
-Add AD date in `YYYY-MM-DD` format to convert from AD to BS.
+---
+
+### Converting AD to BS
+
+Convert a **Gregorian (AD)** date to a **Bikram Sambat (BS)** date. Pass the AD date in `YYYY-MM-DD` format to the `DateConverter` and call the `.toBs()` method.
 
 ```javascript
-const converted = new DateConverter('2001-06-01').toBs();
+// Convert AD date '2023-01-30' to BS
+const converted = new DateConverter('2023-01-30').toBs();
 console.log(converted);
 ```
 
-outputs
-
-```log
-{ year: 2058, month: 2, date: 19, day: 'Friday' }
+**Output**:
+```text
+{ year: 2079, month: 10, date: 17, day: 'Monday' }
 ```
 
-### Using CDN
+- **Input Format**: `YYYY-MM-DD` (Gregorian date).
+- **Output**: An object containing the converted Bikram Sambat date (`year`, `month`, `date`) and the day of the week (`day`).
 
-You can also use the library directly in HTML from
-the [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@remotemerge/ndc-node-sdk).
+---
+
+### Using the Library in the Browser (CDN)
+
+You can also use the library directly in your HTML files via **jsDelivr CDN**. This is ideal for quick prototyping or projects without a build system.
 
 ```html
-
-<script src='https://cdn.jsdelivr.net/npm/@remotemerge/ndc-node-sdk@1/ndc-iife.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1/dist/ndc-browser.js"></script>
 <script>
-  const converted = new DateConverter('2044-01-08').toAd();
+  // Convert BS date '2079-10-17' to AD
+  const converted = new DateConverter('2079-10-17').toAd();
   console.log(converted);
 </script>
 ```
+
+---
+
+### Example Use Cases
+
+1. **Event Planning**: Convert Nepali festival dates to Gregorian dates for international users.
+2. **Historical Data**: Work with historical records that use the Bikram Sambat calendar.
+3. **Localization**: Display dates in the Nepali calendar for Nepali-speaking users.
+
+---
+
+### Advanced Usage
+
+#### Handling Invalid Dates
+If an invalid date is provided, the library will throw an error. Always ensure the input date is within the supported range (**1975 BS to 2099 BS** or **1918 AD to 2043 AD**).
+
+```javascript
+try {
+  const converted = new DateConverter('2100-01-01').toAd(); // Invalid date
+} catch (error) {
+  console.error(error.message); // "The input date is out of supported range."
+}
+```
+
+#### Working with TypeScript
+The library includes built-in TypeScript support, so you get full type checking and autocompletion in your editor.
+
+```typescript
+import DateConverter from '@remotemerge/nepali-date-converter';
+
+const converted = new DateConverter('2079-10-17').toAd();
+console.log(converted.year); // TypeScript knows this is a number
+```
+
+---
+
+## 📊 Why Use Nepali Date Converter?
+
+- **Production-Ready**: Tested and verified for 100% accuracy across the supported date range.
+- **Developer-Friendly**: Simple API, TypeScript support, and detailed documentation.
+- **Lightweight**: Minimal bundle size for fast loading and performance.
+- **Open Source**: MIT licensed — free to use, modify, and distribute.
+
+---
+
+## 🔧 API Reference
+
+### `DateConverter(date: string)`
+
+- **`date`**: A string in `YYYY-MM-DD` format (either BS or AD).
+
+### Methods
+
+- **`.toAd()`**: Converts a BS date to an AD date.
+  - Returns: `{ year: number, month: number, date: number, day: string }`
+
+- **`.toBs()`**: Converts an AD date to a BS date.
+  - Returns: `{ year: number, month: number, date: number, day: string }`
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙌 Contributing
+
+Contributions are welcome! If you find a bug or have a feature request, please open an issue on the [GitHub repository](https://github.com/remotemerge/nepali-date-converter).
+
+---
+
+## 📄 Documentation
+
+For detailed documentation and advanced usage, visit the [GitHub repository](https://github.com/remotemerge/nepali-date-converter).

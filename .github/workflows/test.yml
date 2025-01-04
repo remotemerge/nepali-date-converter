@@ -1,31 +1,35 @@
-# The workflow to run the tests
 name: Test
 
-# Controls when the workflow will run
-on: [ pull_request ]
+# Trigger the workflow on pull requests
+on: [pull_request]
 
 jobs:
   test:
-    # OS to run
-    runs-on: ubuntu-latest
+    # Run on multiple operating systems
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [18, 20, 22]
+      fail-fast: false
 
     steps:
-      # checkout the code
-      - uses: actions/checkout@v3
+      # Checkout the repository
+      - uses: actions/checkout@v4
 
-      # Use nodejs LTS version
-      - uses: actions/setup-node@v3
+      # Set up Node.js with the specified version
+      - uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
+          node-version: ${{ matrix.node-version }}
 
-      - name: "Install dependencies"
+      - name: Install dependencies
         run: npm install
 
-      - name: "Build project"
+      - name: Build project
         run: npm run build
 
-      - name: "Create data file"
-        run: \cp __test__/data.dist.json __test__/data.json
+      - name: Create data file
+        run: npx shx cp __tests__/data.dist.json __tests__/data.json
 
-      - name: "Run Tests"
+      - name: Run Tests
         run: npm run test
