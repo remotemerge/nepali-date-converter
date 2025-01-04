@@ -2,7 +2,7 @@
 
 [![Package](https://img.shields.io/npm/v/@remotemerge/nepali-date-converter?logo=npm)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
 ![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/publish.yml?logo=github)
-![Tests](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?style=flat&logo=counterstrike&label=test)
+![Tests](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?&logo=jest&label=test)
 ![Downloads](https://img.shields.io/npm/dt/@remotemerge/nepali-date-converter?logo=spreadshirt)
 [![Size](https://img.shields.io/bundlephobia/minzip/@remotemerge/nepali-date-converter?logo=ipfs&label=size)](https://bundlephobia.com/result?p=@remotemerge/nepali-date-converter)
 ![License](https://img.shields.io/github/license/remotemerge/nepali-date-converter?logo=opensourceinitiative)

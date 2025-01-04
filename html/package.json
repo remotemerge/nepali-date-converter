@@ -1,6 +1,6 @@
 {
   "name": "@remotemerge/nepali-date-converter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A modern JavaScript library for seamless conversion between Bikram Sambat (BS) and Gregorian (AD) dates. Easily convert Nepali dates to English dates and vice versa with support for years 1975 BS to 2099 BS.",
   "homepage": "https://madansapkota.com",
   "license": "MIT",
@@ -44,9 +44,9 @@
     "lint": "eslint **/*.ts",
     "lint:fix": "eslint **/*.ts --fix",
     "test": "jest",
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0 --port 3000",
     "preview": "vite preview",
-    "build": "vite build && npx tsx maker/package-manager.ts"
+    "build": "vite build && npx tsx ./maker/package-manager.ts"
   },
   "dependencies": {
     "date-fns": "^4.1.0"

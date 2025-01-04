@@ -1,4 +1,4 @@
-import DateConverter from '../src/index';
+import DateConverter from '../src';
 
 import records from './data.json';
 
