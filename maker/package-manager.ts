@@ -33,12 +33,12 @@ const npmPackageConfig = {
   bugs,
   type,
   types: './index.d.ts',
-  main: './ndc.cjs', // CommonJS entry point
   module: './ndc.js', // ES Module entry point
+  main: './ndc-node.js', // CommonJS entry point
   exports: {
     '.': {
       import: './ndc.js', // ES Module import
-      require: './ndc.cjs', // CommonJS require
+      require: './ndc-node.js', // CommonJS require
     },
   },
   files: ['**/*'],

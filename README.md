@@ -99,7 +99,7 @@ console.log(converted);
 You can also use the library directly in your HTML files via **jsDelivr CDN**. This is ideal for quick prototyping or projects without a build system.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1/dist/ndc-iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1/dist/ndc-browser.js"></script>
 <script>
   // Convert BS date '2079-10-17' to AD
   const converted = new DateConverter('2079-10-17').toAd();
