@@ -1,4 +1,4 @@
-import DateConverter from '../dist/ndc-es.js';
+import DateConverter from '../src/index';
 
 import { default as records } from './data.json';
 
