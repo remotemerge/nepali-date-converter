@@ -1,4 +1,6 @@
 # Docker Compose configuration for NPM package deployment
+# If you read this file, start docker compose with the following command:
+# bash start-docker.sh
 
 # Define network
 networks:
