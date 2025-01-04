@@ -28,12 +28,6 @@
   },
 
   // Include and Exclude
-  "include": [
-    "*.ts",
-    "html/__tests__/**/*.ts",
-    "html/maker/*.ts",
-    "html/src/**/*.ts"
-  ],
-  "exclude": [
-    "../node_modules", "dist"]
+  "include": ["*.ts", "__tests__/**/*.ts", "maker/*.ts", "src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
