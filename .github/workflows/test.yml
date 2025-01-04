@@ -13,12 +13,6 @@ jobs:
         node-version: [ 18, 20, 22 ]
       fail-fast: false
 
-    # Set default values for the jobs
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./html
-
     steps:
       # Checkout the repository
       - uses: actions/checkout@v4
@@ -29,13 +23,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: cd html && npm install
 
       - name: Build project
-        run: npm run build
+        run: cd html && npm run build
 
       - name: Create data file
-        run: npx shx cp __tests__/data.dist.json __tests__/data.json
+        run: cd html && npx shx cp __tests__/data.dist.json __tests__/data.json
 
       - name: Run Tests
-        run: npm run test
+        run: cd html && npm run test
