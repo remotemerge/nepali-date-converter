@@ -42,6 +42,9 @@ const npmPackageConfig = {
     },
   },
   files: ['**/*'],
+  engines: {
+    node: '>=18.0.0',
+  },
   scripts: {
     start: 'echo "Thanks for using the package 🎉🎉🎉"',
     test: 'echo "Error: no test specified" && exit 1',
@@ -60,5 +63,6 @@ await writeFile(
 );
 
 // Copy static files to the dist folder
+await copyFile('.npmrc', join(distPath, '.npmrc'));
 await copyFile('README.md', join(distPath, 'README.md'));
 await copyFile('LICENSE', join(distPath, 'LICENSE'));
