@@ -10,20 +10,28 @@ on:
 
 jobs:
   install:
-    # OS to run
-    runs-on: ubuntu-latest
+    # Run on multiple operating systems and Node.js versions
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        node-version: [18, 20, 22]
+      fail-fast: false
 
     steps:
-      # Use nodejs LTS version
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
+      # Checkout the repository
+      - uses: actions/checkout@v4
 
-      - name: "Generate package.json file"
+      # Set up Node.js with the specified version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Generate package.json file
         run: npm init -y
 
-      - name: "Install ndc package"
-        run: npm install @remotemerge/ndc-node-sdk
+      - name: Install ndc package
+        run: npm install @remotemerge/nepali-date-converter
 
-      - name: "List installed packages"
+      - name: List installed packages
         run: npm list --depth=0
