@@ -37,23 +37,8 @@ yarn add @remotemerge/nepali-date-converter
 
 ---
 
-## 🚀 Quick Start
-
-### Installation
-
-Install the library via **npm** or **Yarn**:
-
-```bash
-npm install @remotemerge/nepali-date-converter
-```
-
-or
-
-```bash
-yarn add @remotemerge/nepali-date-converter
-```
-
----
+## 📖 Quick Start
+To get started with the Nepali Date Converter, follow the simple examples below. You can convert dates from **BS to AD** or **AD to BS** with just a few lines of code.
 
 ### Importing the Library
 
