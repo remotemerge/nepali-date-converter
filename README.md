@@ -1,4 +1,4 @@
-# 🔁 Nepali Date Converter
+# 📅 Nepali Date Converter
 
 [![Package](https://img.shields.io/npm/v/@remotemerge/nepali-date-converter?logo=npm)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
 [![Build](https://img.shields.io/github/workflow/status/remotemerge/nepali-date-converter/Publish?logo=github)](README.md)
@@ -6,7 +6,7 @@
 [![Size](https://img.shields.io/bundlephobia/minzip/@remotemerge/nepali-date-converter)](https://bundlephobia.com/result?p=@remotemerge/nepali-date-converter)
 [![License](https://img.shields.io/npm/l/@remotemerge/nepali-date-converter)](LICENSE)
 
-**Nepali Date Converter (NDC)** is a lightweight, high-performance JavaScript library designed to simplify date conversions between the **Bikram Sambat (BS)** and **Gregorian (AD)** calendars. Whether you're building applications for Nepali users or working with historical data, NDC provides accurate and efficient date conversion for **1975 BS to 2099 BS** (1918 AD to 2043 AD). Perfect for developers working with Nepali calendars, festivals, or events.
+**Nepali Date Converter** is a lightweight, high-performance JavaScript library designed to simplify date conversions between the **Bikram Sambat (BS)** and **Gregorian (AD)** calendars. Whether you're building applications for Nepali users or working with historical data, NDC provides accurate and efficient date conversion for **1975 BS to 2099 BS** (1918 AD to 2043 AD). Perfect for developers working with Nepali calendars, festivals, or events.
 
 ---
 
