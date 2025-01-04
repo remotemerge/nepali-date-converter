@@ -23,7 +23,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Change the working directory
-        run: npx shx cd html
+        run: cd html
 
       - name: Install dependencies
         run: npm install
