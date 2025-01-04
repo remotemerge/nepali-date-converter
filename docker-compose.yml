@@ -1,0 +1,28 @@
+# Docker Compose configuration for NPM package deployment
+
+# Define network
+networks:
+  npm-dev-network:
+    name: npm-dev-network
+    driver: bridge
+    external: false
+
+# Define services
+services:
+  npm-dev-server:
+    image: node:22
+    user: node
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "5173:5173"
+    networks:
+      - npm-dev-network
+    entrypoint: [ "/bin/bash", "/app/entrypoint.sh" ]
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5173" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
