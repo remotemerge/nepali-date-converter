@@ -1,7 +1,7 @@
 {
-  "name": "@remotemerge/ndc-node-sdk",
-  "version": "1.0.3",
-  "description": "Modern JavaScript library to convert date from BS to AD and vice-versa.",
+  "name": "@remotemerge/nepali-date-converter",
+  "version": "1.0.0",
+  "description": "A modern JavaScript library for seamless conversion between Bikram Sambat (BS) and Gregorian (AD) dates. Easily convert Nepali dates to English dates and vice versa with support for years 1975 BS to 2099 BS.",
   "homepage": "https://madansapkota.com",
   "license": "MIT",
   "private": false,
@@ -12,22 +12,26 @@
     "url": "https://madansapkota.com"
   },
   "keywords": [
-    "BS",
-    "Bikram",
-    "Sambat",
-    "Nepali",
-    "Calendar",
-    "Date",
-    "Converter",
-    "Miti",
-    "Pariwartan"
+    "ad-to-bs",
+    "bikram-sambat",
+    "bs-to-ad",
+    "date-conversion",
+    "miti-pariwartan",
+    "nepali-calendar",
+    "nepali-date",
+    "nepali-date-converter",
+    "nepali-date-formatter",
+    "nepali-date-library",
+    "nepali-date-tool",
+    "nepali-date-utility",
+    "nepali-miti"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/remotemerge/ndc-node-sdk.git"
+    "url": "git+https://github.com/remotemerge/nepali-date-converter.git"
   },
   "bugs": {
-    "url": "https://github.com/remotemerge/ndc-node-sdk/issues"
+    "url": "https://github.com/remotemerge/nepali-date-converter/issues"
   },
   "engines": {
     "node": ">=22.12 <23.0.0"
@@ -62,7 +66,7 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
-    "vite": "^6.0.6",
+    "vite": "^6.0.7",
     "vite-plugin-dts": "^4.4.0"
   }
 }
