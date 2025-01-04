@@ -1,12 +1,12 @@
 ### Vendor directories
-/.yarn/
-/node_modules/
-/vendor/
+/html/.yarn/
+/html/node_modules/
+/html/vendor/
 
 ### Build directories
-/build/
-/bundle/
-/dist/
+/html/build/
+/html/bundle/
+/html/dist/
 
 ### JetBrains
 /.idea/*
@@ -56,4 +56,4 @@ pnpm-lock.yaml
 yarn.lock
 
 ## Data Files
-/__tests__/data.json
+/html/__tests__/data.json

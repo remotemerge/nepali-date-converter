@@ -16,7 +16,7 @@ services:
     user: node
     working_dir: /app
     volumes:
-      - ./:/app
+      - ./html:/app
     ports:
       - "5173:5173"
     networks:
