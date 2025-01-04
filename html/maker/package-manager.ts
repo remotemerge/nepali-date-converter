@@ -64,5 +64,5 @@ await writeFile(
 
 // Copy static files to the dist folder
 await copyFile('.npmrc', join(distPath, '.npmrc'));
-await copyFile('README.md', join(distPath, 'README.md'));
-await copyFile('LICENSE', join(distPath, 'LICENSE'));
+await copyFile('../../README.md', join(distPath, 'README.md'));
+await copyFile('../../LICENSE', join(distPath, 'LICENSE'));
