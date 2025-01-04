@@ -14,8 +14,10 @@ jobs:
       fail-fast: false
 
     steps:
+      # Checkout the repository
       - uses: actions/checkout@v4
 
+      # Set up Node.js with the specified version
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
