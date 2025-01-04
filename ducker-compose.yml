@@ -17,8 +17,6 @@ services:
     working_dir: /app
     volumes:
       - ./html/:/app
-      - ./README.md:/README.md
-      - ./LICENSE:/LICENSE
     ports:
       - "3000:3000"
     networks:
