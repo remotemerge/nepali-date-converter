@@ -16,14 +16,14 @@ services:
     user: node
     working_dir: /app
     volumes:
-      - ./html:/app
+      - ./html/:/app
     ports:
-      - "5173:5173"
+      - "3000:3000"
     networks:
       - npm-dev-network
     entrypoint: [ "/bin/bash", "/app/entrypoint.sh" ]
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:5173" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:3000" ]
       interval: 30s
       timeout: 10s
       retries: 3
