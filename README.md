@@ -37,27 +37,44 @@ yarn add @remotemerge/nepali-date-converter
 
 ---
 
-## 📖 Quick Start
+## 🚀 Quick Start
 
-### Import the Library
+### Installation
 
-#### ES Modules (Recommended)
+Install the library via **npm** or **Yarn**:
+
+```bash
+npm install @remotemerge/nepali-date-converter
+```
+
+or
+
+```bash
+yarn add @remotemerge/nepali-date-converter
+```
+
+---
+
+### Importing the Library
+
+#### ES Modules (Recommended for Modern JavaScript/TypeScript Projects)
 ```javascript
 import DateConverter from '@remotemerge/nepali-date-converter';
 ```
 
-#### CommonJS
+#### CommonJS (For Node.js or Legacy Projects)
 ```javascript
 const DateConverter = require('@remotemerge/nepali-date-converter');
 ```
 
 ---
 
-### Convert BS to AD
+### Converting BS to AD
 
-Convert a **Bikram Sambat (BS)** date to a **Gregorian (AD)** date:
+Convert a **Bikram Sambat (BS)** date to a **Gregorian (AD)** date. Simply pass the BS date in `YYYY-MM-DD` format to the `DateConverter` and call the `.toAd()` method.
 
 ```javascript
+// Convert BS date '2079-10-17' to AD
 const converted = new DateConverter('2079-10-17').toAd();
 console.log(converted);
 ```
@@ -67,13 +84,17 @@ console.log(converted);
 { year: 2023, month: 1, date: 30, day: 'Monday' }
 ```
 
+- **Input Format**: `YYYY-MM-DD` (Bikram Sambat date).
+- **Output**: An object containing the converted Gregorian date (`year`, `month`, `date`) and the day of the week (`day`).
+
 ---
 
-### Convert AD to BS
+### Converting AD to BS
 
-Convert a **Gregorian (AD)** date to a **Bikram Sambat (BS)** date:
+Convert a **Gregorian (AD)** date to a **Bikram Sambat (BS)** date. Pass the AD date in `YYYY-MM-DD` format to the `DateConverter` and call the `.toBs()` method.
 
 ```javascript
+// Convert AD date '2023-01-30' to BS
 const converted = new DateConverter('2023-01-30').toBs();
 console.log(converted);
 ```
@@ -83,18 +104,55 @@ console.log(converted);
 { year: 2079, month: 10, date: 17, day: 'Monday' }
 ```
 
+- **Input Format**: `YYYY-MM-DD` (Gregorian date).
+- **Output**: An object containing the converted Bikram Sambat date (`year`, `month`, `date`) and the day of the week (`day`).
+
 ---
 
-### Using CDN
+### Using the Library in the Browser (CDN)
 
-You can also use the library directly in your browser via **jsDelivr CDN**:
+You can also use the library directly in your HTML files via **jsDelivr CDN**. This is ideal for quick prototyping or projects without a build system.
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1/dist/ndc-iife.js"></script>
 <script>
+  // Convert BS date '2079-10-17' to AD
   const converted = new DateConverter('2079-10-17').toAd();
   console.log(converted);
 </script>
+```
+
+---
+
+### Example Use Cases
+
+1. **Event Planning**: Convert Nepali festival dates to Gregorian dates for international users.
+2. **Historical Data**: Work with historical records that use the Bikram Sambat calendar.
+3. **Localization**: Display dates in the Nepali calendar for Nepali-speaking users.
+
+---
+
+### Advanced Usage
+
+#### Handling Invalid Dates
+If an invalid date is provided, the library will throw an error. Always ensure the input date is within the supported range (**1975 BS to 2099 BS** or **1918 AD to 2043 AD**).
+
+```javascript
+try {
+  const converted = new DateConverter('2100-01-01').toAd(); // Invalid date
+} catch (error) {
+  console.error(error.message); // "The input date is out of supported range."
+}
+```
+
+#### Working with TypeScript
+The library includes built-in TypeScript support, so you get full type checking and autocompletion in your editor.
+
+```typescript
+import DateConverter from '@remotemerge/nepali-date-converter';
+
+const converted = new DateConverter('2079-10-17').toAd();
+console.log(converted.year); // TypeScript knows this is a number
 ```
 
 ---
