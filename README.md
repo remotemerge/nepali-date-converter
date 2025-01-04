@@ -15,7 +15,7 @@
 
 - **Accurate Date Conversion**: Convert dates between **BS (Bikram Sambat)** and **AD (Gregorian)** with 100% accuracy.
 - **Wide Date Range**: Supports conversion for **1975 BS to 2099 BS** (1918 AD to 2043 AD).
-- **Lightweight**: Just **7.3 KB** (plain) and **2.2 KB** (gzipped) — optimized for performance.
+- **Lightweight**: Just **5.2 KiB** (plain) and **1.8 KiB** (gzipped) — optimized for performance.
 - **TypeScript Support**: Built-in TypeScript types for a seamless development experience.
 - **Cross-Platform**: Works in **Node.js**, **browsers**, and bundlers like **Webpack**, **Rollup**, **Vite**, etc.
 - **Fast and Reliable**: Localized data and optimized code for lightning-fast results.
