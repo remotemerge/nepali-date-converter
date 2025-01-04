@@ -41,12 +41,12 @@
   },
   "type": "module",
   "scripts": {
-    "lint": "eslint --ext .ts src",
-    "lint:fix": "eslint --ext .ts --fix src",
+    "lint": "eslint **/*.ts",
+    "lint:fix": "eslint **/*.ts --fix",
     "test": "jest",
     "dev": "vite",
-    "build": "vite build",
-    "package": "vite build && tsc && node package.js"
+    "preview": "vite preview",
+    "build": "vite build && npx tsx maker/package-manager.ts"
   },
   "dependencies": {
     "date-fns": "^4.1.0"
