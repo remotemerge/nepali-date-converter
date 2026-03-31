@@ -4,27 +4,35 @@
 
 # Define network
 networks:
-  npm-dev-network:
-    name: npm-dev-network
+  ndc-network:
+    name: ndc-network
     driver: bridge
-    external: false
+    external: true
 
 # Define services
 services:
-  npm-dev-server:
-    image: node:22
-    user: node
-    working_dir: /app
+  ndc-server:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      args:
+        APPLICATION_GID: ${APPLICATION_GID:-1000}
+        APPLICATION_UID: ${APPLICATION_UID:-1000}
+    working_dir: /app/codebase
     volumes:
-      - ./html/:/app
+      - ./html/:/app/codebase/
     ports:
-      - "3000:3000"
+      - '3000:3000'
+    environment:
+      NODE_ENV: development
+      APP_ENV: development
+      APP_DEBUG: true
     networks:
-      - npm-dev-network
-    entrypoint: [ "/bin/bash", "/app/entrypoint.sh" ]
+      - ndc-network
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:3000" ]
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 60s
     restart: unless-stopped
