@@ -11,8 +11,9 @@ export default [
     ignores: ['dist/**', 'node_modules/**', 'public/**'],
     settings: {
       'import/resolver': {
-        node: {
-          extensions: ['.js', '.json', '.ts'],
+        typescript: {
+          bun: true,
+          project: 'tsconfig.json',
         },
       },
     },
@@ -27,7 +28,7 @@ export default [
       globals: {
         ...globals.es2024,
         ...globals.node,
-        ...globals.jest,
+        Bun: 'readonly',
       },
     },
     plugins: {

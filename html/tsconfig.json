@@ -7,6 +7,7 @@
     "baseUrl": "./",
     "removeComments": true,
     "incremental": true,
+    "types": ["bun-types"],
 
     // Strict Type Checking
     "strict": true,
