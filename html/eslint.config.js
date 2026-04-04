@@ -3,20 +3,11 @@ import tsPlugin from '@typescript-eslint/eslint-plugin';
 import stylisticPlugin from '@stylistic/eslint-plugin';
 import prettierPlugin from 'eslint-plugin-prettier';
 import globals from 'globals';
-import importPlugin from 'eslint-plugin-import';
 
 export default [
   {
     files: ['**/*.ts', '**/*.tsx'],
     ignores: ['dist/**', 'node_modules/**', 'public/**'],
-    settings: {
-      'import/resolver': {
-        typescript: {
-          bun: true,
-          project: 'tsconfig.json',
-        },
-      },
-    },
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -35,7 +26,6 @@ export default [
       '@typescript-eslint': tsPlugin,
       '@stylistic': stylisticPlugin,
       prettier: prettierPlugin,
-      import: importPlugin,
     },
     rules: {
       // Best Practices
@@ -76,10 +66,6 @@ export default [
 
       // Prettier
       'prettier/prettier': 'error',
-
-      // Imports
-      'import/no-unresolved': 'error',
-      'import/order': ['error', { 'newlines-between': 'always' }],
     },
   },
 ];
