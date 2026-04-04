@@ -10,26 +10,30 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-24.04, windows-latest, macos-latest ]
-        node-version: [ 18, 20, 22 ]
+        bun-version: [ latest ]
       fail-fast: false
 
     steps:
       # Checkout the repository
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      # Set up Node.js with the specified version
-      - uses: actions/setup-node@v4
+      # Set up Bun with the specified version
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          bun-version: ${{ matrix.bun-version }}
 
-      - name: Install dependencies
-        run: cd html && npm install
+      - name: "Install dependencies"
+        working-directory: html
+        run: bun install
 
-      - name: Build project
-        run: cd html && npm run build
+      - name: "Build project"
+        working-directory: html
+        run: bun run build
 
-      - name: Create data file
-        run: cd html && npx shx cp __tests__/data.dist.json __tests__/data.json
+      - name: "Create data file"
+        working-directory: html
+        run: bun x shx cp __tests__/data.dist.json __tests__/data.json
 
-      - name: Run Tests
-        run: cd html && npm run test
+      - name: "Run Tests"
+        working-directory: html
+        run: bun run test

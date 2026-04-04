@@ -14,24 +14,23 @@ jobs:
 
     steps:
       # Checkout the repository
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      # Set up Node.js with the LTS version
-      - uses: actions/setup-node@v4
+      # Set up Bun
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 22
-          registry-url: 'https://registry.npmjs.org'
+          bun-version: latest
 
-      - name: Install dependencies
-        run: cd html && npm install
+      - name: "Install dependencies"
+        working-directory: html
+        run: bun install
 
-      - name: Build project
-        run: cd html && npm run build
+      - name: "Build project"
+        working-directory: html
+        run: bun run build
 
-      - name: Copy Documentation and License
-        run: cp README.md LICENSE html/dist
-
-      - name: Publish the package to npm
-        run: cd html && npm publish ./dist --access public
+      - name: "Publish the package to npm"
+        working-directory: html
+        run: bun publish ./dist --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
