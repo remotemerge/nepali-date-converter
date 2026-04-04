@@ -10,17 +10,14 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-24.04, windows-latest, macos-latest ]
-        bun-version: [ latest ]
       fail-fast: false
 
     steps:
       # Checkout the repository
       - uses: actions/checkout@v6
 
-      # Set up Bun with the specified version
+      # Set up Bun
       - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ matrix.bun-version }}
 
       - name: "Install dependencies"
         working-directory: html

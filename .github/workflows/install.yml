@@ -103,22 +103,19 @@ jobs:
         run: pnpm list --depth=0
 
   install-bun:
-    # Run on multiple operating systems and Bun versions
+    # Run on multiple operating systems
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        bun-version: [ latest ]
       fail-fast: false
 
     steps:
       # Checkout the repository
       - uses: actions/checkout@v6
 
-      # Set up Bun with the specified version
+      # Set up Bun
       - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: ${{ matrix.bun-version }}
 
       - name: "Generate package.json file"
         working-directory: html
