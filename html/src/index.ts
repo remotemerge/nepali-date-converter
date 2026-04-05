@@ -10,8 +10,8 @@ import { years } from './years';
 
 export default class DateConverter {
   // Supported date range for the Nepali calendar (1975 BS - 2099 BS)
-  private readonly startDate = new Date('1918-04-13'); // 1975-01-01 BS
-  private readonly endDate = new Date('2043-04-13'); // 2099-12-30 BS
+  private readonly startDate = new Date(Date.UTC(1918, 3, 13)); // 1975-01-01 BS in UTC
+  private readonly endDate = new Date(Date.UTC(2043, 3, 13)); // 2099-12-30 BS in UTC
   private readonly dateRangeError = 'The input date is out of supported range.';
 
   // Extracted values from the input date string
@@ -95,13 +95,12 @@ export default class DateConverter {
    * Calculates the BS date for a given AD date.
    * Uses the total days difference from the start date (1975-01-01 BS).
    */
-  private getBsDate(givenDate: string): {
+  private getBsDate(daysFromStart: number): {
     year: number;
     month: number;
     date: number;
   } {
-    const targetDate = new Date(givenDate);
-    let remainingDays = differenceInCalendarDays(targetDate, this.startDate);
+    let remainingDays = daysFromStart;
 
     // Iterate through years and months to find the BS date
     for (const year in years) {
@@ -163,9 +162,10 @@ export default class DateConverter {
    * Returns an object with year, month, date, and day.
    */
   public toBs() {
-    // Format the input date string
-    const inputDate = `${this.inputYear}-${this.inputMonth}-${this.inputDate}`;
-    const targetDate = new Date(inputDate);
+    // Format the input date string and parse as UTC
+    const targetDate = new Date(
+      Date.UTC(this.inputYear, this.inputMonth - 1, this.inputDate),
+    );
 
     // Validate the input date range
     if (
@@ -177,9 +177,10 @@ export default class DateConverter {
       throw new Error(this.dateRangeError);
     }
 
-    // Calculate the BS date and weekday
-    const bsDate = this.getBsDate(inputDate);
-    const weekday = this.numToDay(targetDate.getDay());
+    // Calculate days from start date and BS date
+    const daysFromStart = differenceInCalendarDays(targetDate, this.startDate);
+    const bsDate = this.getBsDate(daysFromStart);
+    const weekday = this.numToDay(targetDate.getUTCDay());
 
     return { ...bsDate, day: weekday };
   }
