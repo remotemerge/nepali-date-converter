@@ -19,24 +19,15 @@ jobs:
       fail-fast: false
 
     steps:
-      # Checkout the repository
-      - uses: actions/checkout@v6
-
-      # Set up Node.js with the specified version
-      - uses: actions/setup-node@v4
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Generate package.json file"
-        working-directory: html
-        run: npm init -y
-
       - name: "Install Nepali Date Converter"
-        working-directory: html
-        run: npm install @remotemerge/nepali-date-converter
+        run: npm init -y && npm install @remotemerge/nepali-date-converter
 
       - name: "List installed packages"
-        working-directory: html
         run: npm list --depth=0
 
   install-yarn:
@@ -49,24 +40,15 @@ jobs:
       fail-fast: false
 
     steps:
-      # Checkout the repository
-      - uses: actions/checkout@v6
-
-      # Set up Node.js with the specified version
-      - uses: actions/setup-node@v4
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Generate package.json file"
-        working-directory: html
-        run: npm init -y
-
       - name: "Install Nepali Date Converter"
-        working-directory: html
-        run: yarn add @remotemerge/nepali-date-converter
+        run: npm init -y && yarn add @remotemerge/nepali-date-converter
 
       - name: "List installed packages"
-        working-directory: html
         run: yarn list --depth=0
 
   install-pnpm:
@@ -79,27 +61,18 @@ jobs:
       fail-fast: false
 
     steps:
-      # Checkout the repository
-      - uses: actions/checkout@v6
-
-      # Set up Node.js with the specified version
-      - uses: actions/setup-node@v4
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: "Install pnpm"
         run: npm install -g pnpm
 
-      - name: "Generate package.json file"
-        working-directory: html
-        run: pnpm init
-
       - name: "Install Nepali Date Converter"
-        working-directory: html
-        run: pnpm add @remotemerge/nepali-date-converter
+        run: pnpm init && pnpm add @remotemerge/nepali-date-converter
 
       - name: "List installed packages"
-        working-directory: html
         run: pnpm list --depth=0
 
   install-bun:
@@ -111,20 +84,14 @@ jobs:
       fail-fast: false
 
     steps:
-      # Checkout the repository
-      - uses: actions/checkout@v6
-
-      # Set up Bun
-      - uses: oven-sh/setup-bun@v2
+      - name: "Set up Bun"
+        uses: oven-sh/setup-bun@v2
 
       - name: "Generate package.json file"
-        working-directory: html
         run: bun init -y
 
       - name: "Install Nepali Date Converter"
-        working-directory: html
         run: bun add @remotemerge/nepali-date-converter
 
       - name: "List installed packages"
-        working-directory: html
         run: bun pm ls
