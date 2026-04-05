@@ -23,7 +23,7 @@ updates:
       day: "saturday"
 
   - package-ecosystem: "bun"
-    directory: "/"
+    directory: "/html/"
     schedule:
       interval: "weekly"
       day: "saturday"
