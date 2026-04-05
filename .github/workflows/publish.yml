@@ -1,16 +1,20 @@
 # The workflow to publish the package
-name: Publish
+name: "Publish"
 
 # Controls when the workflow will run
 on:
   release:
-    types: [ created ] # Trigger on new releases
-    branches: [ main ] # Only on the main branch
+    types: [ created ]
 
 jobs:
   publish:
     # Run on the latest Ubuntu
     runs-on: ubuntu-latest
+
+    # Required for tokenless (OIDC)
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: "Checkout repository"
@@ -27,8 +31,12 @@ jobs:
         working-directory: html
         run: bun run build
 
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: "https://registry.npmjs.org"
+
       - name: "Publish the package to npm"
-        working-directory: html
-        run: bun publish ./dist --access public
-        env:
-          NPM_CONFIG_TOKEN: ${{ secrets.NPM_CONFIG_TOKEN }}
+        working-directory: html/dist
+        run: npm publish --access public --provenance
