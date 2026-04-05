@@ -299,8 +299,8 @@ html/
 │   ├── ndc-node.js     # CommonJS bundle
 │   ├── ndc-browser.js  # IIFE bundle (browser-ready)
 │   └── *.d.ts          # TypeScript declarations
-├── maker/
-│   └── package-manager.ts  # Post-build package.json generator
+├── scripts/
+│   └── post-build.ts   # Post-build package.json generator
 ├── package.json
 ├── tsconfig.json
 ├── vite.config.ts

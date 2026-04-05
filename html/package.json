@@ -40,7 +40,7 @@
     "test": "bun test",
     "dev": "vite --host 0.0.0.0 --port 3000",
     "preview": "vite preview",
-    "build": "vite build && bun ./maker/package-manager.ts"
+    "build": "vite build && bun ./scripts/post-build.ts"
   },
   "devDependencies": {
     "bun-types": "^1.3.11",
