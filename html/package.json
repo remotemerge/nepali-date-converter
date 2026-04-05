@@ -1,16 +1,8 @@
 {
   "name": "@remotemerge/nepali-date-converter",
-  "version": "1.0.1",
-  "description": "A modern JavaScript library for seamless conversion between Bikram Sambat (BS) and Gregorian (AD) dates. Easily convert Nepali dates to English dates and vice versa with support for years 1975 BS to 2099 BS.",
-  "homepage": "https://madansapkota.com",
-  "license": "MIT",
+  "version": "1.2.0",
   "private": false,
-  "author": {
-    "name": "Madan Sapkota",
-    "role": "Maintainer",
-    "email": "contact+github@madansapkota.com",
-    "url": "https://madansapkota.com"
-  },
+  "description": "A modern JavaScript library for seamless conversion between Bikram Sambat (BS) and Gregorian (AD) dates. Easily convert Nepali dates to English dates and vice versa with support for years 1975 BS to 2099 BS.",
   "keywords": [
     "ad-to-bs",
     "bikram-sambat",
@@ -26,47 +18,39 @@
     "nepali-date-utility",
     "nepali-miti"
   ],
+  "homepage": "https://madansapkota.com",
+  "bugs": {
+    "url": "https://github.com/remotemerge/nepali-date-converter/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Madan Sapkota",
+    "email": "contact+github@madansapkota.com",
+    "url": "https://madansapkota.com",
+    "role": "Maintainer"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/remotemerge/nepali-date-converter.git"
   },
-  "bugs": {
-    "url": "https://github.com/remotemerge/nepali-date-converter/issues"
-  },
-  "engines": {
-    "node": ">=22.12 <23.0.0"
-  },
-  "prettier": {
-    "singleQuote": true
-  },
   "type": "module",
   "scripts": {
-    "lint": "eslint **/*.ts",
-    "lint:fix": "eslint **/*.ts --fix",
-    "test": "jest",
+    "lint": "oxlint && oxfmt --check",
+    "lint:fix": "oxlint --fix && oxfmt",
+    "test": "bun test",
     "dev": "vite --host 0.0.0.0 --port 3000",
     "preview": "vite preview",
-    "build": "vite build && npx tsx ./maker/package-manager.ts"
-  },
-  "dependencies": {
-    "date-fns": "^4.1.0"
+    "build": "vite build && bun ./scripts/post-build.ts"
   },
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^2.12.1",
-    "@types/jest": "^29.5.14",
-    "@typescript-eslint/eslint-plugin": "^8.19.0",
-    "@typescript-eslint/parser": "^8.19.0",
-    "eslint": "^9.17.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "globals": "^15.14.0",
-    "jest": "^29.7.0",
-    "prettier": "^3.4.2",
-    "ts-jest": "^29.2.5",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.7",
-    "vite-plugin-dts": "^4.4.0"
+    "bun-types": "^1.3.11",
+    "oxfmt": "^0.43.0",
+    "oxlint": "^1.58.0",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.3",
+    "vite-plugin-dts": "^4.5.4"
+  },
+  "engines": {
+    "bun": ">=1.3.11 <2.0.0"
   }
 }

@@ -4,9 +4,9 @@
     "target": "ESNext",
     "module": "ESNext",
     "outDir": "./dist",
-    "baseUrl": "./",
     "removeComments": true,
     "incremental": true,
+    "types": ["bun-types"],
 
     // Strict Type Checking
     "strict": true,
@@ -17,10 +17,7 @@
     "noFallthroughCasesInSwitch": true,
 
     // Module Resolution
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
+    "moduleResolution": "bundler",
 
     // Performance and Optimization
     "skipLibCheck": true,

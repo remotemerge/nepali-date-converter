@@ -9,29 +9,89 @@ on:
       - completed
 
 jobs:
-  install:
+  install-npm:
     # Run on multiple operating systems and Node.js versions
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, windows-latest, macos-latest ]
-        node-version: [18, 20, 22]
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        node-version: [20, 22, 24]
       fail-fast: false
 
     steps:
-      # Checkout the repository
-      - uses: actions/checkout@v4
-
-      # Set up Node.js with the specified version
-      - uses: actions/setup-node@v4
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Generate package.json file
-        run: cd html && npm init -y
+      - name: "Install Nepali Date Converter"
+        run: npm init -y && npm install @remotemerge/nepali-date-converter
 
-      - name: Install Nepali Date Converter
-        run: cd html && npm install @remotemerge/nepali-date-converter
+      - name: "List installed packages"
+        run: npm list --depth=0
 
-      - name: List installed packages
-        run: cd html && npm list --depth=0
+  install-yarn:
+    # Run on multiple operating systems and Node.js versions
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+        node-version: [20, 22, 24]
+      fail-fast: false
+
+    steps:
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: "Install Nepali Date Converter"
+        run: npm init -y && yarn add @remotemerge/nepali-date-converter
+
+      - name: "List installed packages"
+        run: yarn list --depth=0
+
+  install-pnpm:
+    # Run on multiple operating systems and Node.js versions
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        node-version: [20, 22, 24]
+      fail-fast: false
+
+    steps:
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: "Install pnpm"
+        run: npm install -g pnpm
+
+      - name: "Install Nepali Date Converter"
+        run: pnpm init && pnpm add @remotemerge/nepali-date-converter
+
+      - name: "List installed packages"
+        run: pnpm list --depth=0
+
+  install-bun:
+    # Run on multiple operating systems
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+      fail-fast: false
+
+    steps:
+      - name: "Set up Bun"
+        uses: oven-sh/setup-bun@v2
+
+      - name: "Generate package.json file"
+        run: bun init -y
+
+      - name: "Install Nepali Date Converter"
+        run: bun add @remotemerge/nepali-date-converter
+
+      - name: "List installed packages"
+        run: bun pm ls

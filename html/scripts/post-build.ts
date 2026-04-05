@@ -62,5 +62,6 @@ await writeFile(
   'utf-8',
 );
 
-// Copy static files to the dist folder
-await copyFile('.npmrc', join(distPath, '.npmrc'));
+// Copy README.md and LICENSE from project root
+await copyFile(join(resolve(), '..', 'README.md'), join(distPath, 'README.md'));
+await copyFile(join(resolve(), '..', 'LICENSE'), join(distPath, 'LICENSE'));

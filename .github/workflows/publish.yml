@@ -1,37 +1,42 @@
 # The workflow to publish the package
-name: Publish
+name: "Publish"
 
 # Controls when the workflow will run
 on:
   release:
-    types: [ created ] # Trigger on new releases
-    branches: [ main ] # Only on the main branch
+    types: [ created ]
 
 jobs:
   publish:
     # Run on the latest Ubuntu
     runs-on: ubuntu-latest
 
+    # Required for tokenless (OIDC)
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
-      # Checkout the repository
-      - uses: actions/checkout@v4
+      - name: "Checkout repository"
+        uses: actions/checkout@v6
 
-      # Set up Node.js with the LTS version
-      - uses: actions/setup-node@v4
+      - name: "Set up Bun"
+        uses: oven-sh/setup-bun@v2
+
+      - name: "Install dependencies"
+        working-directory: html
+        run: bun install
+
+      - name: "Build project"
+        working-directory: html
+        run: bun run build
+
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v6
         with:
-          node-version: 22
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 24
+          registry-url: "https://registry.npmjs.org"
 
-      - name: Install dependencies
-        run: cd html && npm install
-
-      - name: Build project
-        run: cd html && npm run build
-
-      - name: Copy Documentation and License
-        run: cp README.md LICENSE html/dist
-
-      - name: Publish the package to npm
-        run: cd html && npm publish ./dist --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: "Publish the package to npm"
+        working-directory: html/dist
+        run: npm publish --access public --provenance

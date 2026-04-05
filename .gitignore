@@ -51,7 +51,7 @@ ehthumbs_vista.db
 *.key
 *.log
 .env
-bun.lockb
+package-lock.json
 pnpm-lock.yaml
 yarn.lock
 
