@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
-      - uses: actions/checkout@v6
+      - name: "Checkout repository"
+        uses: actions/checkout@v6
 
-      # Set up Bun
-      - uses: oven-sh/setup-bun@v2
+      - name: "Set up Bun"
+        uses: oven-sh/setup-bun@v2
 
       - name: "Install dependencies"
         working-directory: html
