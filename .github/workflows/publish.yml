@@ -31,4 +31,4 @@ jobs:
         working-directory: html
         run: bun publish ./dist --access public
         env:
-          NPM_CONFIG_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_CONFIG_TOKEN }}
