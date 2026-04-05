@@ -1,6 +1,6 @@
 {
   "name": "@remotemerge/nepali-date-converter",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "private": false,
   "description": "A modern JavaScript library for seamless conversion between Bikram Sambat (BS) and Gregorian (AD) dates. Easily convert Nepali dates to English dates and vice versa with support for years 1975 BS to 2099 BS.",
   "keywords": [
