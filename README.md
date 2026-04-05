@@ -1,11 +1,11 @@
 # 📅 Nepali Date Converter
 
-[![Package](https://img.shields.io/npm/v/@remotemerge/nepali-date-converter?logo=npm)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
-[![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?logo=github&label=build)](https://github.com/remotemerge/nepali-date-converter/actions/workflows/test.yml)
-[![Tests](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?logo=jest&label=tests)](https://github.com/remotemerge/nepali-date-converter/actions/workflows/test.yml)
-[![Downloads](https://img.shields.io/npm/dt/@remotemerge/nepali-date-converter?logo=spreadshirt)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
-[![Size](https://img.shields.io/bundlephobia/minzip/@remotemerge/nepali-date-converter?logo=ipfs&label=size)](https://bundlephobia.com/package/@remotemerge/nepali-date-converter)
-[![License](https://img.shields.io/github/license/remotemerge/nepali-date-converter?logo=opensourceinitiative)](LICENSE)
+[![Package](https://img.shields.io/npm/v/@remotemerge/nepali-date-converter?logo=npm&logoColor=fff)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
+[![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?logo=github-actions&logoColor=fff&label=build)](https://github.com/remotemerge/nepali-date-converter/actions/workflows/test.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?logo=jest&logoColor=fff&label=tests)](https://github.com/remotemerge/nepali-date-converter/actions/workflows/test.yml)
+[![Downloads](https://img.shields.io/npm/dt/@remotemerge/nepali-date-converter?logo=icloud&logoColor=fff)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
+[![Size](https://img.shields.io/bundlephobia/minzip/@remotemerge/nepali-date-converter?logo=nodedotjs&logoColor=fff&label=size)](https://bundlephobia.com/package/@remotemerge/nepali-date-converter)
+[![License](https://img.shields.io/github/license/remotemerge/nepali-date-converter?logo=opensourceinitiative&logoColor=fff)](LICENSE)
 
 > **Fast, accurate, and lightweight JavaScript library for converting dates between Nepali Bikram Sambat (BS) and Gregorian/English (AD) calendars.**
 
