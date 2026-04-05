@@ -357,10 +357,10 @@ For consistent development environments, the project includes Docker support:
 
 ```bash
 # Start development environment
-./start-docker.sh
+bash start-docker.sh
 
 # Or use the CLI wrapper
-./app-cli.sh
+bash app-cli.sh
 ```
 
 The Docker setup:
@@ -369,29 +369,6 @@ The Docker setup:
 - Configures proper UID/GID mapping
 - Runs development server on port 3000
 - Maintains file ownership across host/container
-
----
-
-## 🧪 CI/CD
-
-The project uses GitHub Actions for automated workflows:
-
-### Workflows
-
-1. **Test** (`test.yml`)
-   - Runs on pull requests
-   - Tests across Ubuntu, macOS, and Windows
-   - Validates build and test execution
-
-2. **Publish** (`publish.yml`)
-   - Triggers on GitHub releases
-   - Publishes to npm registry
-   - Runs only on the main branch
-
-3. **Install** (`install.yml`)
-   - Verifies package installation
-   - Tests across multiple Node.js versions (20, 22, 24)
-   - Validates compatibility with npm, Yarn, pnpm, and Bun
 
 ---
 
@@ -490,14 +467,6 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 - Calendar data sourced from official Nepali calendar specifications
 - Built with modern tooling: [Bun](https://bun.sh/), [Vite](https://vitejs.dev/), [Oxlint](https://oxc.rs/), and [date-fns](https://date-fns.org/)
-
----
-
-## 📞 Support
-
-- **Issues & Bug Reports**: [GitHub Issues](https://github.com/remotemerge/nepali-date-converter/issues)
-- **Author**: [Madan Sapkota](https://madansapkota.com)
-- **Email**: contact+github@madansapkota.com
 
 ---
 
