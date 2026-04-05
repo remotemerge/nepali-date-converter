@@ -90,6 +90,7 @@ console.log(converted);
 ### Browser (CDN)
 
 ```html
+
 <script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1/dist/ndc-browser.js"></script>
 <script>
   const converted = new DateConverter("2080-01-15").toAd();
@@ -275,7 +276,7 @@ bun install
 ### Available Scripts
 
 | Command            | Description                                                         |
-| ------------------ | ------------------------------------------------------------------- |
+|--------------------|---------------------------------------------------------------------|
 | `bun run dev`      | Start development server with hot reload (localhost:3000)           |
 | `bun run build`    | Build production bundles (ESM, CJS, IIFE) + TypeScript declarations |
 | `bun run test`     | Run test suite using Bun's native test runner                       |
@@ -375,7 +376,7 @@ The Docker setup:
 ## 📊 Bundle Analysis
 
 | Format | File             | Size (minified) | Size (gzipped) |
-| ------ | ---------------- | --------------- | -------------- |
+|--------|------------------|-----------------|----------------|
 | ESM    | `ndc.js`         | ~5 KiB          | ~1.8 KiB       |
 | CJS    | `ndc-node.js`    | ~5 KiB          | ~1.8 KiB       |
 | IIFE   | `ndc-browser.js` | ~5 KiB          | ~1.8 KiB       |
@@ -466,7 +467,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 ## 🙏 Acknowledgments
 
 - Calendar data sourced from official Nepali calendar specifications
-- Built with modern tooling: [Bun](https://bun.sh/), [Vite](https://vitejs.dev/), [Oxlint](https://oxc.rs/), and [date-fns](https://date-fns.org/)
+- Built with modern tooling: [Bun](https://bun.sh/), [Vite](https://vitejs.dev/), and [Oxlint](https://oxc.rs/)
 
 ---
 
