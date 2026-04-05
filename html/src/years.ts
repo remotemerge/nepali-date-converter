@@ -1,6 +1,6 @@
 /**
  * The Nepali calendar data from 1975 BS to 2099 BS.
- * Based on the array index months days (0 → 11th), total days in year (12th)
+ * Based on the array index months days (0 → 11th), total days in the year (12th)
  */
 const years: number[][] = [];
 // fill years and their months

@@ -9,53 +9,78 @@ import {
 import { years } from './years';
 
 export default class DateConverter {
-  // Supported date range for the Nepali calendar (1975 BS - 2099 BS)
-  private readonly startDate = new Date(Date.UTC(1918, 3, 13)); // 1975-01-01 BS in UTC
-  private readonly endDate = new Date(Date.UTC(2043, 3, 13)); // 2099-12-30 BS in UTC
-  private readonly dateRangeError = 'The input date is out of supported range.';
+  /** The AD date that corresponds to 1975-01-01 BS (start of supported range). */
+  private readonly epochStart = new Date(Date.UTC(1918, 3, 13));
 
-  // Extracted values from the input date string
-  private readonly inputYear: number;
-  private readonly inputMonth: number;
-  private readonly inputDate: number;
+  /** The AD date that corresponds to 2099-12-30 BS (end of supported range). */
+  private readonly epochEnd = new Date(Date.UTC(2043, 3, 13));
 
-  constructor(strDate: string) {
-    // Parse and clean the input date string
-    const [year, month, date] = this.parseDateString(strDate);
-    this.inputYear = year;
-    this.inputMonth = month;
-    this.inputDate = date;
+  /** Error message thrown when the input date is outside the supported range. */
+  private readonly errorMsg = 'The input date is out of supported range.';
+
+  /** Parsed year from the input date string. */
+  private readonly year: number;
+
+  /** Parsed month (1-12) from the input date string. */
+  private readonly month: number;
+
+  /** Parsed day from the input date string. */
+  private readonly day: number;
+
+  /**
+   * Creates a DateConverter instance from a date string.
+   * Accepts both BS and AD date formats with separators: `-`, `/`, `.`, `,`, `|`.
+   * Also supports Nepali Unicode numerals (e.g., `२०८१-०१-१५`).
+   *
+   * @param dateInput - Date string in `YYYY-MM-DD` format (BS or AD).
+   */
+  constructor(dateInput: string) {
+    const [y, m, d] = this.parse(dateInput);
+    this.year = y;
+    this.month = m;
+    this.day = d;
   }
 
   /**
-   * Parses and cleans the input date string.
-   * Converts Nepali numerals to English and splits into year, month, and date.
+   * Parses a date string by converting Nepali numerals to English,
+   * normalizing separators to `-`, and extracting year, month, and day.
+   *
+   * @param input - Raw date string from the user.
+   * @returns Tuple of `[year, month, day]` as numbers.
    */
-  private parseDateString(strDate: string): [number, number, number] {
-    const cleanedDate = this.numToEn(strDate)
+  private parse(input: string): [number, number, number] {
+    const cleaned = this.toEnglishDigits(input)
       .replace(/[./|,]/g, '-')
       .trim();
-    const [year, month, date] = cleanedDate.split('-').map(Number);
+    const [y, m, d] = cleaned.split('-').map(Number);
 
-    return [year, month, date];
+    return [y, m, d];
   }
 
   /**
-   * Converts Nepali numerals (०-९) to English numerals (0-9).
+   * Converts Nepali Unicode numerals (०-९) to their English equivalents (0-9).
+   * Non-Nepali characters are left unchanged.
+   *
+   * @param input - String that may contain Nepali numerals.
+   * @returns String with Nepali numerals replaced by English digits.
    */
-  private numToEn(strNum: string): string {
+  private toEnglishDigits(input: string): string {
     const nepaliNumerals = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
 
-    return strNum.replace(/[०१२३४५६७८९]/g, (char) =>
+    return input.replace(/[०१२३४५६७८९]/g, (char) =>
       nepaliNumerals.indexOf(char).toString(),
     );
   }
 
   /**
-   * Converts a day index (0-6) to a day name (Sunday-Saturday).
+   * Maps a day index (0-6) to its English day name.
+   * 0 = Sunday, 1 = Monday, ..., 6 = Saturday.
+   *
+   * @param index - Day of week index from `Date.getDay()` or `Date.getUTCDay()`.
+   * @returns Full English day name.
    */
-  private numToDay(dayIndex: number): string {
-    const days = [
+  private toDayName(index: number): string {
+    return [
       'Sunday',
       'Monday',
       'Tuesday',
@@ -63,125 +88,108 @@ export default class DateConverter {
       'Thursday',
       'Friday',
       'Saturday',
-    ];
-
-    return days[dayIndex];
+    ][index];
   }
 
   /**
-   * Calculates the AD date for a given BS date.
-   * Uses the total days difference from the start date (1975-01-01 BS).
+   * Converts a BS (Bikram Sambat) date to its corresponding AD (Gregorian) date.
+   *
+   * Sums the days from the epoch (1975-01-01 BS) to the given BS date,
+   * then adds that offset to the epoch start AD date.
+   *
+   * @param bsYear - Bikram Sambat year (1975-2099).
+   * @param bsMonth - Bikram Sambat month (1-12).
+   * @param bsDay - Bikram Sambat day (1-32 depending on month).
+   * @returns AD date as a JavaScript `Date` object.
    */
-  private getAdDate(year: number, month: number, date: number): Date {
+  private toAdDate(bsYear: number, bsMonth: number, bsDay: number): Date {
     let totalDays = 0;
+    for (let y = 1975; y < bsYear; y++) totalDays += years[y][12];
+    for (let m = 0; m < bsMonth - 1; m++) totalDays += years[bsYear][m];
+    totalDays += bsDay - 1;
 
-    // Add days for each year before the input year
-    for (let y = 1975; y < year; y++) {
-      totalDays += years[y][12]; // daysInYear is stored at index 12
-    }
-
-    // Add days for each month before the input month
-    for (let m = 0; m < month - 1; m++) {
-      totalDays += years[year][m];
-    }
-
-    // Add days for the current month
-    totalDays += date - 1; // Subtract 1 to exclude the current day
-
-    return addDays(this.startDate, totalDays);
+    return addDays(this.epochStart, totalDays);
   }
 
   /**
-   * Calculates the BS date for a given AD date.
-   * Uses the total days difference from the start date (1975-01-01 BS).
+   * Converts an AD (Gregorian) date offset to its corresponding BS (Bikram Sambat) date.
+   *
+   * Iterates through the Nepali calendar data year by year, then month by month,
+   * subtracting days until the remaining offset pinpoints the exact BS date.
+   *
+   * @param daysDiff - Number of days from the BS epoch start (1975-01-01 BS).
+   * @returns Object containing BS `year`, `month`, and `date`.
+   * @throws When the offset is outside the supported calendar range.
    */
-  private getBsDate(daysFromStart: number): {
+  private toBsDate(daysDiff: number): {
     year: number;
     month: number;
     date: number;
   } {
-    let remainingDays = daysFromStart;
+    let remaining = daysDiff;
 
-    // Iterate through years and months to find the BS date
-    for (const year in years) {
-      const daysInYear = years[year][12];
-
-      if (remainingDays >= daysInYear) {
-        remainingDays -= daysInYear;
+    for (const y in years) {
+      if (remaining >= years[y][12]) {
+        remaining -= years[y][12];
         continue;
       }
 
-      for (let month = 0; month < 12; month++) {
-        const daysInMonth = years[year][month];
-
-        if (remainingDays >= daysInMonth) {
-          remainingDays -= daysInMonth;
+      for (let m = 0; m < 12; m++) {
+        if (remaining >= years[y][m]) {
+          remaining -= years[y][m];
           continue;
         }
 
-        // Return the calculated BS date
-        return {
-          year: Number(year),
-          month: month + 1,
-          date: remainingDays + 1,
-        };
+        return { year: Number(y), month: m + 1, date: remaining + 1 };
       }
     }
 
-    throw new Error(this.dateRangeError);
+    throw new Error(this.errorMsg);
   }
 
   /**
-   * Converts the input BS date to an AD date.
-   * Returns an object with year, month, date, and day.
+   * Converts a Bikram Sambat (BS) date to its Gregorian (AD) equivalent.
+   *
+   * @returns Object with AD `year`, `month` (1-12), `date` (1-31), and `day` name.
+   * @throws When the BS year is outside the supported range (1975-2099 BS).
    */
   public toAd() {
-    // Validate the input year range
-    if (this.inputYear < 1975 || this.inputYear > 2099) {
-      throw new Error(this.dateRangeError);
+    if (this.year < 1975 || this.year > 2099) {
+      throw new Error(this.errorMsg);
     }
 
-    // Calculate the AD date and weekday
-    const adDate = this.getAdDate(
-      this.inputYear,
-      this.inputMonth,
-      this.inputDate,
-    );
-    const weekday = this.numToDay(adDate.getDay());
+    const adDate = this.toAdDate(this.year, this.month, this.day);
 
     return {
       year: adDate.getFullYear(),
       month: adDate.getMonth() + 1,
       date: adDate.getDate(),
-      day: weekday,
+      day: this.toDayName(adDate.getDay()),
     };
   }
 
   /**
-   * Converts the input AD date to a BS date.
-   * Returns an object with year, month, date, and day.
+   * Converts a Gregorian (AD) date to its Bikram Sambat (BS) equivalent.
+   *
+   * @returns Object with BS `year`, `month` (1-12), `date` (1-32), and `day` name.
+   * @throws When the AD date is outside the supported range
+   *         (1918-04-13 AD to 2043-04-13 AD).
    */
   public toBs() {
-    // Format the input date string and parse as UTC
-    const targetDate = new Date(
-      Date.UTC(this.inputYear, this.inputMonth - 1, this.inputDate),
-    );
+    const targetDate = new Date(Date.UTC(this.year, this.month - 1, this.day));
 
-    // Validate the input date range
     if (
       !isWithinInterval(targetDate, {
-        start: startOfDay(this.startDate),
-        end: endOfDay(this.endDate),
+        start: startOfDay(this.epochStart),
+        end: endOfDay(this.epochEnd),
       })
     ) {
-      throw new Error(this.dateRangeError);
+      throw new Error(this.errorMsg);
     }
 
-    // Calculate days from start date and BS date
-    const daysFromStart = differenceInCalendarDays(targetDate, this.startDate);
-    const bsDate = this.getBsDate(daysFromStart);
-    const weekday = this.numToDay(targetDate.getUTCDay());
+    const daysDiff = differenceInCalendarDays(targetDate, this.epochStart);
+    const bsDate = this.toBsDate(daysDiff);
 
-    return { ...bsDate, day: weekday };
+    return { ...bsDate, day: this.toDayName(targetDate.getUTCDay()) };
   }
 }
