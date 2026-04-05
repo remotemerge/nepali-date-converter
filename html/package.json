@@ -1,16 +1,8 @@
 {
   "name": "@remotemerge/nepali-date-converter",
   "version": "1.0.1",
-  "description": "A modern JavaScript library for seamless conversion between Bikram Sambat (BS) and Gregorian (AD) dates. Easily convert Nepali dates to English dates and vice versa with support for years 1975 BS to 2099 BS.",
-  "homepage": "https://madansapkota.com",
-  "license": "MIT",
   "private": false,
-  "author": {
-    "name": "Madan Sapkota",
-    "role": "Maintainer",
-    "email": "contact+github@madansapkota.com",
-    "url": "https://madansapkota.com"
-  },
+  "description": "A modern JavaScript library for seamless conversion between Bikram Sambat (BS) and Gregorian (AD) dates. Easily convert Nepali dates to English dates and vice versa with support for years 1975 BS to 2099 BS.",
   "keywords": [
     "ad-to-bs",
     "bikram-sambat",
@@ -26,23 +18,25 @@
     "nepali-date-utility",
     "nepali-miti"
   ],
+  "homepage": "https://madansapkota.com",
+  "bugs": {
+    "url": "https://github.com/remotemerge/nepali-date-converter/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Madan Sapkota",
+    "email": "contact+github@madansapkota.com",
+    "url": "https://madansapkota.com",
+    "role": "Maintainer"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/remotemerge/nepali-date-converter.git"
   },
-  "bugs": {
-    "url": "https://github.com/remotemerge/nepali-date-converter/issues"
-  },
-  "engines": {
-    "bun": ">=1.3.11 <2.0.0"
-  },
-  "prettier": {
-    "singleQuote": true
-  },
   "type": "module",
   "scripts": {
-    "lint": "eslint **/*.ts",
-    "lint:fix": "eslint **/*.ts --fix",
+    "lint": "oxlint && oxfmt --check",
+    "lint:fix": "oxlint --fix && oxfmt",
     "test": "bun test",
     "dev": "vite --host 0.0.0.0 --port 3000",
     "preview": "vite preview",
@@ -52,17 +46,14 @@
     "date-fns": "^4.1.0"
   },
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^5.10.0",
-    "@typescript-eslint/eslint-plugin": "^8.58.0",
-    "@typescript-eslint/parser": "^8.58.0",
     "bun-types": "^1.3.11",
-    "eslint": "^10.2.0",
-    "eslint-plugin-prettier": "^5.5.5",
-    "globals": "^17.4.0",
-    "prettier": "^3.8.1",
-    "ts-node": "^10.9.2",
+    "oxfmt": "^0.43.0",
+    "oxlint": "^1.58.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.3",
     "vite-plugin-dts": "^4.5.4"
+  },
+  "engines": {
+    "bun": ">=1.3.11 <2.0.0"
   }
 }
