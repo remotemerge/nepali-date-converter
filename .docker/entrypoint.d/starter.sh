@@ -7,7 +7,7 @@ set -euo pipefail
 cd /app/codebase || exit 1
 
 echo "Installing dependencies..."
-bun install --frozen-lockfile
+bun install --frozen-lockfile --ignore-scripts
 
 echo "Starting the application..."
 exec "$@"

@@ -25,7 +25,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: "Install Nepali Date Converter"
-        run: npm init -y && npm install @remotemerge/nepali-date-converter
+        run: npm init -y && npm install --ignore-scripts @remotemerge/nepali-date-converter
 
       - name: "List installed packages"
         run: npm list --depth=0
@@ -46,7 +46,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: "Install Nepali Date Converter"
-        run: npm init -y && yarn add @remotemerge/nepali-date-converter
+        run: npm init -y && yarn add --ignore-scripts @remotemerge/nepali-date-converter
 
       - name: "List installed packages"
         run: yarn list --depth=0
@@ -67,10 +67,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: "Install pnpm"
-        run: npm install -g pnpm
+        run: npm install -g pnpm@11.17.0
 
       - name: "Install Nepali Date Converter"
-        run: pnpm init && pnpm add @remotemerge/nepali-date-converter
+        run: pnpm init && pnpm add --ignore-scripts @remotemerge/nepali-date-converter
 
       - name: "List installed packages"
         run: pnpm list --depth=0
@@ -84,14 +84,14 @@ jobs:
       fail-fast: false
 
     steps:
-      - name: "Set up Bun"
-        uses: oven-sh/setup-bun@v2.2.0
+      - name: "Set up Bun version 2.2.0"
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
 
       - name: "Generate package.json file"
         run: bun init -y
 
       - name: "Install Nepali Date Converter"
-        run: bun add @remotemerge/nepali-date-converter
+        run: bun add --ignore-scripts @remotemerge/nepali-date-converter
 
       - name: "List installed packages"
         run: bun pm ls
