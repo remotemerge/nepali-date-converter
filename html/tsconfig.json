@@ -6,7 +6,7 @@
     "outDir": "./dist",
     "removeComments": true,
     "incremental": true,
-    "types": ["bun-types"],
+    "types": ["@types/bun"],
 
     // Strict Type Checking
     "strict": true,
