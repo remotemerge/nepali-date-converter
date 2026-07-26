@@ -1,4 +1,4 @@
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 
 // Read the version from package.json
@@ -52,3 +52,20 @@ const configs = {
 const publicPath = join(import.meta.dir, '..', 'dist');
 await mkdir(publicPath, { recursive: true });
 await Bun.write(join(publicPath, 'package.json'), JSON.stringify(configs));
+
+// Keep only the entry declaration in the published package
+const entryDeclaration = 'index.d.ts';
+const declarations = (await readdir(publicPath)).filter(
+  (file) => file.endsWith('.d.ts') && file !== entryDeclaration,
+);
+
+await Promise.all(declarations.map((file) => rm(join(publicPath, file))));
+
+// Fail the build if the entry declaration is not self-contained
+const entrySource = await Bun.file(join(publicPath, entryDeclaration)).text();
+
+if (/\bfrom\s*['"]\.|\/{3}\s*<reference/.test(entrySource)) {
+  throw new Error(
+    `${entryDeclaration} references internal modules; it is no longer self-contained.`,
+  );
+}
