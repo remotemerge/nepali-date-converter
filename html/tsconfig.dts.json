@@ -5,8 +5,13 @@
     "emitDeclarationOnly": true,
     "declaration": true,
     "outDir": "./dist",
+
+    // Always re-emit, since vite build empties dist/
     "incremental": false,
+
+    // Exclude @types/bun from the published declarations
     "types": []
   },
+
   "include": ["src/**/*.ts"]
 }
