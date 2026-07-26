@@ -20,6 +20,12 @@ jobs:
       - name: "Checkout repository"
         uses: actions/checkout@v7
 
+      - name: "Set up Node.js"
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: "https://registry.npmjs.org"
+
       - name: "Set up Bun"
         uses: oven-sh/setup-bun@v2
 
@@ -31,11 +37,8 @@ jobs:
         working-directory: html
         run: bun run build
 
-      - name: "Set up Node.js"
-        uses: actions/setup-node@v7
-        with:
-          node-version: 24
-          registry-url: "https://registry.npmjs.org"
+      - name: "Copy README and LICENSE"
+        run: cp README.md LICENSE ./html/dist/
 
       - name: "Publish the package to npm"
         working-directory: html/dist
