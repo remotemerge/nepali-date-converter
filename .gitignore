@@ -3,6 +3,7 @@
 /html/node_modules/
 
 ### Build directories
+/html/coverage/
 /html/dist/
 /html/output/
 

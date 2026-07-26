@@ -1,7 +1,9 @@
 name: Test
 
-# Trigger the workflow on pull requests
-on: [ pull_request ]
+on:
+  pull_request:
+  push:
+    branches: [main]
 
 jobs:
   test:
@@ -16,7 +18,7 @@ jobs:
       - name: "Checkout repository"
         uses: actions/checkout@v7.0.1
 
-      - name: "Set up Bun version 2.2.0"
+      - name: "Setup Bun runtime"
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
 
       - name: "Install dependencies"
@@ -31,6 +33,12 @@ jobs:
         working-directory: html
         run: bun x shx cp __tests__/data.dist.json __tests__/data.json
 
-      - name: "Run Tests"
+      - name: "Run tests with coverage"
         working-directory: html
-        run: bun run test
+        run: bun run test:coverage
+
+      - name: "SonarQube scan"
+        if: ${{ !cancelled() && matrix.os == 'ubuntu-24.04' && (github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository) }}
+        uses: SonarSource/sonarqube-scan-action@22918119ff8e1ca75a623e15c8296b6ea4fbe28f
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
