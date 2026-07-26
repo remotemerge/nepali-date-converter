@@ -38,6 +38,7 @@
     "lint": "oxlint && oxfmt --check",
     "lint:fix": "oxlint --fix && oxfmt",
     "test": "bun test",
+    "test:coverage": "bun test --coverage-reporter=lcov",
     "dev": "vite --host 0.0.0.0 --port 3000",
     "preview": "vite preview",
     "build": "vite build && tsc -p tsconfig.dts.json && bun ./scripts/post-build.ts"
