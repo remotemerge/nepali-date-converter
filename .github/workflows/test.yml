@@ -31,6 +31,12 @@ jobs:
         working-directory: html
         run: bun x shx cp __tests__/data.dist.json __tests__/data.json
 
-      - name: "Run Tests"
+      - name: "Run tests with coverage"
         working-directory: html
-        run: bun run test
+        run: bun run test:coverage
+
+      - name: "SonarQube scan"
+        if: matrix.os == 'ubuntu-24.04'
+        uses: SonarSource/sonarqube-scan-action@v8.2.1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
