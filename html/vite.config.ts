@@ -1,8 +1,6 @@
 import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-  plugins: [dts({ include: 'src/*.ts' })], // Generate TypeScript declaration files
   build: {
     minify: true,
     lib: {

@@ -6,7 +6,7 @@
     "outDir": "./dist",
     "removeComments": true,
     "incremental": true,
-    "types": ["bun-types"],
+    "types": ["@types/bun"],
 
     // Strict Type Checking
     "strict": true,
@@ -25,6 +25,6 @@
   },
 
   // Include and Exclude
-  "include": ["*.ts", "__tests__/**/*.ts", "maker/*.ts", "src/**/*.ts"],
+  "include": ["*.ts", "__tests__/**/*.ts", "scripts/*.ts", "src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

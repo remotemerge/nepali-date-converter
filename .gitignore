@@ -1,19 +1,15 @@
 ### Vendor directories
 /html/.yarn/
 /html/node_modules/
-/html/vendor/
 
 ### Build directories
-/html/build/
-/html/bundle/
 /html/dist/
+/html/output/
 
 ### JetBrains
 /.idea/*
 !/.idea/dictionaries/
 !/.idea/dictionaries/*.xml
-!/.idea/jsLibraryMappings.xml
-!/.idea/prettier.xml
 !/.idea/vcs.xml
 
 ### Visual Studio Code
@@ -54,6 +50,7 @@ ehthumbs_vista.db
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+*.tsbuildinfo
 
-## Data Files
+### Data Files
 /html/__tests__/data.json

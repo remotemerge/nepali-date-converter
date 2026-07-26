@@ -7,7 +7,7 @@ export default defineConfig({
     perf: 'warn',
   },
   rules: {
-    // Best Practices (from ESLint config)
+    // Best Practices
     'no-var': 'error',
     eqeqeq: 'error',
     'no-eval': 'error',
@@ -23,13 +23,10 @@ export default defineConfig({
     // Restriction rules
     'no-console': 'warn',
 
-    // Disable rules that don't fit this codebase
+    // Disable rules
     'prefer-destructuring': 'off',
     'sort-keys': 'off',
     'switch-case-braces': 'off',
   },
-  globals: {
-    Bun: 'readonly',
-  },
-  ignorePatterns: ['dist/**', 'node_modules/**'],
+  ignorePatterns: ['dist/**', 'node_modules/**', 'output/**', 'public/**'],
 });
