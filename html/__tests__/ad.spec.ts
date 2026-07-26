@@ -23,3 +23,20 @@ describe('DateConverter Nepali to English Conversion', () => {
     },
   );
 });
+
+describe('Nepali Unicode numeral input', () => {
+  test('converts Nepali unicode numerals to English date', () => {
+    const result = new DateConverter('२०८१-०१-१५').toAd();
+    expect(result.year).toBe(2024);
+    expect(result.month).toBe(4);
+    expect(result.date).toBe(27);
+    expect(result.day).toBe('Saturday');
+  });
+
+  test('converts mixed separator with Nepali unicode numerals', () => {
+    const result = new DateConverter('२०८१.०४.०१').toAd();
+    expect(result.year).toBe(2024);
+    expect(result.month).toBe(7);
+    expect(result.date).toBe(16);
+  });
+});
