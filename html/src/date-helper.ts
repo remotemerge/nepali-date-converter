@@ -6,7 +6,7 @@
  * @returns A new Date with the days added.
  */
 export function addDays(date: Date, days: number): Date {
-  const result = new Date(date.getTime());
+  const result = new Date(date);
   result.setUTCDate(result.getUTCDate() + days);
   return result;
 }
