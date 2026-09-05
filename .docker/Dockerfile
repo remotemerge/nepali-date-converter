@@ -1,5 +1,5 @@
 # Use official Bun image
-FROM oven/bun:1.3.14
+FROM oven/bun:1.4.2
 
 # Build arguments for dynamic UID/GID from host
 ARG APPLICATION_UID=1000
