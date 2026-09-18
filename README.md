@@ -91,7 +91,7 @@ console.log(converted);
 
 ```html
 
-<script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1/dist/ndc-browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1.2.1/ndc-browser.js"></script>
 <script>
   const converted = new DateConverter("2080-01-15").toAd();
   console.log(converted);
