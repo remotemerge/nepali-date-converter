@@ -84,7 +84,7 @@ export default class DateConverter {
    */
   private toEnglishDigits(input: string): string {
     return input.replace(/[०-९]/g, (char) =>
-      String(char.charCodeAt(0) - 0x966),
+      String('०१२३४५६७८९'.indexOf(char)),
     );
   }
 
