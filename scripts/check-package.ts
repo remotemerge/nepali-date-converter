@@ -26,6 +26,20 @@ assert.equal(typeof DateConverter, 'function');
 assert.deepEqual(JSON.parse(JSON.stringify(new DateConverter('2080-01-15').toAd())), {year:2023,month:4,date:28,day:'Friday'});
 assert.deepEqual(JSON.parse(JSON.stringify(new DateConverter('2023-04-28').toBs())), {year:2080,month:1,date:15,day:'Friday'});
 assert.throws(() => new DateConverter('1975-100000-01').toAd());
+for (const [bs, ad, weekday] of [
+  ['1975-01-01', '1918-04-13', 'Saturday'],
+  ['2099-12-30', '2043-04-13', 'Monday'],
+  ['2080-11-17', '2024-02-29', 'Thursday'],
+]) {
+  const result = new DateConverter(ad).toBs();
+  const expected = bs.split('-').map(Number);
+  assert.deepEqual([result.year, result.month, result.date, result.day], [...expected, weekday]);
+  const reverse = new DateConverter(bs).toAd();
+  assert.deepEqual([reverse.year, reverse.month, reverse.date, reverse.day], [...ad.split('-').map(Number), weekday]);
+}
+for (const input of ['1918-04-12', '2043-04-14', '2023-02-29']) {
+  assert.throws(() => new DateConverter(input).toBs(), { message: 'The input date is out of supported range.' });
+}
 `;
   await Bun.write(
     join(temporary, 'esm.mjs'),
