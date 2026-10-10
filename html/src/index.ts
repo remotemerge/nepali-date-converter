@@ -175,10 +175,10 @@ export default class DateConverter {
     const adDate = this.toAdDate(this.year, this.month, this.day);
 
     return {
-      year: adDate.getFullYear(),
-      month: adDate.getMonth() + 1,
-      date: adDate.getDate(),
-      day: this.toDayName(adDate.getDay()),
+      year: adDate.getUTCFullYear(),
+      month: adDate.getUTCMonth() + 1,
+      date: adDate.getUTCDate(),
+      day: this.toDayName(adDate.getUTCDay()),
     };
   }
 

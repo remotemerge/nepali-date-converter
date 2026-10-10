@@ -115,6 +115,7 @@ new DateConverter(date: string)
   - Supports multiple separators: `-`, `/`, `.`, `,`, `|`
   - Supports Nepali Unicode numerals (e.g., `२०८०-०१-१५` for 2080-01-15)
   - Choose `.toAd()` for BS input or `.toBs()` for AD input.
+  - Conversion uses UTC calendar days and gives the same result in every timezone.
   - Malformed and impossible dates throw `Error` with `The input date is out of supported range.` instead of rolling over. Inputs may have surrounding whitespace and one- or two-digit months/days, with a maximum total length of 64 characters.
 
 **Examples:**
