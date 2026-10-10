@@ -371,7 +371,7 @@ The Docker setup:
 
 - Uses Bun 1.3.11 base image
 - Configures proper UID/GID mapping
-- Runs development server on port 3000
+- Runs development server on `127.0.0.1:3000`. Remote access requires an explicit host-binding change in `compose.yml`; for direct Vite use, pass `--host 0.0.0.0`. Do not use the development server for production.
 - Maintains file ownership across host/container
 
 ---
