@@ -40,6 +40,8 @@ make a test pass.
 
 Run `bun run test`, `bun run lint`, and `bun run build` before every pull request.
 For changes to exports, bundling, or types, also run `bun run test:package` after the build.
+This checks ESM and CommonJS consumers under Bun and Node.js, the browser bundle in a Node.js VM,
+and TypeScript declarations. Node.js and npm must be installed for these compatibility checks.
 
 Available commands:
 

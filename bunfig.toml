@@ -1,2 +1,6 @@
+[run]
+shell = "bun"
+bun = false
+
 [test]
 coverage = true
