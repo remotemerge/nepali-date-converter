@@ -1,6 +1,9 @@
 import { expect, test } from 'bun:test';
 import DateConverter from '../src';
 
+const format = (value: { year: number; month: number; date: number }) =>
+  `${value.year}-${value.month}-${value.date}`;
+
 for (const input of [
   '',
   'abc-01-01',
@@ -42,5 +45,28 @@ test('preserves separators, unpadded components, surrounding whitespace and Nepa
       date: 28,
       day: 'Friday',
     });
+  }
+});
+
+test('rejects Gregorian rollover and dates outside the supported interval', () => {
+  for (const input of [
+    '2023-02-29',
+    '2023-02-31',
+    '2024-02-30',
+    '2023-04-31',
+    '1918-04-12',
+    '2043-04-14',
+  ]) {
+    expect(() => new DateConverter(input).toBs()).toThrow();
+  }
+  const leapDay = new DateConverter('2024-02-29').toBs();
+  expect(new DateConverter(format(leapDay)).toAd()).toEqual({
+    year: 2024,
+    month: 2,
+    date: 29,
+    day: 'Thursday',
+  });
+  for (const input of ['1974-12-30', '2100-01-01']) {
+    expect(() => new DateConverter(input).toAd()).toThrow();
   }
 });

@@ -114,7 +114,8 @@ new DateConverter(date: string)
 - `date` (string): Date string in `YYYY-MM-DD` format. Accepts both BS (Nepali) and AD (Gregorian) dates.
   - Supports multiple separators: `-`, `/`, `.`, `,`, `|`
   - Supports Nepali Unicode numerals (e.g., `२०८०-०१-१५` for 2080-01-15)
-  - Automatically detects whether the input is BS or AD based on the date range
+  - Choose `.toAd()` for BS input or `.toBs()` for AD input.
+  - Malformed and impossible dates throw `Error` with `The input date is out of supported range.` instead of rolling over. Inputs may have surrounding whitespace and one- or two-digit months/days, with a maximum total length of 64 characters.
 
 **Examples:**
 
