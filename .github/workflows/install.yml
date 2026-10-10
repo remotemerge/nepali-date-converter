@@ -8,6 +8,14 @@ on:
     types:
       - completed
 
+# Install the exact version tagged by the release that triggered Publish
+env:
+  PACKAGE: "@remotemerge/nepali-date-converter@${{ github.event.workflow_run.head_branch }}"
+
+defaults:
+  run:
+    shell: bash
+
 jobs:
   install-npm:
     # Run on multiple operating systems and Node.js versions
@@ -25,7 +33,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: "Install Nepali Date Converter"
-        run: npm init -y && npm install --ignore-scripts @remotemerge/nepali-date-converter
+        run: npm init -y && npm install --ignore-scripts "$PACKAGE"
 
       - name: "List installed packages"
         run: npm list --depth=0
@@ -46,7 +54,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: "Install Nepali Date Converter"
-        run: npm init -y && yarn add --ignore-scripts @remotemerge/nepali-date-converter
+        run: npm init -y && yarn add --ignore-scripts "$PACKAGE"
 
       - name: "List installed packages"
         run: yarn list --depth=0
@@ -67,10 +75,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: "Install pnpm"
-        run: npm install -g pnpm@11.17.0
+        run: npm install -g --ignore-scripts pnpm@12.10.1
 
       - name: "Install Nepali Date Converter"
-        run: pnpm init && pnpm add --ignore-scripts @remotemerge/nepali-date-converter
+        run: pnpm init && pnpm add --ignore-scripts "$PACKAGE"
 
       - name: "List installed packages"
         run: pnpm list --depth=0
@@ -91,7 +99,7 @@ jobs:
         run: bun init -y
 
       - name: "Install Nepali Date Converter"
-        run: bun add --ignore-scripts @remotemerge/nepali-date-converter
+        run: bun add --ignore-scripts "$PACKAGE"
 
       - name: "List installed packages"
         run: bun pm ls
