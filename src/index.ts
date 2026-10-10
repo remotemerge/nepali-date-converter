@@ -1,19 +1,27 @@
-import {
-  addDays,
-  differenceInCalendarDays,
-  endOfDay,
-  isWithinInterval,
-  startOfDay,
-} from './date-helper';
+import { addDays, differenceInCalendarDays } from './date-helper';
 
 import { years } from './years';
+
+const dayNames = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
+/** Days from 1975-01-01 BS to the first day of each BS year; index 2100 is the range length. */
+const yearOffsets: number[] = [];
+yearOffsets[1975] = 0;
+for (let y = 1975; y <= 2099; y++) {
+  yearOffsets[y + 1] = yearOffsets[y] + years[y][12];
+}
 
 export default class DateConverter {
   /** The AD date that corresponds to 1975-01-01 BS (start of supported range). */
   private readonly epochStart = new Date(Date.UTC(1918, 3, 13));
-
-  /** The AD date that corresponds to 2099-12-30 BS (end of supported range). */
-  private readonly epochEnd = new Date(Date.UTC(2043, 3, 13));
 
   /** Error message thrown when the input date is outside the supported range. */
   private readonly errorMsg = 'The input date is out of supported range.';
@@ -75,10 +83,8 @@ export default class DateConverter {
    * @returns String with Nepali numerals replaced by English digits.
    */
   private toEnglishDigits(input: string): string {
-    const nepaliNumerals = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-
-    return input.replace(/[०१२३४५६७८९]/g, (char) =>
-      nepaliNumerals.indexOf(char).toString(),
+    return input.replace(/[०-९]/g, (char) =>
+      String(char.charCodeAt(0) - 0x966),
     );
   }
 
@@ -90,15 +96,7 @@ export default class DateConverter {
    * @returns Full English day name.
    */
   private toDayName(index: number): string {
-    return [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ][index];
+    return dayNames[index];
   }
 
   /**
@@ -113,8 +111,7 @@ export default class DateConverter {
    * @returns AD date as a JavaScript `Date` object.
    */
   private toAdDate(bsYear: number, bsMonth: number, bsDay: number): Date {
-    let totalDays = 0;
-    for (let y = 1975; y < bsYear; y++) totalDays += years[y][12];
+    let totalDays = yearOffsets[bsYear];
     for (let m = 0; m < bsMonth - 1; m++) totalDays += years[bsYear][m];
     totalDays += bsDay - 1;
 
@@ -124,8 +121,8 @@ export default class DateConverter {
   /**
    * Converts an AD (Gregorian) date offset to its corresponding BS (Bikram Sambat) date.
    *
-   * Iterates through the Nepali calendar data year by year, then month by month,
-   * subtracting days until the remaining offset pinpoints the exact BS date.
+   * Finds the year containing the offset, then walks its months
+   * until the remaining offset pinpoints the exact BS date.
    *
    * @param daysDiff - Number of days from the BS epoch start (1975-01-01 BS).
    * @returns Object containing BS `year`, `month`, and `date`.
@@ -136,25 +133,18 @@ export default class DateConverter {
     month: number;
     date: number;
   } {
-    let remaining = daysDiff;
-
-    for (const y in years) {
-      if (remaining >= years[y][12]) {
-        remaining -= years[y][12];
-        continue;
-      }
-
-      for (let m = 0; m < 12; m++) {
-        if (remaining >= years[y][m]) {
-          remaining -= years[y][m];
-          continue;
-        }
-
-        return { year: Number(y), month: m + 1, date: remaining + 1 };
-      }
+    if (daysDiff < 0 || daysDiff >= yearOffsets[2100]) {
+      throw new Error(this.errorMsg);
     }
 
-    throw new Error(this.errorMsg);
+    let y = 1975;
+    while (daysDiff >= yearOffsets[y + 1]) y++;
+
+    let remaining = daysDiff - yearOffsets[y];
+    let m = 0;
+    while (remaining >= years[y][m]) remaining -= years[y][m++];
+
+    return { year: y, month: m + 1, date: remaining + 1 };
   }
 
   /**
@@ -195,17 +185,14 @@ export default class DateConverter {
     if (
       targetDate.getUTCFullYear() !== this.year ||
       targetDate.getUTCMonth() !== this.month - 1 ||
-      targetDate.getUTCDate() !== this.day ||
-      !isWithinInterval(targetDate, {
-        start: startOfDay(this.epochStart),
-        end: endOfDay(this.epochEnd),
-      })
+      targetDate.getUTCDate() !== this.day
     ) {
       throw new Error(this.errorMsg);
     }
 
-    const daysDiff = differenceInCalendarDays(targetDate, this.epochStart);
-    const bsDate = this.toBsDate(daysDiff);
+    const bsDate = this.toBsDate(
+      differenceInCalendarDays(targetDate, this.epochStart),
+    );
 
     return { ...bsDate, day: this.toDayName(targetDate.getUTCDay()) };
   }
