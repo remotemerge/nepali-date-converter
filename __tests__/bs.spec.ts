@@ -14,7 +14,7 @@ const padZero = (num: number): string =>
 
 describe('DateConverter', () => {
   test.each(records)(
-    'converts English date %s to Nepali date %s',
+    'converts English date $eng to Nepali date $nep',
     ({
       eng: englishDate,
       nep: expectedNepaliDate,
