@@ -37,7 +37,7 @@
   "scripts": {
     "lint": "oxlint && oxfmt --check",
     "lint:fix": "oxlint --fix && oxfmt",
-    "test": "bun test",
+    "test": "bun test --check",
     "test:package": "bun scripts/check-package.ts",
     "test:coverage": "bun test --coverage-reporter=lcov",
     "dev": "vite --host 127.0.0.1 --port 3000",
@@ -52,6 +52,6 @@
     "vite": "^8.3.4"
   },
   "engines": {
-    "bun": ">=1.4.2 <2.0.0"
+    "bun": ">=1.4.3 <2.0.0"
   }
 }

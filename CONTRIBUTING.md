@@ -12,7 +12,7 @@ include sensitive reports in issues, discussions, or pull requests.
 
 ## Requirements
 
-Use Bun `>=1.4.2 <2.0.0` to install dependencies, run scripts, and test changes.
+Use Bun `>=1.4.3 <2.0.0` to install dependencies, run scripts, and test changes.
 
 Install dependencies from the lockfile:
 
@@ -45,7 +45,7 @@ Available commands:
 
 | Command                 | What it does                                      |
 | ----------------------- | ------------------------------------------------- |
-| `bun run test`          | Runs the test suite                               |
+| `bun run test`          | Type checks, then runs the test suite             |
 | `bun run lint`          | Checks code with Oxlint and formatting with Oxfmt |
 | `bun run build`         | Builds bundles and TypeScript declarations        |
 | `bun run test:package`  | Checks the built package after `build`            |
