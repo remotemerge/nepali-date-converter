@@ -24,7 +24,7 @@ const configs = {
     },
   },
   engines: {
-    node: '>=18.0.0',
+    node: '>=18.12.0',
   },
 };
 
