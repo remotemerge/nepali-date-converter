@@ -10,6 +10,7 @@ jobs:
   publish:
     # Run on the latest Ubuntu
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     # Required for tokenless (OIDC)
     permissions:
@@ -33,12 +34,30 @@ jobs:
         working-directory: html
         run: bun install --frozen-lockfile --ignore-scripts
 
+      - name: "Validate release version"
+        working-directory: html
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: bun -e 'const {version} = await Bun.file("package.json").json(); if (![version, `v${version}`].includes(process.env.RELEASE_TAG)) throw new Error("Release tag does not match package version");'
+
+      - name: "Lint and test"
+        working-directory: html
+        run: |
+          bun run lint
+          for timezone in UTC America/New_York America/Los_Angeles Asia/Kathmandu; do
+            TZ="$timezone" bun run test
+          done
+
       - name: "Build project"
         working-directory: html
         run: bun run build
 
       - name: "Copy README and LICENSE"
         run: cp README.md LICENSE ./html/dist/
+
+      - name: "Verify packed consumers"
+        working-directory: html
+        run: bun run test:package
 
       - name: "Publish the package to npm"
         working-directory: html/dist
