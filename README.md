@@ -299,7 +299,7 @@ html/
 │   └── data.json       # Test data fixtures
 ├── dist/               # Generated build output
 │   ├── ndc.js          # ESM bundle
-│   ├── ndc-node.js     # CommonJS bundle
+│   ├── ndc-node.cjs    # CommonJS bundle
 │   ├── ndc-browser.js  # IIFE bundle (browser-ready)
 │   └── *.d.ts          # TypeScript declarations
 ├── scripts/
@@ -321,7 +321,7 @@ bun run build
 This generates:
 
 - **ndc.js** - ES Module (for modern bundlers)
-- **ndc-node.js** - CommonJS (for Node.js)
+- **ndc-node.cjs** - CommonJS (for Node.js)
 - **ndc-browser.js** - IIFE (for direct browser usage)
 - **TypeScript declaration files** (.d.ts)
 - **Packaged dist/** - Ready for npm distribution
@@ -381,7 +381,7 @@ The Docker setup:
 | Format | File             | Size (minified) | Size (gzipped) |
 | ------ | ---------------- | --------------- | -------------- |
 | ESM    | `ndc.js`         | ~5 KiB          | ~1.8 KiB       |
-| CJS    | `ndc-node.js`    | ~5 KiB          | ~1.8 KiB       |
+| CJS    | `ndc-node.cjs`   | ~5 KiB          | ~1.8 KiB       |
 | IIFE   | `ndc-browser.js` | ~5 KiB          | ~1.8 KiB       |
 
 ---
