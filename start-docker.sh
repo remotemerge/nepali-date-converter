@@ -16,20 +16,10 @@ export APPLICATION_GID APPLICATION_UID
 # Docker Compose command wrapper
 COMPOSE_CMD="docker compose --file ${COMPOSE_FILE} --project-name ${PROJECT_NAME}"
 
-# Function to stop and prune Docker containers
+# Stop only this Compose project; preserve volumes and unrelated resources.
 stop_docker() {
-  echo "Stopping all running Docker containers..."
-  docker ps -q | xargs -r docker stop
-
-  echo "Stopping Docker containers..."
+  echo "Stopping project Docker containers..."
   ${COMPOSE_CMD} down --remove-orphans
-
-  echo "Removing dangling Docker resources..."
-  docker container prune -f
-  docker network prune -f
-  docker builder prune -f
-  docker image prune -f
-  docker volume prune -f
 }
 
 start_docker() {
