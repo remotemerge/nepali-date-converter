@@ -1,0 +1,32 @@
+name: Feature or change request
+description: Propose a new capability or a change to existing behavior
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: Describe what you are trying to do and what the library does not support.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the change you want. Include an example of the input and expected output if applicable.
+    validations:
+      required: true
+
+  - type: textarea
+    id: calendar
+    attributes:
+      label: Calendar data reference
+      description: |
+        For changes to calendar data, month lengths, or the supported range of 1975 to 2099 BS,
+        link a reliable source or attach a copy for every affected year. Otherwise, leave this blank.
+
+  - type: textarea
+    id: anything-else
+    attributes:
+      label: Additional context
+      description: Describe any workarounds you use or link to an earlier discussion.

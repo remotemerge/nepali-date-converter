@@ -260,100 +260,6 @@ The Nepali Date Converter library handles the complex mathematics required to co
 
 ---
 
-## 🛠️ Development
-
-This section provides a comprehensive guide for developers who want to contribute to the Nepali Date Converter project or build it locally. The project uses modern JavaScript tooling, including Bun for package management and testing, Vite for building, and Oxlint/Oxfmt for code quality.
-
-### Prerequisites
-
-- **Bun** >= 1.3.11 (required for development and building)
-- Node.js >= 20 (for consuming the package)
-
-### Setup
-
-```bash
-# Install dependencies
-bun install
-```
-
-### Available Scripts
-
-| Command            | Description                                                         |
-| ------------------ | ------------------------------------------------------------------- |
-| `bun run dev`      | Start development server with hot reload (localhost:3000)           |
-| `bun run build`    | Build production bundles (ESM, CJS, IIFE) + TypeScript declarations |
-| `bun run test`     | Run test suite using Bun's native test runner                       |
-| `bun run lint`     | Run Oxlint and Oxfmt checks                                         |
-| `bun run lint:fix` | Auto-fix linting and formatting issues                              |
-
-### Project Structure
-
-```text
-.
-├── src/
-│   ├── index.ts        # Main DateConverter class
-│   └── years.ts        # Nepali calendar data (1975-2099 BS)
-├── __tests__/
-│   ├── bs.spec.ts      # AD to BS conversion tests
-│   ├── ad.spec.ts      # BS to AD conversion tests
-│   └── data.json       # Test data fixtures
-├── dist/               # Generated build output
-│   ├── ndc.js          # ESM bundle
-│   ├── ndc-node.cjs    # CommonJS bundle
-│   ├── ndc-browser.js  # IIFE bundle (browser-ready)
-│   └── *.d.ts          # TypeScript declarations
-├── scripts/
-│   └── post-build.ts   # Post-build package.json generator
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-├── oxlint.config.ts
-└── oxfmt.config.ts
-```
-
-### Building
-
-```bash
-bun run build
-```
-
-This generates:
-
-- **ndc.js** - ES Module (for modern bundlers)
-- **ndc-node.cjs** - CommonJS (for Node.js)
-- **ndc-browser.js** - IIFE (for direct browser usage)
-- **TypeScript declaration files** (.d.ts)
-- **Packaged dist/** - Ready for npm distribution
-
-### Testing
-
-```bash
-# Run all tests
-bun run test
-
-# Run specific test file
-bun test __tests__/bs.spec.ts
-```
-
-Tests validate conversion accuracy across the entire supported date range using comprehensive fixtures.
-
-### Linting & Formatting
-
-The project uses modern tooling:
-
-- **Oxlint** - Fast Rust-based linter (ESLint replacement)
-- **Oxfmt** - Code formatter
-
-```bash
-# Check for issues
-bun run lint
-
-# Auto-fix issues
-bun run lint:fix
-```
-
----
-
 ## 📊 Bundle Analysis
 
 | Format | File             | Size (minified) | Size (gzipped) |
@@ -408,34 +314,21 @@ The Nepali Date Converter library is widely used in various applications and sys
 
 ---
 
+## 🔒 Security
+
+See [SECURITY](SECURITY.md) for supported versions and how to report vulnerabilities privately.
+
+---
+
 ## 🤝 Contributing
 
-We welcome contributions from the community! Whether you're fixing a bug, adding features, improving documentation, or reporting issues, your help makes this library better for everyone in the Nepali developer community. Below is a comprehensive guide to contributing to the Nepali Date Converter project.
+See [CONTRIBUTING](CONTRIBUTING.md) for setup instructions, required checks, and how to submit a pull request.
 
-### Reporting Issues
+---
 
-- **Bug Reports**: Open an issue with clear steps to reproduce the behavior
-- **Feature Requests**: Describe the use case and expected behavior in detail
-- **Documentation Issues**: Suggest improvements or report outdated information
+## 📜 Code of Conduct
 
-### Code Contributions
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Run tests: `bun run test`
-5. Run linter: `bun run lint:fix`
-6. Commit your changes (follow [Conventional Commits](https://www.conventionalcommits.org/))
-7. Push to your branch
-8. Open a Pull Request
-
-### Development Guidelines
-
-- **TypeScript**: Write TypeScript with strict mode enabled for type safety
-- **Testing**: Add comprehensive tests for all new functionality
-- **Code Style**: Follow existing code patterns and conventions
-- **Quality Checks**: Ensure `bun run lint` passes with no errors or warnings
-- **Documentation**: Update documentation and examples when adding features
+See [CODE OF CONDUCT](CODE_OF_CONDUCT.md) for community expectations and how to report concerns.
 
 ---
 

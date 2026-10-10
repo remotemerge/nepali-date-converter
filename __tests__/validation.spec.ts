@@ -5,7 +5,7 @@ import { years } from '../src/years';
 const format = (value: { year: number; month: number; date: number }) =>
   `${value.year}-${value.month}-${value.date}`;
 
-for (const input of [
+test.each([
   '',
   'abc-01-01',
   'NaN-01-01',
@@ -26,18 +26,17 @@ for (const input of [
   undefined,
   1975,
   {},
-]) {
-  test(`rejects malformed input ${JSON.stringify(input)}`, () => {
-    for (const method of ['toAd', 'toBs'] as const) {
-      expect(() => new DateConverter(input as string)[method]()).toThrow(
-        'The input date is out of supported range.',
-      );
-    }
-  });
-}
+])('rejects malformed input %j', (input) => {
+  for (const method of ['toAd', 'toBs'] as const) {
+    expect(() => new DateConverter(input as string)[method]()).toThrow(
+      'The input date is out of supported range.',
+    );
+  }
+});
 
-test('preserves separators, unpadded components, surrounding whitespace and Nepali digits', () => {
-  for (const separator of ['-', '/', '.', ',', '|']) {
+test.each(['-', '/', '.', ',', '|'])(
+  'preserves separator %s, unpadded components, surrounding whitespace and Nepali digits',
+  (separator) => {
     expect(
       new DateConverter(` २०८०${separator}१${separator}१५ `).toAd(),
     ).toEqual({
@@ -46,8 +45,8 @@ test('preserves separators, unpadded components, surrounding whitespace and Nepa
       date: 28,
       day: 'Friday',
     });
-  }
-});
+  },
+);
 
 test('rejects Gregorian rollover and dates outside the supported interval', () => {
   for (const input of [
