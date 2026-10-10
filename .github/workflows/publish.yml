@@ -10,6 +10,7 @@ jobs:
   publish:
     # Run on the latest Ubuntu
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     # Required for tokenless (OIDC)
     permissions:
@@ -18,28 +19,41 @@ jobs:
 
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: "Setup Node.js runtime"
-        uses: actions/setup-node@v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
           registry-url: "https://registry.npmjs.org"
 
       - name: "Setup Bun runtime"
-        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
 
       - name: "Install dependencies"
-        working-directory: html
         run: bun install --frozen-lockfile --ignore-scripts
 
+      - name: "Validate release version"
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: bun -e 'const {version} = await Bun.file("package.json").json(); if (![version, `v${version}`].includes(process.env.RELEASE_TAG)) throw new Error("Release tag does not match package version");'
+
+      - name: "Lint and test"
+        run: |
+          bun run lint
+          for timezone in UTC America/New_York America/Los_Angeles Asia/Kathmandu; do
+            TZ="$timezone" bun run test
+          done
+
       - name: "Build project"
-        working-directory: html
         run: bun run build
 
       - name: "Copy README and LICENSE"
-        run: cp README.md LICENSE ./html/dist/
+        run: cp README.md LICENSE ./dist/
+
+      - name: "Verify packed consumers"
+        run: bun run test:package
 
       - name: "Publish the package to npm"
-        working-directory: html/dist
+        working-directory: dist
         run: npm publish --access public --provenance

@@ -14,7 +14,7 @@ export default defineConfig({
           case 'iife':
             return 'ndc-browser.js'; // IIFE format (for browsers)
           case 'cjs':
-            return 'ndc-node.js'; // CommonJS format (for Node.js)
+            return 'ndc-node.cjs'; // CommonJS format (for Node.js)
           default:
             return `ndc-${format}.js`; // Fallback for other formats
         }

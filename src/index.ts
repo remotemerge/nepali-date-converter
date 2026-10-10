@@ -49,10 +49,20 @@ export default class DateConverter {
    * @returns Tuple of `[year, month, day]` as numbers.
    */
   private parse(input: string): [number, number, number] {
+    if (typeof input !== 'string' || input.length > 64) {
+      throw new Error(this.errorMsg);
+    }
+
     const cleaned = this.toEnglishDigits(input)
       .replace(/[./|,]/g, '-')
       .trim();
+    if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(cleaned)) {
+      throw new Error(this.errorMsg);
+    }
     const [y, m, d] = cleaned.split('-').map(Number);
+    if (m < 1 || m > 12 || d < 1 || d > 32) {
+      throw new Error(this.errorMsg);
+    }
 
     return [y, m, d];
   }
@@ -151,20 +161,24 @@ export default class DateConverter {
    * Converts a Bikram Sambat (BS) date to its Gregorian (AD) equivalent.
    *
    * @returns Object with AD `year`, `month` (1-12), `date` (1-31), and `day` name.
-   * @throws When the BS year is outside the supported range (1975-2099 BS).
+   * @throws When the BS date is invalid or outside 1975-2099 BS.
    */
   public toAd() {
-    if (this.year < 1975 || this.year > 2099) {
+    if (
+      this.year < 1975 ||
+      this.year > 2099 ||
+      this.day > years[this.year][this.month - 1]
+    ) {
       throw new Error(this.errorMsg);
     }
 
     const adDate = this.toAdDate(this.year, this.month, this.day);
 
     return {
-      year: adDate.getFullYear(),
-      month: adDate.getMonth() + 1,
-      date: adDate.getDate(),
-      day: this.toDayName(adDate.getDay()),
+      year: adDate.getUTCFullYear(),
+      month: adDate.getUTCMonth() + 1,
+      date: adDate.getUTCDate(),
+      day: this.toDayName(adDate.getUTCDay()),
     };
   }
 
@@ -172,13 +186,16 @@ export default class DateConverter {
    * Converts a Gregorian (AD) date to its Bikram Sambat (BS) equivalent.
    *
    * @returns Object with BS `year`, `month` (1-12), `date` (1-32), and `day` name.
-   * @throws When the AD date is outside the supported range
+   * @throws When the AD date is invalid or outside the supported range
    *         (1918-04-13 AD to 2043-04-13 AD).
    */
   public toBs() {
     const targetDate = new Date(Date.UTC(this.year, this.month - 1, this.day));
 
     if (
+      targetDate.getUTCFullYear() !== this.year ||
+      targetDate.getUTCMonth() !== this.month - 1 ||
+      targetDate.getUTCDate() !== this.day ||
       !isWithinInterval(targetDate, {
         start: startOfDay(this.epochStart),
         end: endOfDay(this.epochEnd),

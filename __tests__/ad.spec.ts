@@ -2,7 +2,12 @@ import { describe, test, expect } from 'bun:test';
 
 import DateConverter from '../src';
 
-import records from './data.json';
+import fallbackRecords from './data.dist.json';
+
+const localData = Bun.file(new URL('./data.json', import.meta.url));
+const records: { nep: string; eng: string }[] = (await localData.exists())
+  ? await localData.json()
+  : fallbackRecords;
 
 const padZero = (num: number): string =>
   num < 10 ? `0${num}` : num.toString();

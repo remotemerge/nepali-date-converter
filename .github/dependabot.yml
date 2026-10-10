@@ -9,20 +9,8 @@ updates:
       interval: "weekly"
       day: "saturday"
 
-  - package-ecosystem: "docker"
-    directory: "/.docker/"
-    schedule:
-      interval: "weekly"
-      day: "saturday"
-
-  - package-ecosystem: "docker-compose"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "saturday"
-
   - package-ecosystem: "bun"
-    directory: "/html/"
+    directory: "/"
     schedule:
       interval: "weekly"
       day: "saturday"

@@ -31,11 +31,11 @@ const configs = {
   type: packageJson.type,
   types: './index.d.ts',
   module: './ndc.js', // ES Module entry point
-  main: './ndc-node.js', // CommonJS entry point
+  main: './ndc-node.cjs', // CommonJS entry point
   exports: {
     '.': {
-      import: './ndc.js', // ES Module import
-      require: './ndc-node.js', // CommonJS require
+      import: { types: './index.d.ts', default: './ndc.js' },
+      require: { types: './index.d.cts', default: './ndc-node.cjs' },
     },
   },
   files: ['**/*'],
@@ -69,3 +69,12 @@ if (/\bfrom\s*['"]\.|\/{3}\s*<reference/.test(entrySource)) {
     `${entryDeclaration} references internal modules; it is no longer self-contained.`,
   );
 }
+
+// CommonJS declarations must match the constructor returned by require().
+await Bun.write(
+  join(publicPath, 'index.d.cts'),
+  entrySource.replace(
+    'export default class DateConverter',
+    'declare class DateConverter',
+  ) + '\nexport = DateConverter;\n',
+);

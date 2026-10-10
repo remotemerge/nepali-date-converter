@@ -25,7 +25,6 @@ Built with **TypeScript** and powered by **Bun**, this library is optimized for 
 - 🌐 **Universal Compatibility**: Works in Node.js (v20+), modern browsers, and all major bundlers (Vite, Webpack, Rollup, esbuild)
 - 🚀 **Modern Tooling**: Built with Bun, Vite, Oxlint, and Oxfmt for fast development and builds
 - 🧪 **Well-Tested**: Comprehensive test suite validating every date in the supported range
-- 🐳 **Docker Ready**: Includes Docker configuration for consistent cross-platform development
 - 📦 **Zero Dependencies**: Minimal runtime footprint with only essential dependencies
 
 ---
@@ -65,15 +64,15 @@ The Nepali Date Converter library is straightforward to use. Import the `DateCon
 ### ES Modules (Recommended)
 
 ```javascript
-import DateConverter from "@remotemerge/nepali-date-converter";
+import DateConverter from '@remotemerge/nepali-date-converter';
 
 // Convert BS to AD
-const adDate = new DateConverter("2080-01-15").toAd();
+const adDate = new DateConverter('2080-01-15').toAd();
 console.log(adDate);
 // Output: { year: 2023, month: 4, date: 28, day: 'Friday' }
 
 // Convert AD to BS
-const bsDate = new DateConverter("2023-04-28").toBs();
+const bsDate = new DateConverter('2023-04-28').toBs();
 console.log(bsDate);
 // Output: { year: 2080, month: 1, date: 15, day: 'Friday' }
 ```
@@ -81,19 +80,18 @@ console.log(bsDate);
 ### CommonJS
 
 ```javascript
-const DateConverter = require("@remotemerge/nepali-date-converter");
+const DateConverter = require('@remotemerge/nepali-date-converter');
 
-const converted = new DateConverter("2080-01-15").toAd();
+const converted = new DateConverter('2080-01-15').toAd();
 console.log(converted);
 ```
 
 ### Browser (CDN)
 
 ```html
-
 <script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1.2.1/ndc-browser.js"></script>
 <script>
-  const converted = new DateConverter("2080-01-15").toAd();
+  const converted = new DateConverter('2080-01-15').toAd();
   console.log(converted);
 </script>
 ```
@@ -115,14 +113,16 @@ new DateConverter(date: string)
 - `date` (string): Date string in `YYYY-MM-DD` format. Accepts both BS (Nepali) and AD (Gregorian) dates.
   - Supports multiple separators: `-`, `/`, `.`, `,`, `|`
   - Supports Nepali Unicode numerals (e.g., `२०८०-०१-१५` for 2080-01-15)
-  - Automatically detects whether the input is BS or AD based on the date range
+  - Choose `.toAd()` for BS input or `.toBs()` for AD input.
+  - Conversion uses UTC calendar days and gives the same result in every timezone.
+  - Malformed and impossible dates throw `Error` with `The input date is out of supported range.` instead of rolling over. Inputs may have surrounding whitespace and one- or two-digit months/days, with a maximum total length of 64 characters.
 
 **Examples:**
 
 ```javascript
-new DateConverter("2080-01-15"); // Standard BS format with hyphen
-new DateConverter("2080/01/15"); // Slash separator
-new DateConverter("२०८०-०१-१५"); // Nepali numerals (Devanagari script)
+new DateConverter('2080-01-15'); // Standard BS format with hyphen
+new DateConverter('2080/01/15'); // Slash separator
+new DateConverter('२०८०-०१-१५'); // Nepali numerals (Devanagari script)
 ```
 
 ### Methods
@@ -146,7 +146,7 @@ Converts a Bikram Sambat (BS) date to its equivalent Gregorian (AD) date. This m
 
 ```javascript
 // Convert Nepali date to English/Gregorian date
-const result = new DateConverter("2080-01-15").toAd();
+const result = new DateConverter('2080-01-15').toAd();
 // { year: 2023, month: 4, date: 28, day: 'Friday' }
 ```
 
@@ -169,7 +169,7 @@ Converts a Gregorian (AD) date to its equivalent Bikram Sambat (BS) date. Use th
 
 ```javascript
 // Convert English/Gregorian date to Nepali date
-const result = new DateConverter("2023-04-28").toBs();
+const result = new DateConverter('2023-04-28').toBs();
 // { year: 2080, month: 1, date: 15, day: 'Friday' }
 ```
 
@@ -182,26 +182,32 @@ The Nepali Date Converter library is versatile and can be used in various real-w
 ### Basic Conversions
 
 ```javascript
-import DateConverter from "@remotemerge/nepali-date-converter";
+import DateConverter from '@remotemerge/nepali-date-converter';
 
 // Festival date conversion - Dashain, Tihar, and other Nepali festivals
-const dashainDate = new DateConverter("2080-07-01").toAd();
-console.log(`Dashain 2080 starts: ${dashainDate.month}/${dashainDate.date}/${dashainDate.year}`);
+const dashainDate = new DateConverter('2080-07-01').toAd();
+console.log(
+  `Dashain 2080 starts: ${dashainDate.month}/${dashainDate.date}/${dashainDate.year}`,
+);
 
 // Historical record conversion - Nepal history, government documents
-const historicalDate = new DateConverter("1950-01-01").toBs();
-console.log(`January 1, 1950 AD = ${historicalDate.year}-${historicalDate.month}-${historicalDate.date} BS`);
+const historicalDate = new DateConverter('1950-01-01').toBs();
+console.log(
+  `January 1, 1950 AD = ${historicalDate.year}-${historicalDate.month}-${historicalDate.date} BS`,
+);
 
 // Birthday and anniversary conversions
-const birthdayBS = new DateConverter("2024-06-15").toBs();
-console.log(`Your Nepali birthday: ${birthdayBS.year}/${birthdayBS.month}/${birthdayBS.date}`);
+const birthdayBS = new DateConverter('2024-06-15').toBs();
+console.log(
+  `Your Nepali birthday: ${birthdayBS.year}/${birthdayBS.month}/${birthdayBS.date}`,
+);
 ```
 
 ### Error Handling
 
 ```javascript
 try {
-  const converted = new DateConverter("2100-01-01").toAd();
+  const converted = new DateConverter('2100-01-01').toAd();
 } catch (error) {
   console.error(error.message);
   // "The input date is out of supported range."
@@ -211,9 +217,9 @@ try {
 ### TypeScript Usage
 
 ```typescript
-import DateConverter from "@remotemerge/nepali-date-converter";
+import DateConverter from '@remotemerge/nepali-date-converter';
 
-const converter = new DateConverter("2080-01-15");
+const converter = new DateConverter('2080-01-15');
 const result = converter.toAd();
 
 // Full type safety and autocompletion
@@ -227,12 +233,12 @@ console.log(result.day); // string
 
 ```javascript
 // All of these work identically:
-new DateConverter("2080-01-15").toAd(); // Hyphen
-new DateConverter("2080/01/15").toAd(); // Slash
-new DateConverter("2080.01.15").toAd(); // Dot
-new DateConverter("2080,01,15").toAd(); // Comma
-new DateConverter("2080|01|15").toAd(); // Pipe
-new DateConverter("२०८०-०१-१५").toAd(); // Nepali numerals
+new DateConverter('2080-01-15').toAd(); // Hyphen
+new DateConverter('2080/01/15').toAd(); // Slash
+new DateConverter('2080.01.15').toAd(); // Dot
+new DateConverter('2080,01,15').toAd(); // Comma
+new DateConverter('2080|01|15').toAd(); // Pipe
+new DateConverter('२०८०-०१-१५').toAd(); // Nepali numerals
 ```
 
 ---
@@ -266,9 +272,6 @@ This section provides a comprehensive guide for developers who want to contribut
 ### Setup
 
 ```bash
-# Navigate to the source directory
-cd html
-
 # Install dependencies
 bun install
 ```
@@ -276,7 +279,7 @@ bun install
 ### Available Scripts
 
 | Command            | Description                                                         |
-|--------------------|---------------------------------------------------------------------|
+| ------------------ | ------------------------------------------------------------------- |
 | `bun run dev`      | Start development server with hot reload (localhost:3000)           |
 | `bun run build`    | Build production bundles (ESM, CJS, IIFE) + TypeScript declarations |
 | `bun run test`     | Run test suite using Bun's native test runner                       |
@@ -286,7 +289,7 @@ bun install
 ### Project Structure
 
 ```text
-html/
+.
 ├── src/
 │   ├── index.ts        # Main DateConverter class
 │   └── years.ts        # Nepali calendar data (1975-2099 BS)
@@ -296,7 +299,7 @@ html/
 │   └── data.json       # Test data fixtures
 ├── dist/               # Generated build output
 │   ├── ndc.js          # ESM bundle
-│   ├── ndc-node.js     # CommonJS bundle
+│   ├── ndc-node.cjs    # CommonJS bundle
 │   ├── ndc-browser.js  # IIFE bundle (browser-ready)
 │   └── *.d.ts          # TypeScript declarations
 ├── scripts/
@@ -311,14 +314,13 @@ html/
 ### Building
 
 ```bash
-cd html
 bun run build
 ```
 
 This generates:
 
 - **ndc.js** - ES Module (for modern bundlers)
-- **ndc-node.js** - CommonJS (for Node.js)
+- **ndc-node.cjs** - CommonJS (for Node.js)
 - **ndc-browser.js** - IIFE (for direct browser usage)
 - **TypeScript declaration files** (.d.ts)
 - **Packaged dist/** - Ready for npm distribution
@@ -352,33 +354,12 @@ bun run lint:fix
 
 ---
 
-## 🐳 Docker Development
-
-For consistent development environments, the project includes Docker support:
-
-```bash
-# Start development environment
-bash start-docker.sh
-
-# Or use the CLI wrapper
-bash app-cli.sh
-```
-
-The Docker setup:
-
-- Uses Bun 1.3.11 base image
-- Configures proper UID/GID mapping
-- Runs development server on port 3000
-- Maintains file ownership across host/container
-
----
-
 ## 📊 Bundle Analysis
 
 | Format | File             | Size (minified) | Size (gzipped) |
-|--------|------------------|-----------------|----------------|
+| ------ | ---------------- | --------------- | -------------- |
 | ESM    | `ndc.js`         | ~5 KiB          | ~1.8 KiB       |
-| CJS    | `ndc-node.js`    | ~5 KiB          | ~1.8 KiB       |
+| CJS    | `ndc-node.cjs`   | ~5 KiB          | ~1.8 KiB       |
 | IIFE   | `ndc-browser.js` | ~5 KiB          | ~1.8 KiB       |
 
 ---
