@@ -1,0 +1,45 @@
+name: Bug report
+description: Report an incorrect conversion, parsing error, or packaging defect
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not report a suspected vulnerability in a public issue. Follow the [security policy](https://github.com/remotemerge/nepali-date-converter/security/policy) instead.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: Include the exact input, whether you called toAd() or toBs(), and the result or error message. For build or import failures, include the failing command or import.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: Describe the expected result. For an incorrect conversion, link the calendar source you used or attach a copy.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: How to reproduce
+      description: Provide the smallest code sample or steps that reproduce the problem. Include the package import.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Package version and environment
+      description: Include the package version, runtime or browser version, and your timezone. For build or import failures, include the bundler and its version.
+    validations:
+      required: true
+
+  - type: textarea
+    id: anything-else
+    attributes:
+      label: Additional context
+      description: Add relevant logs or screenshots. Remove credentials and personal data.
