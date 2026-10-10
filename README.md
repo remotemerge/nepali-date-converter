@@ -90,7 +90,6 @@ console.log(converted);
 ### Browser (CDN)
 
 ```html
-
 <script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1.2.1/ndc-browser.js"></script>
 <script>
   const converted = new DateConverter("2080-01-15").toAd();
@@ -190,7 +189,9 @@ console.log(`Dashain 2080 starts: ${dashainDate.month}/${dashainDate.date}/${das
 
 // Historical record conversion - Nepal history, government documents
 const historicalDate = new DateConverter("1950-01-01").toBs();
-console.log(`January 1, 1950 AD = ${historicalDate.year}-${historicalDate.month}-${historicalDate.date} BS`);
+console.log(
+  `January 1, 1950 AD = ${historicalDate.year}-${historicalDate.month}-${historicalDate.date} BS`,
+);
 
 // Birthday and anniversary conversions
 const birthdayBS = new DateConverter("2024-06-15").toBs();
@@ -276,7 +277,7 @@ bun install
 ### Available Scripts
 
 | Command            | Description                                                         |
-|--------------------|---------------------------------------------------------------------|
+| ------------------ | ------------------------------------------------------------------- |
 | `bun run dev`      | Start development server with hot reload (localhost:3000)           |
 | `bun run build`    | Build production bundles (ESM, CJS, IIFE) + TypeScript declarations |
 | `bun run test`     | Run test suite using Bun's native test runner                       |
@@ -376,7 +377,7 @@ The Docker setup:
 ## 📊 Bundle Analysis
 
 | Format | File             | Size (minified) | Size (gzipped) |
-|--------|------------------|-----------------|----------------|
+| ------ | ---------------- | --------------- | -------------- |
 | ESM    | `ndc.js`         | ~5 KiB          | ~1.8 KiB       |
 | CJS    | `ndc-node.js`    | ~5 KiB          | ~1.8 KiB       |
 | IIFE   | `ndc-browser.js` | ~5 KiB          | ~1.8 KiB       |
