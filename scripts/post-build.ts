@@ -1,21 +1,6 @@
-import { mkdir, readdir, rm } from 'node:fs/promises';
+import { readdir } from 'node:fs/promises';
 import { join } from 'node:path';
-
-// Read the version from package.json
-const packageJson = (await Bun.file(
-  join(import.meta.dir, '..', 'package.json'),
-).json()) as {
-  name: string;
-  version: string;
-  description: string;
-  license: string;
-  author: string;
-  repository: string;
-  bugs: string;
-  keywords: string[];
-  homepage: string;
-  type: string;
-};
+import packageJson from '../package.json';
 
 // Compose the package object
 const configs = {
@@ -38,19 +23,13 @@ const configs = {
       require: { types: './index.d.cts', default: './ndc-node.cjs' },
     },
   },
-  files: ['**/*'],
   engines: {
     node: '>=18.0.0',
-  },
-  scripts: {
-    start: 'echo "Thanks for using the package 🎉🎉🎉"',
-    test: 'echo "Error: no test specified" && exit 1',
   },
 };
 
 // Write package.json to the public directory
 const publicPath = join(import.meta.dir, '..', 'dist');
-await mkdir(publicPath, { recursive: true });
 await Bun.write(join(publicPath, 'package.json'), JSON.stringify(configs));
 
 // Keep only the entry declaration in the published package
@@ -59,7 +38,9 @@ const declarations = (await readdir(publicPath)).filter(
   (file) => file.endsWith('.d.ts') && file !== entryDeclaration,
 );
 
-await Promise.all(declarations.map((file) => rm(join(publicPath, file))));
+await Promise.all(
+  declarations.map((file) => Bun.file(join(publicPath, file)).delete()),
+);
 
 // Fail the build if the entry declaration is not self-contained
 const entrySource = await Bun.file(join(publicPath, entryDeclaration)).text();
