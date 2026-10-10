@@ -1,24 +1,25 @@
 {
   "name": "@remotemerge/nepali-date-converter",
-  "version": "1.2.1",
+  "version": "1.2.5",
   "private": false,
-  "description": "A modern JavaScript library for seamless conversion between Bikram Sambat (BS) and Gregorian (AD) dates. Easily convert Nepali dates to English dates and vice versa with support for years 1975 BS to 2099 BS.",
+  "description": "Convert dates between Nepali (Bikram Sambat, BS) and Gregorian (AD) in JavaScript and TypeScript. Supports 1975–2099 BS, Devanagari numerals, and timezone-independent conversion, with zero runtime dependencies.",
   "keywords": [
     "ad-to-bs",
     "bikram-sambat",
     "bs-to-ad",
-    "date-conversion",
-    "miti-pariwartan",
+    "date-converter",
+    "english-to-nepali-date",
+    "nepal",
+    "nepali",
     "nepali-calendar",
     "nepali-date",
     "nepali-date-converter",
-    "nepali-date-formatter",
-    "nepali-date-library",
-    "nepali-date-tool",
-    "nepali-date-utility",
-    "nepali-miti"
+    "nepali-miti",
+    "nepali-to-english-date",
+    "typescript",
+    "vikram-samvat"
   ],
-  "homepage": "https://madansapkota.com",
+  "homepage": "https://github.com/remotemerge/nepali-date-converter",
   "bugs": {
     "url": "https://github.com/remotemerge/nepali-date-converter/issues"
   },
@@ -26,8 +27,7 @@
   "author": {
     "name": "Madan Sapkota",
     "email": "contact+github@madansapkota.com",
-    "url": "https://madansapkota.com",
-    "role": "Maintainer"
+    "url": "https://madansapkota.com"
   },
   "repository": {
     "type": "git",
