@@ -64,15 +64,15 @@ The Nepali Date Converter library is straightforward to use. Import the `DateCon
 ### ES Modules (Recommended)
 
 ```javascript
-import DateConverter from "@remotemerge/nepali-date-converter";
+import DateConverter from '@remotemerge/nepali-date-converter';
 
 // Convert BS to AD
-const adDate = new DateConverter("2080-01-15").toAd();
+const adDate = new DateConverter('2080-01-15').toAd();
 console.log(adDate);
 // Output: { year: 2023, month: 4, date: 28, day: 'Friday' }
 
 // Convert AD to BS
-const bsDate = new DateConverter("2023-04-28").toBs();
+const bsDate = new DateConverter('2023-04-28').toBs();
 console.log(bsDate);
 // Output: { year: 2080, month: 1, date: 15, day: 'Friday' }
 ```
@@ -80,9 +80,9 @@ console.log(bsDate);
 ### CommonJS
 
 ```javascript
-const DateConverter = require("@remotemerge/nepali-date-converter");
+const DateConverter = require('@remotemerge/nepali-date-converter');
 
-const converted = new DateConverter("2080-01-15").toAd();
+const converted = new DateConverter('2080-01-15').toAd();
 console.log(converted);
 ```
 
@@ -91,7 +91,7 @@ console.log(converted);
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1.2.1/ndc-browser.js"></script>
 <script>
-  const converted = new DateConverter("2080-01-15").toAd();
+  const converted = new DateConverter('2080-01-15').toAd();
   console.log(converted);
 </script>
 ```
@@ -120,9 +120,9 @@ new DateConverter(date: string)
 **Examples:**
 
 ```javascript
-new DateConverter("2080-01-15"); // Standard BS format with hyphen
-new DateConverter("2080/01/15"); // Slash separator
-new DateConverter("२०८०-०१-१५"); // Nepali numerals (Devanagari script)
+new DateConverter('2080-01-15'); // Standard BS format with hyphen
+new DateConverter('2080/01/15'); // Slash separator
+new DateConverter('२०८०-०१-१५'); // Nepali numerals (Devanagari script)
 ```
 
 ### Methods
@@ -146,7 +146,7 @@ Converts a Bikram Sambat (BS) date to its equivalent Gregorian (AD) date. This m
 
 ```javascript
 // Convert Nepali date to English/Gregorian date
-const result = new DateConverter("2080-01-15").toAd();
+const result = new DateConverter('2080-01-15').toAd();
 // { year: 2023, month: 4, date: 28, day: 'Friday' }
 ```
 
@@ -169,7 +169,7 @@ Converts a Gregorian (AD) date to its equivalent Bikram Sambat (BS) date. Use th
 
 ```javascript
 // Convert English/Gregorian date to Nepali date
-const result = new DateConverter("2023-04-28").toBs();
+const result = new DateConverter('2023-04-28').toBs();
 // { year: 2080, month: 1, date: 15, day: 'Friday' }
 ```
 
@@ -182,28 +182,32 @@ The Nepali Date Converter library is versatile and can be used in various real-w
 ### Basic Conversions
 
 ```javascript
-import DateConverter from "@remotemerge/nepali-date-converter";
+import DateConverter from '@remotemerge/nepali-date-converter';
 
 // Festival date conversion - Dashain, Tihar, and other Nepali festivals
-const dashainDate = new DateConverter("2080-07-01").toAd();
-console.log(`Dashain 2080 starts: ${dashainDate.month}/${dashainDate.date}/${dashainDate.year}`);
+const dashainDate = new DateConverter('2080-07-01').toAd();
+console.log(
+  `Dashain 2080 starts: ${dashainDate.month}/${dashainDate.date}/${dashainDate.year}`,
+);
 
 // Historical record conversion - Nepal history, government documents
-const historicalDate = new DateConverter("1950-01-01").toBs();
+const historicalDate = new DateConverter('1950-01-01').toBs();
 console.log(
   `January 1, 1950 AD = ${historicalDate.year}-${historicalDate.month}-${historicalDate.date} BS`,
 );
 
 // Birthday and anniversary conversions
-const birthdayBS = new DateConverter("2024-06-15").toBs();
-console.log(`Your Nepali birthday: ${birthdayBS.year}/${birthdayBS.month}/${birthdayBS.date}`);
+const birthdayBS = new DateConverter('2024-06-15').toBs();
+console.log(
+  `Your Nepali birthday: ${birthdayBS.year}/${birthdayBS.month}/${birthdayBS.date}`,
+);
 ```
 
 ### Error Handling
 
 ```javascript
 try {
-  const converted = new DateConverter("2100-01-01").toAd();
+  const converted = new DateConverter('2100-01-01').toAd();
 } catch (error) {
   console.error(error.message);
   // "The input date is out of supported range."
@@ -213,9 +217,9 @@ try {
 ### TypeScript Usage
 
 ```typescript
-import DateConverter from "@remotemerge/nepali-date-converter";
+import DateConverter from '@remotemerge/nepali-date-converter';
 
-const converter = new DateConverter("2080-01-15");
+const converter = new DateConverter('2080-01-15');
 const result = converter.toAd();
 
 // Full type safety and autocompletion
@@ -229,12 +233,12 @@ console.log(result.day); // string
 
 ```javascript
 // All of these work identically:
-new DateConverter("2080-01-15").toAd(); // Hyphen
-new DateConverter("2080/01/15").toAd(); // Slash
-new DateConverter("2080.01.15").toAd(); // Dot
-new DateConverter("2080,01,15").toAd(); // Comma
-new DateConverter("2080|01|15").toAd(); // Pipe
-new DateConverter("२०८०-०१-१५").toAd(); // Nepali numerals
+new DateConverter('2080-01-15').toAd(); // Hyphen
+new DateConverter('2080/01/15').toAd(); // Slash
+new DateConverter('2080.01.15').toAd(); // Dot
+new DateConverter('2080,01,15').toAd(); // Comma
+new DateConverter('2080|01|15').toAd(); // Pipe
+new DateConverter('२०८०-०१-१५').toAd(); // Nepali numerals
 ```
 
 ---

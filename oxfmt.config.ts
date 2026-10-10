@@ -3,14 +3,7 @@ import { defineConfig } from 'oxfmt';
 export default defineConfig({
   singleQuote: true,
   printWidth: 80,
-  ignorePatterns: [
-    '.github/**',
-    '*.md',
-    'dist/**',
-    'output/**',
-    'public/**',
-    'src/*.js',
-  ],
+  ignorePatterns: ['.github/**', 'dist/**', 'output/**', 'public/**'],
   overrides: [
     {
       files: ['**/*.scss', '**/*.css', '**/*.html', '**/*.yml'],
