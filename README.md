@@ -1,348 +1,223 @@
-# 📅 Nepali Date Converter
+# Nepali Date Converter
 
-[![Package](https://img.shields.io/npm/v/@remotemerge/nepali-date-converter?logo=npm&logoColor=fff)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
-[![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?logo=github-actions&logoColor=fff&label=build)](https://github.com/remotemerge/nepali-date-converter/actions/workflows/test.yml)
-[![Tests](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?logo=jest&logoColor=fff&label=tests)](https://github.com/remotemerge/nepali-date-converter/actions/workflows/test.yml)
-[![Downloads](https://img.shields.io/npm/dt/@remotemerge/nepali-date-converter?logo=icloud&logoColor=fff)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
-[![Size](https://img.shields.io/bundlephobia/minzip/@remotemerge/nepali-date-converter?logo=nodedotjs&logoColor=fff&label=size)](https://bundlephobia.com/package/@remotemerge/nepali-date-converter)
-[![License](https://img.shields.io/github/license/remotemerge/nepali-date-converter?logo=opensourceinitiative&logoColor=fff)](LICENSE)
+[![Node.js Version](https://img.shields.io/node/v/@remotemerge/nepali-date-converter?style=flat&logo=nodedotjs&label=node)](#)
+[![npm](https://img.shields.io/npm/v/@remotemerge/nepali-date-converter?style=flat&logo=npm&label=npm)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
+[![Tests](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?style=flat&logo=bun&label=test)](#)
+[![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/publish.yml?style=flat&logo=github&label=build)](#)
+[![Sonar Coverage](https://img.shields.io/sonar/coverage/nepali-date-converter/main?server=https%3A%2F%2Fsonarcloud.io&style=flat&logo=sonarqubecloud&logoColor=126ED3&label=coverage)](#)
+[![Downloads](https://img.shields.io/npm/dt/@remotemerge/nepali-date-converter?style=flat&logo=npm&label=downloads)](#)
+[![License](https://img.shields.io/github/license/remotemerge/nepali-date-converter?style=flat&label=license&logo=opensourceinitiative&logoColor=fff)](LICENSE)
 
-> **Fast, accurate, and lightweight JavaScript library for converting dates between Nepali Bikram Sambat (BS) and Gregorian/English (AD) calendars.**
+Convert Nepali dates to English dates and back. This library converts between Bikram Sambat (BS, also written Vikram Samvat), the official calendar of Nepal, and the Gregorian (AD) calendar, in JavaScript and TypeScript.
 
-**Nepali Date Converter (NDC)** is a modern, production-ready JavaScript library designed for seamless date conversions between the **Bikram Sambat (BS)** calendar used in Nepal and the **Gregorian (AD)** calendar used internationally. Whether you're building Nepali calendar applications, event management systems, government portals, or localization features, NDC provides **100% accurate** date conversions for the range **1975 BS to 2099 BS** (1918 AD to 2043 AD).
+```js
+import DateConverter from '@remotemerge/nepali-date-converter';
 
-Built with **TypeScript** and powered by **Bun**, this library is optimized for performance with a tiny bundle size (~5 KiB minified), making it perfect for web applications, Node.js services, mobile apps, and server-side rendering.
+new DateConverter('2080-01-15').toAd(); // { year: 2023, month: 4, date: 28, day: 'Friday' }
+new DateConverter('2023-04-28').toBs(); // { year: 2080, month: 1, date: 15, day: 'Friday' }
+```
 
----
+- Converts in both directions for every day from 1975-01-01 BS to 2099-12-30 BS (1918-04-13 to 2043-04-13 AD).
+- Looks up the length of every BS month in a table instead of using a fixed offset. The test suite round-trips every day in the range.
+- Returns the same result in every timezone.
+- Accepts Devanagari digits (`२०८०-०१-१५`) and the separators `-` `/` `.` `,` `|`.
+- Ships ESM, CommonJS, a browser script, and TypeScript declarations, with no runtime dependencies.
 
-## ✨ Features
+## Installation
 
-- 🎯 **Accurate Conversions**: 100% accurate date conversions between Bikram Sambat (BS) and Gregorian (AD) calendars
-- 📆 **Wide Date Range**: Supports **1975 BS to 2099 BS** (April 13, 1918 AD to April 13, 2043 AD)
-- ⚡ **Lightweight & Fast**: Only **~5 KiB** minified and **~1.8 KiB** gzipped — optimized for fast page loads
-- 🇳🇵 **Nepali Unicode Support**: Accepts Nepali numerals (०-९) and multiple date format separators
-- 🔒 **TypeScript Native**: Full TypeScript support with built-in type definitions and autocompletion
-- 🌐 **Universal Compatibility**: Works in Node.js (v20+), modern browsers, and all major bundlers (Vite, Webpack, Rollup, esbuild)
-- 🚀 **Modern Tooling**: Built with Bun, Vite, Oxlint, and Oxfmt for fast development and builds
-- 🧪 **Well-Tested**: Comprehensive test suite validating every date in the supported range
-- 📦 **Zero Dependencies**: Minimal runtime footprint with only essential dependencies
-
----
-
-## 📦 Installation
-
-### npm
-
-```bash
+```sh
 npm install @remotemerge/nepali-date-converter
 ```
 
-### Yarn
+The package works the same with `yarn add`, `pnpm add`, or `bun add`.
 
-```bash
-yarn add @remotemerge/nepali-date-converter
-```
+## Usage
 
-### pnpm
+Create a `DateConverter` with a date string in year-month-day order, then call `toAd()` if the string is a BS date or `toBs()` if it is an AD date. Both methods return a plain object.
 
-```bash
-pnpm add @remotemerge/nepali-date-converter
-```
-
-### Bun
-
-```bash
-bun add @remotemerge/nepali-date-converter
-```
-
----
-
-## 🚀 Quick Start
-
-The Nepali Date Converter library is straightforward to use. Import the `DateConverter` class, instantiate it with a date string in `YYYY-MM-DD` format, and call either `.toAd()` to convert from Bikram Sambat to Gregorian, or `.toBs()` to convert from Gregorian to Bikram Sambat.
-
-### ES Modules (Recommended)
-
-```javascript
+```js
 import DateConverter from '@remotemerge/nepali-date-converter';
 
-// Convert BS to AD
-const adDate = new DateConverter('2080-01-15').toAd();
-console.log(adDate);
-// Output: { year: 2023, month: 4, date: 28, day: 'Friday' }
+const ad = new DateConverter('2081-01-15').toAd();
+// { year: 2024, month: 4, date: 27, day: 'Saturday' }
 
-// Convert AD to BS
-const bsDate = new DateConverter('2023-04-28').toBs();
-console.log(bsDate);
-// Output: { year: 2080, month: 1, date: 15, day: 'Friday' }
+const bs = new DateConverter('2024-02-29').toBs();
+// { year: 2080, month: 11, date: 17, day: 'Thursday' }
 ```
 
-### CommonJS
+`month` and `date` are 1-based numbers, and `day` is the English weekday name.
 
-```javascript
+### Input formats
+
+The year must have four digits. The month and day may have one or two digits. Leading and trailing whitespace is ignored.
+
+```js
+new DateConverter('2081-01-15'); // hyphen
+new DateConverter('2081/1/15'); // slash, no zero padding
+new DateConverter('2081.01.15'); // dot
+new DateConverter('2081,01,15'); // comma
+new DateConverter('2081|01|15'); // pipe
+new DateConverter('२०८१-०१-१५'); // Devanagari digits
+```
+
+Other orders such as `15-01-2081`, `Date` objects, and timestamps are not accepted.
+
+### Today's date in Nepal
+
+The converter works with calendar dates and has no notion of time or timezone. To get today's BS date, first decide which timezone "today" belongs to. This example uses Nepal time regardless of where the code runs:
+
+```js
+// formatToParts returns each field separately, so the result does not
+// depend on the date order a locale uses.
+const parts = Object.fromEntries(
+  new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kathmandu',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  })
+    .formatToParts(new Date())
+    .map(({ type, value }) => [type, value]),
+);
+
+const today = `${parts.year}-${parts.month}-${parts.day}`;
+const { year, month, date } = new DateConverter(today).toBs();
+```
+
+### Formatting the result
+
+The library returns numbers and leaves formatting to you. For a zero-padded `YYYY-MM-DD` string:
+
+```js
+const { year, month, date } = new DateConverter('2023-04-28').toBs();
+const pad = (n) => String(n).padStart(2, '0');
+
+`${year}-${pad(month)}-${pad(date)}`; // '2080-01-15'
+```
+
+### Handling invalid input
+
+Invalid input throws an `Error` with the message `The input date is out of supported range.` The constructor throws for malformed strings. `toAd()` and `toBs()` throw for dates that do not exist in that calendar or fall outside the supported range. Wrap both in the same `try` block:
+
+```js
+function toAdOrNull(bsDate) {
+  try {
+    return new DateConverter(bsDate).toAd();
+  } catch {
+    return null;
+  }
+}
+
+toAdOrNull('2080-01-32'); // null: Baishakh 2080 has 31 days
+toAdOrNull('2100-01-01'); // null: outside the supported range
+```
+
+Invalid dates never roll over into the next month. `new DateConverter('2023-02-29').toBs()` throws instead of returning the BS date for March 1.
+
+## Use cases
+
+Use it wherever an app stores or shows Nepali dates (miti):
+
+- Show BS dates next to AD dates in calendars, date pickers, and published timestamps.
+- Convert dates of birth and government document dates entered in BS.
+- Work with BS dates in accounting, payroll, and leave systems that follow the Nepali fiscal year.
+- Clean or import datasets that mix BS and AD dates.
+
+## API
+
+### `new DateConverter(date: string)`
+
+Parses `date` as year, month, and day. It does not check whether the date is BS or AD; the method you call decides that.
+
+Throws if `date` is not a string, is longer than 64 characters, does not match the [input formats](#input-formats), has a month outside 1 to 12, or has a day outside 1 to 32.
+
+### `toAd(): DateResult`
+
+Treats the input as a BS date and returns the matching Gregorian date.
+
+Throws if the year is outside 1975 to 2099 or the day is past the end of that BS month.
+
+### `toBs(): DateResult`
+
+Treats the input as a Gregorian date and returns the matching BS date.
+
+Throws if the date does not exist in the Gregorian calendar or is outside 1918-04-13 to 2043-04-13.
+
+### `DateResult`
+
+```ts
+{
+  year: number; // four-digit year
+  month: number; // 1 to 12
+  date: number; // day of the month: 1 to 31 for AD, 1 to 32 for BS
+  day: string; // 'Sunday' to 'Saturday'
+}
+```
+
+The package does not export a named type for the result. In TypeScript, derive it from the method:
+
+```ts
+import DateConverter from '@remotemerge/nepali-date-converter';
+
+type DateResult = ReturnType<DateConverter['toAd']>;
+```
+
+## Supported range
+
+| Calendar  | First date | Last date  |
+| --------- | ---------- | ---------- |
+| BS        | 1975-01-01 | 2099-12-30 |
+| Gregorian | 1918-04-13 | 2043-04-13 |
+
+BS month lengths vary from year to year (29 to 32 days), so the library stores each month's length for every supported year. Dates outside this range throw rather than return an estimate.
+
+The library converts dates only. It does not format month names, output Devanagari digits, or handle time of day.
+
+## Module formats and runtimes
+
+The default export is the `DateConverter` class in every format.
+
+**ES modules**
+
+```js
+import DateConverter from '@remotemerge/nepali-date-converter';
+```
+
+**CommonJS**
+
+```js
 const DateConverter = require('@remotemerge/nepali-date-converter');
-
-const converted = new DateConverter('2080-01-15').toAd();
-console.log(converted);
 ```
 
-### Browser (CDN)
+**Browser script tag.** The browser build defines a global `DateConverter`:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1.2.1/ndc-browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@remotemerge/nepali-date-converter@1/ndc-browser.js"></script>
 <script>
-  const converted = new DateConverter('2080-01-15').toAd();
-  console.log(converted);
+  console.log(new DateConverter('2080-01-15').toAd());
 </script>
 ```
 
----
+Pin an exact version in the URL for production use.
 
-## 📖 API Reference
+The package requires Node.js 18.12 or later and also runs on Bun. Type declarations are included for both `import` and `require` consumers.
 
-The `DateConverter` class provides a simple, intuitive API for converting dates between the Nepali Bikram Sambat calendar and the Gregorian calendar. All methods return plain JavaScript objects with full type safety when using TypeScript.
+## About Bikram Sambat
 
-### Constructor
+Bikram Sambat is the official calendar of Nepal. Its year begins in mid-April with the month of Baishakh and runs about 56 to 57 years ahead of the Gregorian year. Months follow the sun's movement through the zodiac, so their lengths change each year and are published in advance rather than computed from a simple rule. This is why the converter uses a lookup table.
 
-```text
-new DateConverter(date: string)
-```
-
-**Parameters:**
-
-- `date` (string): Date string in `YYYY-MM-DD` format. Accepts both BS (Nepali) and AD (Gregorian) dates.
-  - Supports multiple separators: `-`, `/`, `.`, `,`, `|`
-  - Supports Nepali Unicode numerals (e.g., `२०८०-०१-१५` for 2080-01-15)
-  - Choose `.toAd()` for BS input or `.toBs()` for AD input.
-  - Conversion uses UTC calendar days and gives the same result in every timezone.
-  - Malformed and impossible dates throw `Error` with `The input date is out of supported range.` instead of rolling over. Inputs may have surrounding whitespace and one- or two-digit months/days, with a maximum total length of 64 characters.
-
-**Examples:**
-
-```javascript
-new DateConverter('2080-01-15'); // Standard BS format with hyphen
-new DateConverter('2080/01/15'); // Slash separator
-new DateConverter('२०८०-०१-१५'); // Nepali numerals (Devanagari script)
-```
-
-### Methods
-
-#### `.toAd()`
-
-Converts a Bikram Sambat (BS) date to its equivalent Gregorian (AD) date. This method is essential for displaying Nepali dates in international format for web applications, mobile apps, and data processing systems.
-
-**Returns:**
-
-```typescript
-{
-  year: number; // AD year (e.g., 2023)
-  month: number; // AD month (1-12)
-  date: number; // AD day of month (1-31)
-  day: string; // Day name (e.g., "Monday", "Tuesday")
-}
-```
-
-**Example:**
-
-```javascript
-// Convert Nepali date to English/Gregorian date
-const result = new DateConverter('2080-01-15').toAd();
-// { year: 2023, month: 4, date: 28, day: 'Friday' }
-```
-
-#### `.toBs()`
-
-Converts a Gregorian (AD) date to its equivalent Bikram Sambat (BS) date. Use this method when you need to display dates in Nepali calendar format for local audiences, festivals, and government systems in Nepal.
-
-**Returns:**
-
-```typescript
-{
-  year: number; // BS year (e.g., 2080)
-  month: number; // BS month (1-12)
-  date: number; // BS day of month (1-32, varies by month)
-  day: string; // Day name (e.g., "Monday", "Tuesday")
-}
-```
-
-**Example:**
-
-```javascript
-// Convert English/Gregorian date to Nepali date
-const result = new DateConverter('2023-04-28').toBs();
-// { year: 2080, month: 1, date: 15, day: 'Friday' }
-```
-
----
-
-## 💡 Usage Examples
-
-The Nepali Date Converter library is versatile and can be used in various real-world scenarios. Below are practical examples demonstrating how to integrate the library into your applications, from festival date conversions to historical data processing and multilingual support.
-
-### Basic Conversions
-
-```javascript
-import DateConverter from '@remotemerge/nepali-date-converter';
-
-// Festival date conversion - Dashain, Tihar, and other Nepali festivals
-const dashainDate = new DateConverter('2080-07-01').toAd();
-console.log(
-  `Dashain 2080 starts: ${dashainDate.month}/${dashainDate.date}/${dashainDate.year}`,
-);
-
-// Historical record conversion - Nepal history, government documents
-const historicalDate = new DateConverter('1950-01-01').toBs();
-console.log(
-  `January 1, 1950 AD = ${historicalDate.year}-${historicalDate.month}-${historicalDate.date} BS`,
-);
-
-// Birthday and anniversary conversions
-const birthdayBS = new DateConverter('2024-06-15').toBs();
-console.log(
-  `Your Nepali birthday: ${birthdayBS.year}/${birthdayBS.month}/${birthdayBS.date}`,
-);
-```
-
-### Error Handling
-
-```javascript
-try {
-  const converted = new DateConverter('2100-01-01').toAd();
-} catch (error) {
-  console.error(error.message);
-  // "The input date is out of supported range."
-}
-```
-
-### TypeScript Usage
-
-```typescript
-import DateConverter from '@remotemerge/nepali-date-converter';
-
-const converter = new DateConverter('2080-01-15');
-const result = converter.toAd();
-
-// Full type safety and autocompletion
-console.log(result.year); // number
-console.log(result.month); // number
-console.log(result.date); // number
-console.log(result.day); // string
-```
-
-### Multiple Date Formats
-
-```javascript
-// All of these work identically:
-new DateConverter('2080-01-15').toAd(); // Hyphen
-new DateConverter('2080/01/15').toAd(); // Slash
-new DateConverter('2080.01.15').toAd(); // Dot
-new DateConverter('2080,01,15').toAd(); // Comma
-new DateConverter('2080|01|15').toAd(); // Pipe
-new DateConverter('२०८०-०१-१५').toAd(); // Nepali numerals
-```
-
----
-
-## 🇳🇵 About Bikram Sambat Calendar
-
-**Bikram Sambat (BS)**, also known as **Bikrami calendar** or **Nepali calendar**, is the official calendar of Nepal and is widely used throughout the country for government, business, and cultural purposes. Named after the legendary Indian king Vikramaditya, this lunar calendar system is approximately 56.7 years ahead of the Gregorian calendar.
-
-### Key Facts About Bikram Sambat
-
-- **Official Calendar of Nepal**: Used by the Government of Nepal for fiscal years, official documents, and public holidays
-- **Lunar-Based System**: Months are based on lunar cycles, with each month having 29–32 days
-- **New Year**: Falls in mid-April (Baishakh 1), marking the beginning of spring in Nepal
-- **Cultural Significance**: Determines dates for major festivals like Dashain, Tihar, Holi, and Teej
-- **Historical Origins**: Dates back to 57 BC, making it one of the oldest calendar systems still in use
-- **Geographic Usage**: Primarily used in Nepal and parts of India (especially in northern states)
-
-The Nepali Date Converter library handles the complex mathematics required to convert between these two calendar systems accurately, accounting for varying month lengths and leap years in the Bikram Sambat system.
-
----
-
-## 📊 Bundle Analysis
-
-| Format | File             | Size (minified) | Size (gzipped) |
-| ------ | ---------------- | --------------- | -------------- |
-| ESM    | `ndc.js`         | ~5 KiB          | ~1.8 KiB       |
-| CJS    | `ndc-node.cjs`   | ~5 KiB          | ~1.8 KiB       |
-| IIFE   | `ndc-browser.js` | ~5 KiB          | ~1.8 KiB       |
-
----
-
-## 🌟 Common Use Cases
-
-The Nepali Date Converter library is widely used in various applications and systems. Here are some of the most common scenarios where developers integrate this library:
-
-### 🏛️ Government & Public Sector
-
-- **Government Portals**: Converting official dates for documents, certificates, and public notices
-- **Municipal Systems**: Local government applications for citizen services
-- **Legal Documents**: Court dates, legal filings, and official records in Nepal
-
-### 🎉 Festival & Event Management
-
-- **Festival Calendars**: Displaying dates for Dashain, Tihar, Holi, Teej, and other Nepali festivals
-- **Event Planning**: Scheduling events that use both BS and AD dates
-- **Cultural Applications**: Preserving and displaying Nepali cultural events
-
-### 💼 Business & Enterprise
-
-- **Accounting Systems**: Nepali fiscal year calculations and financial reporting
-- **Payroll Systems**: Employee salary calculations using BS dates
-- **ERP Systems**: Enterprise resource planning for Nepali companies
-- **HR Applications**: Leave management, attendance tracking with Nepali dates
-
-### 📱 Web & Mobile Applications
-
-- **Calendar Apps**: Dual calendar displays showing both BS and AD dates
-- **Date Pickers**: UI components for selecting Nepali dates
-- **News Portals**: Displaying publication dates in both calendar systems
-- **Social Media**: Timestamp conversions for Nepali audiences
-
-### 🎓 Education & Research
-
-- **Academic Calendars**: School and university schedules in Nepal
-- **Historical Research**: Converting historical dates for research papers
-- **Data Analysis**: Processing datasets with mixed calendar systems
-
-### 🏥 Healthcare
-
-- **Medical Records**: Patient records using Nepali dates
-- **Appointment Systems**: Scheduling with BS date displays
-- **Pharmacy Applications**: Medicine expiry date tracking
-
----
-
-## 🔒 Security
+## Security
 
 See [SECURITY](SECURITY.md) for supported versions and how to report vulnerabilities privately.
 
----
-
-## 🤝 Contributing
+## Contributing
 
 See [CONTRIBUTING](CONTRIBUTING.md) for setup instructions, required checks, and how to submit a pull request.
 
----
-
-## 📜 Code of Conduct
+## Code of Conduct
 
 See [CODE OF CONDUCT](CODE_OF_CONDUCT.md) for community expectations and how to report concerns.
 
----
-
-## 📄 License
+## License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- Calendar data sourced from official Nepali calendar specifications
-- Built with modern tooling: [Bun](https://bun.sh/), [Vite](https://vitejs.dev/), and [Oxlint](https://oxc.rs/)
-
----
-
-**Made with ❤️ for the Nepali developer community**

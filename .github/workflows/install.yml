@@ -25,7 +25,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        node-version: [ 20, 22, 24 ]
+        node-version: [ 18.12.0, 20, 22, 24 ]
 
     steps:
       - name: Set up Node.js
@@ -48,7 +48,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        node-version: [ 20, 22, 24 ]
+        node-version: [ 18.12.0, 20, 22, 24 ]
 
     steps:
       - name: Set up Node.js
@@ -71,7 +71,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        node-version: [ 20, 22, 24 ]
+        node-version: [ 18.12.0, 20, 22, 24 ]
 
     steps:
       - name: Set up Node.js
