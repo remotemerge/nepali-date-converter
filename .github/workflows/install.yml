@@ -1,15 +1,14 @@
-# The workflow to install the package
 name: Install
 
-# Controls when the workflow will run
 on:
   workflow_run:
-    workflows: [ "Publish" ]
-    types:
-      - completed
+    workflows: [ Publish ]
+    types: [ completed ]
 
-# Install the exact version tagged by the release that triggered Publish
+permissions: { }
+
 env:
+  # For a release-triggered run, head_branch is the release tag.
   PACKAGE: "@remotemerge/nepali-date-converter@${{ github.event.workflow_run.head_branch }}"
 
 defaults:
@@ -17,89 +16,97 @@ defaults:
     shell: bash
 
 jobs:
-  install-npm:
-    # Run on multiple operating systems and Node.js versions
+  npm:
+    name: npm on ${{ matrix.os }} with Node.js ${{ matrix.node-version }}
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
         node-version: [ 20, 22, 24 ]
-      fail-fast: false
 
     steps:
-      - name: "Setup Node.js runtime"
+      - name: Set up Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Install Nepali Date Converter"
+      - name: Install published package
         run: npm init -y && npm install --ignore-scripts "$PACKAGE"
 
-      - name: "List installed packages"
+      - name: List installed packages
         run: npm list --depth=0
 
-  install-yarn:
-    # Run on multiple operating systems and Node.js versions
+  yarn:
+    name: Yarn on ${{ matrix.os }} with Node.js ${{ matrix.node-version }}
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
         os: [ ubuntu-latest, macos-latest ]
         node-version: [ 20, 22, 24 ]
-      fail-fast: false
 
     steps:
-      - name: "Setup Node.js runtime"
+      - name: Set up Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Install Nepali Date Converter"
+      - name: Install published package
         run: npm init -y && yarn add --ignore-scripts "$PACKAGE"
 
-      - name: "List installed packages"
+      - name: List installed packages
         run: yarn list --depth=0
 
-  install-pnpm:
-    # Run on multiple operating systems and Node.js versions
+  pnpm:
+    name: pnpm on ${{ matrix.os }} with Node.js ${{ matrix.node-version }}
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
         node-version: [ 20, 22, 24 ]
-      fail-fast: false
 
     steps:
-      - name: "Setup Node.js runtime"
+      - name: Set up Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Install pnpm"
+      - name: Install pnpm
         run: npm install -g --ignore-scripts pnpm@12.10.1
 
-      - name: "Install Nepali Date Converter"
+      - name: Install published package
         run: pnpm init && pnpm add --ignore-scripts "$PACKAGE"
 
-      - name: "List installed packages"
+      - name: List installed packages
         run: pnpm list --depth=0
 
-  install-bun:
-    # Run on multiple operating systems
+  bun:
+    name: Bun on ${{ matrix.os }}
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-      fail-fast: false
 
     steps:
-      - name: "Setup Bun runtime"
+      - name: Set up Bun
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
 
-      - name: "Generate package.json file"
+      - name: Create package.json
         run: bun init -y
 
-      - name: "Install Nepali Date Converter"
+      - name: Install published package
         run: bun add --ignore-scripts "$PACKAGE"
 
-      - name: "List installed packages"
+      - name: List installed packages
         run: bun pm ls
