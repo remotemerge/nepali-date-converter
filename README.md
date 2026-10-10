@@ -1,9 +1,12 @@
 # Nepali Date Converter
 
-[![npm](https://img.shields.io/npm/v/@remotemerge/nepali-date-converter?logo=npm&logoColor=fff)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
-[![Test](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?branch=main&logo=github&logoColor=fff&label=test)](https://github.com/remotemerge/nepali-date-converter/actions/workflows/test.yml)
-[![Bundle size](https://img.shields.io/bundlephobia/minzip/@remotemerge/nepali-date-converter?label=minzipped)](https://bundlephobia.com/package/@remotemerge/nepali-date-converter)
-[![License](https://img.shields.io/github/license/remotemerge/nepali-date-converter)](https://github.com/remotemerge/nepali-date-converter/blob/main/LICENSE)
+[![Node.js Version](https://img.shields.io/node/v/@remotemerge/nepali-date-converter?style=flat&logo=nodedotjs&label=node)](#)
+[![npm](https://img.shields.io/npm/v/@remotemerge/nepali-date-converter?style=flat&logo=npm&label=npm)](https://www.npmjs.com/package/@remotemerge/nepali-date-converter)
+[![Tests](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/test.yml?style=flat&logo=bun&label=test)](#)
+[![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/nepali-date-converter/publish.yml?style=flat&logo=github&label=build)](#)
+[![Sonar Coverage](https://img.shields.io/sonar/coverage/nepali-date-converter/main?server=https%3A%2F%2Fsonarcloud.io&style=flat&logo=sonarqubecloud&logoColor=126ED3&label=coverage)](#)
+[![Downloads](https://img.shields.io/npm/dt/@remotemerge/nepali-date-converter?style=flat&logo=npm&label=downloads)](#)
+[![License](https://img.shields.io/github/license/remotemerge/nepali-date-converter?style=flat&label=license&logo=opensourceinitiative&logoColor=fff)](LICENSE)
 
 Convert Nepali dates to English dates and back. This library converts between Bikram Sambat (BS, also written Vikram Samvat), the official calendar of Nepal, and the Gregorian (AD) calendar, in JavaScript and TypeScript.
 
