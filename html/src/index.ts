@@ -49,10 +49,20 @@ export default class DateConverter {
    * @returns Tuple of `[year, month, day]` as numbers.
    */
   private parse(input: string): [number, number, number] {
+    if (typeof input !== 'string' || input.length > 64) {
+      throw new Error(this.errorMsg);
+    }
+
     const cleaned = this.toEnglishDigits(input)
       .replace(/[./|,]/g, '-')
       .trim();
+    if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(cleaned)) {
+      throw new Error(this.errorMsg);
+    }
     const [y, m, d] = cleaned.split('-').map(Number);
+    if (m < 1 || m > 12 || d < 1 || d > 32) {
+      throw new Error(this.errorMsg);
+    }
 
     return [y, m, d];
   }
