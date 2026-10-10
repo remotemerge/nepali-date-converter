@@ -1,11 +1,11 @@
 ### Vendor directories
-/html/.yarn/
-/html/node_modules/
+/.yarn/
+/node_modules/
 
 ### Build directories
-/html/coverage/
-/html/dist/
-/html/output/
+/coverage/
+/dist/
+/output/
 
 ### JetBrains
 /.idea/*
@@ -53,4 +53,4 @@ yarn.lock
 *.tsbuildinfo
 
 ### Data Files
-/html/__tests__/data.json
+/__tests__/data.json

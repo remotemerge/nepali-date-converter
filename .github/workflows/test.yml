@@ -31,19 +31,15 @@ jobs:
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
 
       - name: "Install dependencies"
-        working-directory: html
         run: bun install --frozen-lockfile --ignore-scripts
 
       - name: "Build project"
-        working-directory: html
         run: bun run build
 
       - name: "Lint"
-        working-directory: html
         run: bun run lint
 
       - name: "Run tests with coverage"
-        working-directory: html
         run: bun run test:coverage
 
       - name: "SonarQube scan"
@@ -65,7 +61,6 @@ jobs:
         with:
           node-version: 24
       - name: Build package
-        working-directory: html
         run: |
           bun install --frozen-lockfile --ignore-scripts
           bun run build
@@ -73,5 +68,4 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Verify packed consumers
-        working-directory: html
         run: bun run test:package

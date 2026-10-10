@@ -25,7 +25,6 @@ Built with **TypeScript** and powered by **Bun**, this library is optimized for 
 - 🌐 **Universal Compatibility**: Works in Node.js (v20+), modern browsers, and all major bundlers (Vite, Webpack, Rollup, esbuild)
 - 🚀 **Modern Tooling**: Built with Bun, Vite, Oxlint, and Oxfmt for fast development and builds
 - 🧪 **Well-Tested**: Comprehensive test suite validating every date in the supported range
-- 🐳 **Docker Ready**: Includes Docker configuration for consistent cross-platform development
 - 📦 **Zero Dependencies**: Minimal runtime footprint with only essential dependencies
 
 ---
@@ -269,9 +268,6 @@ This section provides a comprehensive guide for developers who want to contribut
 ### Setup
 
 ```bash
-# Navigate to the source directory
-cd html
-
 # Install dependencies
 bun install
 ```
@@ -289,7 +285,7 @@ bun install
 ### Project Structure
 
 ```text
-html/
+.
 ├── src/
 │   ├── index.ts        # Main DateConverter class
 │   └── years.ts        # Nepali calendar data (1975-2099 BS)
@@ -314,7 +310,6 @@ html/
 ### Building
 
 ```bash
-cd html
 bun run build
 ```
 
@@ -352,28 +347,6 @@ bun run lint
 # Auto-fix issues
 bun run lint:fix
 ```
-
----
-
-## 🐳 Docker Development
-
-For consistent development environments, the project includes Docker support:
-
-```bash
-# Start development environment
-bash start-docker.sh
-
-# Or use the CLI wrapper
-bash app-cli.sh
-```
-
-The Docker setup:
-
-- Uses Bun 1.3.11 base image
-- Configures proper UID/GID mapping
-- Runs development server on `127.0.0.1:3000`. Remote access requires an explicit host-binding change in `compose.yml`; for direct Vite use, pass `--host 0.0.0.0`. Do not use the development server for production.
-- `bash start-docker.sh stop` stops only this Compose project and preserves volumes and unrelated Docker resources.
-- Maintains file ownership across host/container
 
 ---
 
