@@ -41,7 +41,7 @@ jobs:
         run: bun install --frozen-lockfile --ignore-scripts
 
       - name: Run tests with coverage
-        run: bun run test:coverage
+        run: bun run test
 
       - name: Run SonarQube scan
         uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0

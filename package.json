@@ -37,9 +37,8 @@
   "scripts": {
     "lint": "oxlint && bun check && bun fmt --check",
     "lint:fix": "oxlint --fix && bun fmt",
-    "test": "bun test --check",
+    "test": "bun test",
     "test:package": "bun scripts/check-package.ts",
-    "test:coverage": "bun test --coverage-reporter=lcov",
     "dev": "vite --host 127.0.0.1 --port 3000",
     "preview": "vite preview",
     "build": "vite build && tsc -p tsconfig.dts.json && bun ./scripts/post-build.ts"

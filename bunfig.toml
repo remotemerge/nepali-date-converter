@@ -4,6 +4,7 @@ bun = false
 
 [test]
 coverage = true
+coverageReporter = ["text", "lcov"]
 
 [fmt]
 singleQuote = true
