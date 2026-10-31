@@ -1,7 +1,6 @@
-import { describe, test, expect } from 'bun:test';
+import { describe, expect, test } from 'bun:test';
 
 import DateConverter from '../src';
-
 import fallbackRecords from './data.dist.json';
 
 const localData = Bun.file(new URL('./data.json', import.meta.url));

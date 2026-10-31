@@ -12,8 +12,8 @@ export function addDays(date: Date, days: number): Date {
 }
 
 /**
- * Calculates the difference in calendar days between two dates.
- * Uses UTC time to avoid timezone issues.
+ * Calculates the difference in calendar days between two dates. Uses UTC time
+ * to avoid timezone issues.
  *
  * @param dateLeft - The later date.
  * @param dateRight - The earlier date.

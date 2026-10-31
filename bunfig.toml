@@ -9,6 +9,9 @@ coverageReporter = ["text", "lcov"]
 [fmt]
 singleQuote = true
 printWidth = 80
+sortImports = true
+sortPackageJson = true
+jsdoc = true
 ignorePatterns = [".github/**", "dist/**", "output/**", "public/**"]
 
 [[fmt.overrides]]

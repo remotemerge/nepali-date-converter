@@ -1,13 +1,14 @@
 /**
  * Packs dist/ the way npm publishes it and installs the tarball into a
  * temporary project. The check then loads the package as ESM, as CommonJS and
- * as the browser global under Node.js and Bun, and type-checks the
- * declarations for both module systems.
+ * as the browser global under Node.js and Bun, and type-checks the declarations
+ * for both module systems.
  */
 import { strict as assert } from 'node:assert';
 import { mkdtemp, readdir, rename, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+
 import { $ } from 'bun';
 
 const PACKAGE_NAME = '@remotemerge/nepali-date-converter';
