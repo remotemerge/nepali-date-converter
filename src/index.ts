@@ -1,5 +1,4 @@
 import { addDays, differenceInCalendarDays } from './date-helper';
-
 import { years } from './years';
 
 const dayNames = [
@@ -12,7 +11,10 @@ const dayNames = [
   'Saturday',
 ];
 
-/** Days from 1975-01-01 BS to the first day of each BS year; index 2100 is the range length. */
+/**
+ * Days from 1975-01-01 BS to the first day of each BS year; index 2100 is the
+ * range length.
+ */
 const yearOffsets: number[] = [];
 yearOffsets[1975] = 0;
 for (let y = 1975; y <= 2099; y++) {
@@ -36,9 +38,9 @@ export default class DateConverter {
   private readonly day: number;
 
   /**
-   * Creates a DateConverter instance from a date string.
-   * Accepts both BS and AD date formats with separators: `-`, `/`, `.`, `,`, `|`.
-   * Also supports Nepali Unicode numerals (e.g., `२०८१-०१-१५`).
+   * Creates a DateConverter instance from a date string. Accepts both BS and AD
+   * date formats with separators: `-`, `/`, `.`, `,`, `|`. Also supports Nepali
+   * Unicode numerals (e.g., `२०८१-०१-१५`).
    *
    * @param dateInput - Date string in `YYYY-MM-DD` format (BS or AD).
    */
@@ -50,8 +52,8 @@ export default class DateConverter {
   }
 
   /**
-   * Parses a date string by converting Nepali numerals to English,
-   * normalizing separators to `-`, and extracting year, month, and day.
+   * Parses a date string by converting Nepali numerals to English, normalizing
+   * separators to `-`, and extracting year, month, and day.
    *
    * @param input - Raw date string from the user.
    * @returns Tuple of `[year, month, day]` as numbers.
@@ -89,10 +91,11 @@ export default class DateConverter {
   }
 
   /**
-   * Maps a day index (0-6) to its English day name.
-   * 0 = Sunday, 1 = Monday, ..., 6 = Saturday.
+   * Maps a day index (0-6) to its English day name. 0 = Sunday, 1 = Monday,
+   * ..., 6 = Saturday.
    *
-   * @param index - Day of week index from `Date.getDay()` or `Date.getUTCDay()`.
+   * @param index - Day of week index from `Date.getDay()` or
+   *   `Date.getUTCDay()`.
    * @returns Full English day name.
    */
   private toDayName(index: number): string {
@@ -100,10 +103,11 @@ export default class DateConverter {
   }
 
   /**
-   * Converts a BS (Bikram Sambat) date to its corresponding AD (Gregorian) date.
+   * Converts a BS (Bikram Sambat) date to its corresponding AD (Gregorian)
+   * date.
    *
-   * Sums the days from the epoch (1975-01-01 BS) to the given BS date,
-   * then adds that offset to the epoch start AD date.
+   * Sums the days from the epoch (1975-01-01 BS) to the given BS date, then
+   * adds that offset to the epoch start AD date.
    *
    * @param bsYear - Bikram Sambat year (1975-2099).
    * @param bsMonth - Bikram Sambat month (1-12).
@@ -119,10 +123,11 @@ export default class DateConverter {
   }
 
   /**
-   * Converts an AD (Gregorian) date offset to its corresponding BS (Bikram Sambat) date.
+   * Converts an AD (Gregorian) date offset to its corresponding BS (Bikram
+   * Sambat) date.
    *
-   * Finds the year containing the offset, then walks its months
-   * until the remaining offset pinpoints the exact BS date.
+   * Finds the year containing the offset, then walks its months until the
+   * remaining offset pinpoints the exact BS date.
    *
    * @param daysDiff - Number of days from the BS epoch start (1975-01-01 BS).
    * @returns Object containing BS `year`, `month`, and `date`.
@@ -150,7 +155,8 @@ export default class DateConverter {
   /**
    * Converts a Bikram Sambat (BS) date to its Gregorian (AD) equivalent.
    *
-   * @returns Object with AD `year`, `month` (1-12), `date` (1-31), and `day` name.
+   * @returns Object with AD `year`, `month` (1-12), `date` (1-31), and `day`
+   *   name.
    * @throws When the BS date is invalid or outside 1975-2099 BS.
    */
   public toAd() {
@@ -175,9 +181,10 @@ export default class DateConverter {
   /**
    * Converts a Gregorian (AD) date to its Bikram Sambat (BS) equivalent.
    *
-   * @returns Object with BS `year`, `month` (1-12), `date` (1-32), and `day` name.
+   * @returns Object with BS `year`, `month` (1-12), `date` (1-32), and `day`
+   *   name.
    * @throws When the AD date is invalid or outside the supported range
-   *         (1918-04-13 AD to 2043-04-13 AD).
+   *   (1918-04-13 AD to 2043-04-13 AD).
    */
   public toBs() {
     const targetDate = new Date(Date.UTC(this.year, this.month - 1, this.day));

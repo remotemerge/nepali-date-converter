@@ -12,7 +12,7 @@ include sensitive reports in issues, discussions, or pull requests.
 
 ## Requirements
 
-Use Bun `>=1.4.3 <2.0.0` to install dependencies, run scripts, and test changes.
+Use Bun `>=1.4.4 <2.0.0` to install dependencies, run scripts, and test changes.
 
 Install dependencies from the lockfile:
 
@@ -45,14 +45,13 @@ and TypeScript declarations. Node.js and npm must be installed for these compati
 
 Available commands:
 
-| Command                 | What it does                                      |
-| ----------------------- | ------------------------------------------------- |
-| `bun run test`          | Type checks, then runs the test suite             |
-| `bun run lint`          | Checks code with Oxlint and formatting with Oxfmt |
-| `bun run build`         | Builds bundles and TypeScript declarations        |
-| `bun run test:package`  | Checks the built package after `build`            |
-| `bun run test:coverage` | Runs tests and writes an LCOV coverage report     |
-| `bun run lint:fix`      | Applies lint fixes and formatting                 |
+| Command                | What it does                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| `bun run test`         | Runs the tests and writes an LCOV coverage report                              |
+| `bun run lint`         | Checks code with Oxlint, types with `bun check`, and formatting with `bun fmt` |
+| `bun run build`        | Builds bundles and TypeScript declarations                                     |
+| `bun run test:package` | Checks the built package after `build`                                         |
+| `bun run lint:fix`     | Applies lint fixes and formatting                                              |
 
 ## Pull requests
 

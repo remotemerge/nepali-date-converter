@@ -1,5 +1,6 @@
 import { readdir } from 'node:fs/promises';
 import { join } from 'node:path';
+
 import packageJson from '../package.json';
 
 // Compose the package object

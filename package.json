@@ -1,6 +1,6 @@
 {
   "name": "@remotemerge/nepali-date-converter",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "private": false,
   "description": "Convert dates between Nepali (Bikram Sambat, BS) and Gregorian (AD) in JavaScript and TypeScript. Supports 1975–2099 BS, Devanagari numerals, and timezone-independent conversion, with zero runtime dependencies.",
   "keywords": [
@@ -35,23 +35,20 @@
   },
   "type": "module",
   "scripts": {
-    "lint": "oxlint && oxfmt --check",
-    "lint:fix": "oxlint --fix && oxfmt",
-    "test": "bun test --check",
+    "lint": "oxlint && bun check && bun fmt --check",
+    "lint:fix": "oxlint --fix && bun fmt",
+    "test": "bun test",
     "test:package": "bun scripts/check-package.ts",
-    "test:coverage": "bun test --coverage-reporter=lcov",
     "dev": "vite --host 127.0.0.1 --port 3000",
-    "preview": "vite preview",
     "build": "vite build && tsc -p tsconfig.dts.json && bun ./scripts/post-build.ts"
   },
   "devDependencies": {
-    "@types/bun": "^1.4.2",
-    "oxfmt": "^0.72.0",
-    "oxlint": "^1.87.0",
+    "@types/bun": "^1.4.4",
+    "oxlint": "^1.90.0",
     "typescript": "^7.0.2",
-    "vite": "^8.3.4"
+    "vite": "^8.3.5"
   },
   "engines": {
-    "bun": ">=1.4.3 <2.0.0"
+    "bun": ">=1.4.4 <2.0.0"
   }
 }
