@@ -1,6 +1,6 @@
 {
   "name": "@remotemerge/nepali-date-converter",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "private": false,
   "description": "Convert dates between Nepali (Bikram Sambat, BS) and Gregorian (AD) in JavaScript and TypeScript. Supports 1975–2099 BS, Devanagari numerals, and timezone-independent conversion, with zero runtime dependencies.",
   "keywords": [
