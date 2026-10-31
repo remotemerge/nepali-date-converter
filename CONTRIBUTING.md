@@ -12,7 +12,7 @@ include sensitive reports in issues, discussions, or pull requests.
 
 ## Requirements
 
-Use Bun `>=1.4.3 <2.0.0` to install dependencies, run scripts, and test changes.
+Use Bun `>=1.4.4 <2.0.0` to install dependencies, run scripts, and test changes.
 
 Install dependencies from the lockfile:
 

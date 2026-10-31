@@ -44,12 +44,12 @@
     "build": "vite build && tsc -p tsconfig.dts.json && bun ./scripts/post-build.ts"
   },
   "devDependencies": {
-    "@types/bun": "^1.4.2",
-    "oxlint": "^1.87.0",
+    "@types/bun": "^1.4.4",
+    "oxlint": "^1.90.0",
     "typescript": "^7.0.2",
-    "vite": "^8.3.4"
+    "vite": "^8.3.5"
   },
   "engines": {
-    "bun": ">=1.4.3 <2.0.0"
+    "bun": ">=1.4.4 <2.0.0"
   }
 }
