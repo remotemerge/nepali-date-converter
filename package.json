@@ -40,7 +40,6 @@
     "test": "bun test",
     "test:package": "bun scripts/check-package.ts",
     "dev": "vite --host 127.0.0.1 --port 3000",
-    "preview": "vite preview",
     "build": "vite build && tsc -p tsconfig.dts.json && bun ./scripts/post-build.ts"
   },
   "devDependencies": {
