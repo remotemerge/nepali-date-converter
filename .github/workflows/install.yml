@@ -16,9 +16,23 @@ defaults:
     shell: bash
 
 jobs:
+  registry:
+    name: Wait for the npm registry
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # The npm-registry environment has a 10-minute wait timer. A new version
+    # takes about a minute to appear on the registry, and the registry's CDN
+    # serves cached package metadata for up to 5 minutes.
+    environment: npm-registry
+
+    steps:
+      - name: Report the package
+        run: echo "Installing $PACKAGE"
+
   npm:
     name: npm on ${{ matrix.os }} with Node.js ${{ matrix.node-version }}
-    if: github.event.workflow_run.conclusion == 'success'
+    needs: registry
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
@@ -41,7 +55,7 @@ jobs:
 
   yarn:
     name: Yarn on ${{ matrix.os }} with Node.js ${{ matrix.node-version }}
-    if: github.event.workflow_run.conclusion == 'success'
+    needs: registry
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
@@ -64,7 +78,7 @@ jobs:
 
   pnpm:
     name: pnpm on ${{ matrix.os }} with Node.js ${{ matrix.node-version }}
-    if: github.event.workflow_run.conclusion == 'success'
+    needs: registry
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
@@ -90,7 +104,7 @@ jobs:
 
   bun:
     name: Bun on ${{ matrix.os }}
-    if: github.event.workflow_run.conclusion == 'success'
+    needs: registry
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     strategy:
