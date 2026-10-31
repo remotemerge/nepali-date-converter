@@ -35,8 +35,8 @@
   },
   "type": "module",
   "scripts": {
-    "lint": "oxlint && oxfmt --check",
-    "lint:fix": "oxlint --fix && oxfmt",
+    "lint": "oxlint && bun check && bun fmt --check",
+    "lint:fix": "oxlint --fix && bun fmt",
     "test": "bun test --check",
     "test:package": "bun scripts/check-package.ts",
     "test:coverage": "bun test --coverage-reporter=lcov",
@@ -46,7 +46,6 @@
   },
   "devDependencies": {
     "@types/bun": "^1.4.2",
-    "oxfmt": "^0.72.0",
     "oxlint": "^1.87.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.4"

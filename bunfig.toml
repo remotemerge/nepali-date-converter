@@ -4,3 +4,12 @@ bun = false
 
 [test]
 coverage = true
+
+[fmt]
+singleQuote = true
+printWidth = 80
+ignorePatterns = [".github/**", "dist/**", "output/**", "public/**"]
+
+[[fmt.overrides]]
+files = ["**/*.scss", "**/*.css", "**/*.html", "**/*.yml"]
+options = { singleQuote = false }
