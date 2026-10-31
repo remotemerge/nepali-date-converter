@@ -2,6 +2,7 @@ import { describe, expect, test } from 'bun:test';
 
 import DateConverter from '../src';
 import fallbackRecords from './data.dist.json';
+import { weekdayOf } from './weekday';
 
 const localData = Bun.file(new URL('./data.json', import.meta.url));
 const records: { nep: string; eng: string }[] = (await localData.exists())
@@ -21,9 +22,10 @@ describe('DateConverter', () => {
       eng: string;
       nep: string;
     }) => {
-      const { year, month, date } = new DateConverter(englishDate).toBs();
+      const { year, month, date, day } = new DateConverter(englishDate).toBs();
       const convertedNepaliDate = `${year}-${padZero(month)}-${padZero(date)}`;
       expect(convertedNepaliDate).toBe(expectedNepaliDate);
+      expect(day).toBe(weekdayOf(englishDate));
     },
   );
 });
